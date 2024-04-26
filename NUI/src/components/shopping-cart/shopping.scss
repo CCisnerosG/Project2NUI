@@ -1,0 +1,65 @@
+.bar-container {}
+
+.item {
+    &__container {
+        width: 100%;
+        display: flex;
+        margin-top: 30px;
+        align-items: center;
+    }
+
+    &__image-container {
+        width: 30%
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__info-container {
+        width: 55%;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__name-container {
+        text-wrap: wrap;
+    }
+
+    &__name {
+        font-size: 1.5rem;
+    }
+
+    &__description {
+        font-size: 0.8rem;
+    }
+
+    &__price-details {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+
+    &__price-container {}
+
+    &__price {}
+
+    &__subtotal {}
+
+    &__details-container {
+        font-size: 0.7rem;
+    }
+
+    &__details-type {}
+
+    &__details-type-text {}
+
+    &__details-weight-text {}
+
+    &__details-height-text {}
+}
+
+.options {}

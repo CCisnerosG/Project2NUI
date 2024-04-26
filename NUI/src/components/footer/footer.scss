@@ -1,0 +1,28 @@
+.footer {
+    &__container {
+        width: 100%;
+        display: flex;
+        background-color: white;
+        justify-content: center;
+        color: black;
+        // box-shadow: 10px 10px 5px 12px gray;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__legal {
+        margin-bottom: 20px;
+    }
+
+    &__legal-text {}
+
+    &__social {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+}

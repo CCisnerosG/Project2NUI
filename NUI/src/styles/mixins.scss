@@ -1,0 +1,29 @@
+@mixin for-phone-xs {
+    @media (max-width:$breakpoint-xs) {
+        @content;
+    }
+}
+
+@mixin for-phone-only {
+    @media (min-width:$breakpoint-xs) {
+        @content;
+    }
+}
+
+@mixin for-tablet-portrait {
+    @media (min-width:$breakpoint-sm) {
+        @content;
+    }
+}
+
+@mixin for-tablet-landscape {
+    @media (min-width:$breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin for-pc {
+    @media (min-width:$breakpoint-xl) {
+        @content;
+    }
+}

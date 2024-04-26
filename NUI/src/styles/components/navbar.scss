@@ -1,0 +1,25 @@
+@import '../global.scss';
+
+.mynav {
+    background-color: $primary-color;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    font-weight: bold;
+    color: white;
+}
+
+.mylink-item {
+    color: white;
+    font-size: 1.3rem;
+
+    &:hover {
+        color: $fourth-color !important;
+    }
+}
+
+.navbar-img {
+    height: 2rem;
+    width: 2rem;
+}

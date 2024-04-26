@@ -1,0 +1,42 @@
+@import '../global.scss';
+
+.footer {
+    background-color: $primary-color;
+    color: black;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+
+    &__logos {
+        justify-content: center;
+    }
+
+    &__logos-link {
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            transition: ease-in-out 0.2s;
+            color: $fourth-color;
+        }
+    }
+
+    &__logos-icon {
+        border-radius: 50%;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: flex-end;
+    }
+
+    &__text {
+        padding: 0 40px;
+        width: 100%;
+        text-align: center;
+    }
+}

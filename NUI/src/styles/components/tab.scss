@@ -1,0 +1,40 @@
+@import '../global.scss';
+
+.mytab {
+
+    margin-top: 30px;
+    padding-bottom: 30px;
+
+    &__text {
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-bottom: 40px;
+    }
+
+    &__text-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__text-rating {
+        display: flex;
+    }
+
+    &__text-title {
+        font-weight: bold;
+        font-size: 1rem;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    &__text-user {
+        font-weight: 300;
+        color: rgb(89, 86, 86);
+        margin-left: 10px;
+        margin-bottom: 2px;
+    }
+}
+
+.mytab-content {
+    margin-top: 10px;
+}

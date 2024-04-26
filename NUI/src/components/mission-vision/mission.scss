@@ -1,0 +1,71 @@
+.mission-vision-container {
+    display: flex;
+    background-color: rgb(243, 236, 226);
+    padding: 50px;
+    flex-direction: column;
+    align-items: center;
+
+    @include for-phone-only {
+        flex-direction: row;
+    }
+
+}
+
+.mydivider{
+    transform: rotate(90deg);
+    @include for-phone-only {
+        transform: none;
+    }
+}
+
+.mission {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        max-width: 50%;
+    }
+
+    &__img {
+        width: 20%;
+    }
+
+    &__title {
+        font-size: 3rem;
+    }
+
+    &__description {
+        font-size: 1rem;
+    }
+}
+
+.vision {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        max-width: 50%;
+    }
+
+    &__img {
+        width: 32%;
+    }
+
+    &__title {
+        font-size: 3rem;
+    }
+
+    &__description {
+        font-size: 1rem;
+    }
+}
+
+.shipping {
+    font-size: 5rem;
+}
+
+// .mydivider {
+//     height: 80px !important;
+// }

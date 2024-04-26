@@ -1,0 +1,33 @@
+// @import "~bootstrap/scss/bootstrap";
+@import 'components/hero.scss';
+@import 'components/navbar.scss';
+@import 'components/list.scss';
+@import 'components/footer.scss';
+@import 'components/product.scss';
+@import 'components/tab.scss';
+
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+
+h1 {
+    text-align: center;
+    font-family: $montserrat-font;
+}
+
+.vr {
+    border: 0.1px solid rgb(230, 226, 226);
+}
+
+.back {
+    margin-top: 80px;
+    margin-left: 40px;
+    text-decoration: none;
+    color: black;
+    font-family: $montserrat-font;
+    font-size: 1rem;
+}

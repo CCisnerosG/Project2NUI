@@ -1,0 +1,82 @@
+.pkm {
+    display: flex;
+    flex-direction: column;
+    border: 1.3px solid rgb(211, 210, 210);
+    width: 44%;
+    border-radius: 10px;
+    margin: 30px 10px 0 10px;
+
+    &__img-container {
+        padding: 20px;
+    }
+
+    &__img {}
+
+    &__head {
+        width: 100%;
+    }
+
+    &__head-title {
+        font-size: 1.5rem;
+        color: rgb(154, 167, 167);
+    }
+
+    &__head-types {}
+
+    &__pricing {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__total {
+        font-size: 1.8rem;
+        color: rgb(23, 122, 202);
+    }
+
+    &__save {
+        color: rgb(66, 127, 176);
+    }
+
+
+    @include for-tablet-portrait {
+        width: 30%;
+    }
+
+    @include for-tablet-landscape {
+        width: 20%;
+    }
+
+    @include for-pc {
+        width: 18%;
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    z-index: 1;
+    background-color: #555;
+    color: #fff;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.tooltip.active .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.mybtn {
+    background-color: rgb(19, 245, 49);
+    color: white;
+    width: 50%;
+    border-radius: 4px;
+}
