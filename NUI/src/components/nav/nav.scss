@@ -2,9 +2,14 @@
     cursor: pointer;
 }
 
-.navItem-container{
+
+.navItem-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 
+}
+
+.navbar-img {
+    margin: 0;
 }

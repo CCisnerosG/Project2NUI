@@ -5,7 +5,6 @@ import subject from "../../service/service";
 import { Button } from "@nextui-org/react";
 
 const PokeItem = ({ item }) => {
-    const [currentPage, setCurrentPage] = React.useState(1);
 
     const handleItem = (item: any) => {
         subject.next([
@@ -20,21 +19,31 @@ const PokeItem = ({ item }) => {
                 <div className="pkm__img-container">
                     <img className="pkm__img" src={item.sprite} alt={`Pokemon ${item.name}`} />
                 </div>
-                <div className="pkm__head">
-                    <p className="pkm__total">${item.price}</p>
-                    <p className="pkm__head-title">{item.name}</p>
-                </div>
-                <div className="pkm__content">
-                    <div className="content-types">
-                        <p>{item.type}</p>
+                <div className="pkm__details">
+                    <div className="pkm__head">
+                        <p className="pkm__total">${item.price}</p>
+                        <p className="pkm__head-title">{item.name}</p>
+                        <p className="pkm__head-number">Pokemon No. {item.id}</p>
                     </div>
-                    <div className="pkm__pricing">
-                        <p className="pkm__save">Save: ${item.save}</p>
+                    <div className="pkm__content">
+                        <div className="pkm__content-info">
+                            <div className="pkm__content-types">
+                                <p><b>TYPE:</b> {item.type}</p>
+                            </div>
+                            <p className="pkm__content-height"><b>HEIGHT:</b> {item.height} inch</p>
+                            <p className="pkm__content-weight"><b>WEIGHT:</b> {item.weight} lbs</p>
+                        </div>
+                        <div className="pkm__pricing">
+                            <p className="pkm__subtotal">Sub-total: ${item.subtotal}</p>
+                            <p className="pkm__taxes">Taxes: ${item.taxes}</p>
+                            <p className="pkm__save">Save: ${item.save}</p>
+                        </div>
                     </div>
                 </div>
             </Link>
-
-            <Button color="success" onClick={() => handleItem(item)}>Add to Cart</Button>
+            <div className="mybtn__container">
+                <Button className="mybtn" color="success" onClick={() => handleItem(item)}>Add to Cart</Button>
+            </div>
         </div>
             {/* //------Pagination ---------- */}
 

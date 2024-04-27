@@ -1,8 +1,10 @@
 import './login.scss';
 import { Button, Input } from "@nextui-org/react";
-import { MailIcon } from './MailIcon';
+import { useUserContext } from '../../context/user-context';
 
 const Log = () => {
+    const data = useUserContext();
+    
     return (
         <div className="body">
             <div className="login-container">

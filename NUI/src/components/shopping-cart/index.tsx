@@ -39,6 +39,7 @@ const Cart = () => {
                                         <p className="item__details-type-text">Type: {item.type}</p>
                                         <p className="item__details-weight-text">Weight: {item.weight} lbs</p>
                                         <p className="item__details-height-text">Height: {item.height} inch</p>
+                                        
                                     </li>
                                 </div>
                             </div>

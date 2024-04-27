@@ -14,7 +14,21 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/1.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/1/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Ivysaur",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+                "type": "Grass",
+                "evolution": [
+                    {
+                        "name": "Venusaur",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+                        "type": "Grass"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 4,
@@ -31,7 +45,21 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/4.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/4/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Charmeleon",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+                "type": "Fire",
+                "evolution": [
+                    {
+                        "name": "Charizard",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+                        "type": "Fire"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 7,
@@ -48,7 +76,21 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/7.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/7/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Wartortle",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+                "type": "Water",
+                "evolution": [
+                    {
+                        "name": "Blastoise",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+                        "type": "Water"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 25,
@@ -65,7 +107,8 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/25.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/25/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": []
     },
     {
         "id": 39,
@@ -82,7 +125,14 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/39.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/39/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Wigglytuff",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/40.png",
+                "type": "Normal"
+            }
+        ]
     },
     {
         "id": 23,
@@ -99,7 +149,14 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/23.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/23/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Arbok",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png",
+                "type": "Poison"
+            }
+        ]
     },
     {
         "id": 27,
@@ -116,7 +173,14 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/27.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/27/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Sandslash",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/28.png",
+                "type": "Ground"
+            }
+        ]
     },
     {
         "id": 29,
@@ -133,7 +197,21 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/29.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/29/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Nidorina",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/30.png",
+                "type": "Poison",
+                "evolution": [
+                    {
+                        "name": "Nidoqueen",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/31.png",
+                        "type": "Poison/Ground"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 32,
@@ -150,7 +228,21 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/32.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/32/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Nidorino",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/33.png",
+                "type": "Poison",
+                "evolution": [
+                    {
+                        "name": "Nidoking",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/34.png",
+                        "type": "Poison/Ground"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 37,
@@ -167,7 +259,14 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/37.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/37/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Ninetales",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+                "type": "Fire"
+            }
+        ]
     },
     {
         "id": 41,
@@ -184,7 +283,14 @@
         "generation": 1,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/41.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/41/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Golbat",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png",
+                "type": "Poison/Flying"
+            }
+        ]
     },
     {
         "id": 249,
@@ -201,7 +307,8 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/249.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/249/",
-        "isLegendary": true
+        "isLegendary": true,
+        "evolution": []
     },
     {
         "id": 152,
@@ -218,7 +325,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/152.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/152/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Bayleef",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/153.png",
+                "type": "Grass",
+                "evolution": [
+                    {
+                        "name": "Meganium",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/154.png",
+                        "type": "Grass"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 155,
@@ -235,7 +356,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/155.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/155/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Quilava",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/156.png",
+                "type": "Fire",
+                "evolution": [
+                    {
+                        "name": "Typhlosion",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/157.png",
+                        "type": "Fire"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 158,
@@ -252,7 +387,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/158.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/158/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Croconaw",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/159.png",
+                "type": "Water",
+                "evolution": [
+                    {
+                        "name": "Feraligatr",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/160.png",
+                        "type": "Water"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 161,
@@ -269,7 +418,14 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/161.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/161/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Furret",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/162.png",
+                "type": "Normal"
+            }
+        ]
     },
     {
         "id": 165,
@@ -286,7 +442,14 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/165.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/165/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Ledian",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/166.png",
+                "type": "Bug/Flying"
+            }
+        ]
     },
     {
         "id": 167,
@@ -303,7 +466,14 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/167.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/167/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Ariados",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/168.png",
+                "type": "Bug/Poison"
+            }
+        ]
     },
     {
         "id": 170,
@@ -320,7 +490,14 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/170.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/170/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Lanturn",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/171.png",
+                "type": "Water/Electric"
+            }
+        ]
     },
     {
         "id": 172,
@@ -337,7 +514,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/172.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/172/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Pikachu",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+                "type": "Electric",
+                "evolution": [
+                    {
+                        "name": "Raichu",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+                        "type": "Electric"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 179,
@@ -354,7 +545,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/179.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/179/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Flaaffy",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/180.png",
+                "type": "Electric",
+                "evolution": [
+                    {
+                        "name": "Ampharos",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/181.png",
+                        "type": "Electric"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 183,
@@ -371,7 +576,14 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/183.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/183/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Azumarill",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/184.png",
+                "type": "Water"
+            }
+        ]
     },
     {
         "id": 187,
@@ -388,7 +600,21 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/187.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/187/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Skiploom",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/188.png",
+                "type": "Grass/Flying",
+                "evolution": [
+                    {
+                        "name": "Jumpluff",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/189.png",
+                        "type": "Grass/Flying"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 251,
@@ -405,7 +631,8 @@
         "generation": 2,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/251.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/251/",
-        "isLegendary": true
+        "isLegendary": true,
+        "evolution": []
     },
     {
         "id": 252,
@@ -422,7 +649,21 @@
         "generation": 3,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/252.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/252/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Grovyle",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/253.png",
+                "type": "Grass",
+                "evolution": [
+                    {
+                        "name": "Sceptile",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/254.png",
+                        "type": "Grass"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 255,
@@ -439,7 +680,21 @@
         "generation": 3,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/255.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/255/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Combusken",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/256.png",
+                "type": "Fire/Fighting",
+                "evolution": [
+                    {
+                        "name": "Blaziken",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/257.png",
+                        "type": "Fire/Fighting"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 258,
@@ -456,143 +711,93 @@
         "generation": 3,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/258.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/258/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Marshtomp",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/259.png",
+                "type": "Water/Ground",
+                "evolution": [
+                    {
+                        "name": "Swampert",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/260.png",
+                        "type": "Water/Ground"
+                    }
+                ]
+            }
+        ]
     },
     {
-        "id": 261,
-        "name": "Poochyena",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/261.png",
+        "id": 352,
+        "name": "Kecleon",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/352.png",
+        "type": "Normal",
+        "weight": 220,
+        "height": 10,
+        "price": 94.99,
+        "subtotal": 105,
+        "taxes": 10,
+        "save": 20,
+        "description": "KECLEON is capable of changing its body colors at will to blend in with its surroundings. There is one exception—this POKéMON can't change the zigzag pattern on its belly.",
+        "generation": 3,
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/352.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/352/",
+        "isLegendary": false,
+        "evolution": []
+    },
+    {
+        "id": 359,
+        "name": "Absol",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/359.png",
         "type": "Dark",
-        "weight": 136,
-        "height": 5,
-        "price": 79.99,
-        "subtotal": 90,
-        "taxes": 8,
+        "weight": 470,
+        "height": 12,
+        "price": 99.99,
+        "subtotal": 110,
+        "taxes": 10,
         "save": 20,
-        "description": "POOCHYENA is an omnivore - it will eat anything. A distinguishing feature is how large its fangs are compared to its body.",
+        "description": "Every time ABSOL appears before people, it is followed by a disaster such as an earthquake or a tidal wave. As a result, it came to be known as the disaster POKéMON.",
         "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/261.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/261/",
-        "isLegendary": false
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/359.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/359/",
+        "isLegendary": false,
+        "evolution": []
     },
     {
-        "id": 263,
-        "name": "Zigzagoon",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/263.png",
-        "type": "Normal",
-        "weight": 175,
-        "height": 4,
-        "price": 74.99,
-        "subtotal": 85,
-        "taxes": 8,
+        "id": 383,
+        "name": "Groudon",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/383.png",
+        "type": "Ground",
+        "weight": 9500,
+        "height": 35,
+        "price": 599.99,
+        "subtotal": 660,
+        "taxes": 60,
         "save": 20,
-        "description": "ZIGZAGOON restlessly wanders everywhere at all times. This POKéMON does so because it is very curious. It becomes interested in anything that it happens to see.",
+        "description": "GROUDON has long been described in mythology as the POKéMON that raised lands and expanded continents. This POKéMON took to sleep after a cataclysmic battle with KYOGRE.",
         "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/263.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/263/",
-        "isLegendary": false
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/383.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/383/",
+        "isLegendary": true,
+        "evolution": []
     },
     {
-        "id": 265,
-        "name": "Wurmple",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/265.png",
-        "type": "Bug",
-        "weight": 36,
-        "height": 3,
-        "price": 69.99,
-        "subtotal": 80,
-        "taxes": 7,
+        "id": 384,
+        "name": "Rayquaza",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/384.png",
+        "type": "Dragon",
+        "weight": 2065,
+        "height": 70,
+        "price": 599.99,
+        "subtotal": 660,
+        "taxes": 60,
         "save": 20,
-        "description": "Using the spikes on its rear end, WURMPLE peels the bark off trees and feeds on the sap that oozes out. This POKéMON's feet are tipped with suction pads that allow it to cling to glass without slipping.",
+        "description": "RAYQUAZA is said to have lived for hundreds of millions of years. Legends remain of how it put to rest the clash between KYOGRE and GROUDON.",
         "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/265.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/265/",
-        "isLegendary": false
-    },
-    {
-        "id": 270,
-        "name": "Lotad",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/270.png",
-        "type": "Water",
-        "weight": 26,
-        "height": 5,
-        "price": 74.99,
-        "subtotal": 85,
-        "taxes": 8,
-        "save": 20,
-        "description": "LOTAD live in ponds and lakes, where they float on the surface. It grows weak if its broad leaf dies. On rare occasions, this POKéMON travels on land in search of clean water.",
-        "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/270.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/270/",
-        "isLegendary": false
-    },
-    {
-        "id": 273,
-        "name": "Seedot",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/273.png",
-        "type": "Grass",
-        "weight": 40,
-        "height": 5,
-        "price": 74.99,
-        "subtotal": 85,
-        "taxes": 8,
-        "save": 20,
-        "description": "SEEDOT attaches itself to a tree branch using the top of its head. It sucks moisture from the tree while hanging off the branch. The more water it drinks, the glossier this POKéMON's body becomes.",
-        "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/273.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/273/",
-        "isLegendary": false
-    },
-    {
-        "id": 280,
-        "name": "Ralts",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/280.png",
-        "type": "Psychic",
-        "weight": 66,
-        "height": 4,
-        "price": 89.99,
-        "subtotal": 100,
-        "taxes": 9,
-        "save": 20,
-        "description": "RALTS senses the emotions of people using the horns on its head. This POKéMON rarely appears before people. But when it does, it draws closer if it senses that the person has a positive disposition.",
-        "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/280.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/280/",
-        "isLegendary": false
-    },
-    {
-        "id": 287,
-        "name": "Slakoth",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/287.png",
-        "type": "Normal",
-        "weight": 240,
-        "height": 8,
-        "price": 69.99,
-        "subtotal": 80,
-        "taxes": 7,
-        "save": 20,
-        "description": "SLAKOTH lolls around for over 20 hours every day. Because it moves so little, it does not need much food. This POKéMON's sole daily meal consists of just three leaves.",
-        "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/287.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/287/",
-        "isLegendary": false
-    },
-    {
-        "id": 293,
-        "name": "Whismur",
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/293.png",
-        "type": "Normal",
-        "weight": 163,
-        "height": 6,
-        "price": 74.99,
-        "subtotal": 85,
-        "taxes": 8,
-        "save": 20,
-        "description": "WHISMUR is very timid. If it starts to cry loudly, it becomes startled by its own crying and cries even harder. When it finally stops crying, the POKéMON goes to sleep, all tired out.",
-        "generation": 3,
-        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/293.ogg",
-        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/293/",
-        "isLegendary": false
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/384.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/384/",
+        "isLegendary": true,
+        "evolution": []
     },
     {
         "id": 385,
@@ -601,15 +806,34 @@
         "type": "Steel",
         "weight": 11,
         "height": 3,
-        "price": 199.99,
-        "subtotal": 220,
-        "taxes": 20,
+        "price": 299.99,
+        "subtotal": 330,
+        "taxes": 30,
         "save": 20,
-        "description": "JIRACHI will awaken from its sleep of a thousand years if you sing to it in a voice of purity. It is said to make true any wish that people desire.",
+        "description": "A legend states that JIRACHI will make true any wish that is written on notes attached to its head when it awakens. If this POKéMON senses danger, it will fight without awakening.",
         "generation": 3,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/385.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/385/",
-        "isLegendary": true
+        "isLegendary": true,
+        "evolution": []
+    },
+    {
+        "id": 386,
+        "name": "Deoxys",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png",
+        "type": "Psychic",
+        "weight": 608,
+        "height": 17,
+        "price": 399.99,
+        "subtotal": 440,
+        "taxes": 40,
+        "save": 20,
+        "description": "The DNA of a space virus underwent a sudden mutation upon exposure to a laser beam and resulted in DEOXYS. The crystalline organ on this POKéMON's chest appears to be its brain.",
+        "generation": 3,
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/386.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/386/",
+        "isLegendary": true,
+        "evolution": []
     },
     {
         "id": 387,
@@ -626,7 +850,21 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/387.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/387/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Grotle",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/388.png",
+                "type": "Grass",
+                "evolution": [
+                    {
+                        "name": "Torterra",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/389.png",
+                        "type": "Grass/Ground"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 390,
@@ -643,7 +881,21 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/390.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/390/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Monferno",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/391.png",
+                "type": "Fire/Fighting",
+                "evolution": [
+                    {
+                        "name": "Infernape",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/392.png",
+                        "type": "Fire/Fighting"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 393,
@@ -660,7 +912,21 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/393.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/393/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Prinplup",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/394.png",
+                "type": "Water",
+                "evolution": [
+                    {
+                        "name": "Empoleon",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/395.png",
+                        "type": "Water/Steel"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 396,
@@ -677,7 +943,21 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/396.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/396/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Staravia",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/397.png",
+                "type": "Normal/Flying",
+                "evolution": [
+                    {
+                        "name": "Staraptor",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/398.png",
+                        "type": "Normal/Flying"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 399,
@@ -694,7 +974,14 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/399.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/399/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Bibarel",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/400.png",
+                "type": "Normal/Water"
+            }
+        ]
     },
     {
         "id": 401,
@@ -711,7 +998,14 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/401.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/401/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Kricketune",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/402.png",
+                "type": "Bug"
+            }
+        ]
     },
     {
         "id": 403,
@@ -728,7 +1022,21 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/403.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/403/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Luxio",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/404.png",
+                "type": "Electric",
+                "evolution": [
+                    {
+                        "name": "Luxray",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/405.png",
+                        "type": "Electric"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 406,
@@ -745,24 +1053,45 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/406.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/406/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Roselia",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/407.png",
+                "type": "Grass/Poison",
+                "evolution": [
+                    {
+                        "name": "Roserade",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/315.png",
+                        "type": "Grass/Poison"
+                    }
+                ]
+            }
+        ]
     },
     {
         "id": 408,
         "name": "Cranidos",
         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/408.png",
         "type": "Rock",
-        "weight": 315,
+        "weight": 316,
         "height": 9,
-        "price": 94.99,
-        "subtotal": 105,
-        "taxes": 10,
+        "price": 89.99,
+        "subtotal": 100,
+        "taxes": 9,
         "save": 20,
-        "description": "CRANIDOS is a primarily blue dinosaurian Pokémon with a head plate on its skull. Its eyes are red with small, white pupils. It has a short tail and its hind legs are long and powerful. CRANIDOS's head plate is strong and sturdy, and it is capable of breaking boulders.",
+        "description": "CRANIDOS is a primarily blue dinosaurian Pokémon with two red spikes that protrude from its frill. It has a hooked beak, red irises, and a white bump on its forehead. Its blue skin is mostly smooth, with a scaly pattern on its legs, tail, and face.",
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/408.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/408/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Rampardos",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/409.png",
+                "type": "Rock"
+            }
+        ]
     },
     {
         "id": 410,
@@ -771,15 +1100,22 @@
         "type": "Rock",
         "weight": 570,
         "height": 5,
-        "price": 94.99,
-        "subtotal": 105,
-        "taxes": 10,
+        "price": 89.99,
+        "subtotal": 100,
+        "taxes": 9,
         "save": 20,
-        "description": "SHIELDON is a bipedal, ceratopsian Pokémon resembling a baby Triceratops. It is mainly dark gray with a lighter gray underbelly and blue eyes. Its head is covered with a dark gray, rocky helmet, which is extremely hard. It has a white bump on its forehead and a short, blunt horn on the tip of its snout.",
+        "description": "SHIELDON is a gray, ceratopsian-like Pokémon. It has white toes and a white bump on its back. Its face is white with a black design that resembles a shield. Its lower jaw is yellow with two teeth sticking out. Its head is covered with a gray, helmet-like shell with a small, red gem on its back. Its face is white with a black design that resembles a shield.",
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/410.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/410/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Bastiodon",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/411.png",
+                "type": "Rock/Steel"
+            }
+        ]
     },
     {
         "id": 412,
@@ -792,11 +1128,67 @@
         "subtotal": 75,
         "taxes": 7,
         "save": 20,
-        "description": "BURMY is a small, larval Pokémon with a black segmented body and a coiled antenna on top of its head. Its eyes are hidden beneath a blue cover that surrounds its head. BURMY is encased in a cloak made of leaves and plant material, which covers its body completely except for its face. Depending on the environment, this cloak will have different appearances, such as leaves in forests, sand in deserts, or building insulation in towns.",
+        "description": "BURMY is a small, round Pokémon with a cloak of leaves, sand, or building insulation. The cloak is known to be made from materials in its environment. The cloak has a number of holes where its eyes and mouth can be seen, as well as a hole in the top where its head pokes out.",
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/412.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/412/",
-        "isLegendary": false
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Wormadam",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/413.png",
+                "type": "Bug/Grass",
+                "evolution": [
+                    {
+                        "name": "Mothim",
+                        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/414.png",
+                        "type": "Bug/Flying"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 415,
+        "name": "Combee",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/415.png",
+        "type": "Bug/Flying",
+        "weight": 55,
+        "height": 3,
+        "price": 74.99,
+        "subtotal": 85,
+        "taxes": 8,
+        "save": 20,
+        "description": "COMBEE is a small Pokémon resembling three black-and-yellow striped hexagons stacked vertically with a single, large eye on each face. It has two black, antennae-like stripes on its top and a black, conical extension on its underside. There is a ring of yellow around each of its round eyes.",
+        "generation": 4,
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/415.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/415/",
+        "isLegendary": false,
+        "evolution": [
+            {
+                "name": "Vespiquen",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/416.png",
+                "type": "Bug/Flying"
+            }
+        ]
+    },
+    {
+        "id": 417,
+        "name": "Pachirisu",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/417.png",
+        "type": "Electric",
+        "weight": 39,
+        "height": 4,
+        "price": 74.99,
+        "subtotal": 85,
+        "taxes": 8,
+        "save": 20,
+        "description": "PACHIRISU is a small, white squirrel-like Pokémon with a faint blueish tint and a light blue stripe starting from its forehead and goes all the way down to the tip of the tail. There is a pattern of three yellow stripes down its back, and its belly and the undersides of its tail are cream-colored.",
+        "generation": 4,
+        "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/417.ogg",
+        "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/417/",
+        "isLegendary": false,
+        "evolution": []
     },
     {
         "id": 490,
@@ -813,6 +1205,7 @@
         "generation": 4,
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/490.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/490/",
-        "isLegendary": true
+        "isLegendary": true,
+        "evolution": []
     }
 ]

@@ -19,7 +19,7 @@ const NavNUI = () => {
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    <Link to='/'>
+                    <Link to='/' className="img-container">
                         <img className="navbar-img"
                             src="https://i.pinimg.com/originals/73/46/2b/73462b387cdd1ce3352343c290d61f4d.png"
                             alt="Pikachu PokéStore" />
