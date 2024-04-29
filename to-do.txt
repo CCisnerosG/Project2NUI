@@ -1,8 +1,9 @@
 Checkout completo
 Flag en featured (tambien el responsiveness)
 Pagination y filters -----------
-Evolutions en details
-Pasar a shopping cart mediante localstorage
+Evolutions en details -----------arreglar
+Pasar a shopping cart mediante localstorage (casi)
 Cambiar Login a Logout cuando se hace Login
+-----UI login
 Hero bien hecho
-Menu desplegable que se cierre con click
+Accesibilidad Pagination

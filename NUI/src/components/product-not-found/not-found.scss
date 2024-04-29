@@ -1,0 +1,48 @@
+.semi-hero {
+    display: flex;
+    align-items: center;
+    background: $background;
+    flex-direction: column;
+    margin: 30px 0 50px 0;
+
+    @include for-tablet-landscape {
+        flex-direction: row;
+        margin: 30px 0 40px 0;
+    }
+}
+
+.title-not-found {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 50px 0 30px 0;
+
+    @include for-tablet-landscape {
+        font-size: 3rem;
+    }
+}
+
+.not-found-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.not-found-img {
+    width: 1000px;
+}
+
+
+.text-not-found {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.text-description {
+    text-align: center;
+    margin-bottom: 60px;
+
+    @include for-tablet-portrait {
+        margin-bottom: 30px;
+    }
+}

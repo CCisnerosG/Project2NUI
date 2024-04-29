@@ -3,31 +3,8 @@ import { Link } from "react-router-dom";
 import './item.scss';
 import { Button } from "@nextui-org/react";
 
-const PokeItem = ({ item }) => {
-    const [cart, setCart] = useState([]);
+const PokeItem = ({ item, addToCart }) => {
 
-
-    // useEffect(() => {
-    //     if (cart.length > 0) {
-    //         localStorage.setItem("cart", JSON.stringify(cart));
-    //         console.log(cart)
-    //     }
-    // }, [cart]);
-
-    const addToCart = () => {
-        const index = cart.findIndex(cartItem => cartItem.id === item.id);
-        if (index !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[index].quantity += 1;
-            setCart(updatedCart);
-            console.log("Este es el if")
-        } else {
-            const updatedItem = { ...item, quantity: 1 };
-            console.log(cart)
-            setCart([...cart, updatedItem])
-            console.log("Este es el else")
-        }
-    };
 
     return (
         <>

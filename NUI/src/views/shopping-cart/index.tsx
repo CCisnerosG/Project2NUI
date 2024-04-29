@@ -7,3 +7,4 @@ const ShoppingCart = () => {
 };
 
 export default ShoppingCart
+ShoppingCart

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import './shopping.scss'
+import { Divider } from "@nextui-org/divider";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [data, setData] = useState([]);
@@ -10,37 +13,113 @@ const Cart = () => {
         }
     }, []);
 
+    const updateCart = (updatedCart) => {
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        setData(updatedCart);
+    };
+
+    const addQuantity = (itemId) => {
+        const updatedCart = data.map(item => {
+            if (item.id === itemId) {
+                return { ...item, quantity: item.quantity + 1 };
+            }
+            return item;
+        });
+        updateCart(updatedCart);
+    };
+
+    const subtractQuantity = (itemId) => {
+        const updatedCart = data.map(item => {
+            if (item.id === itemId && item.quantity >= 1) {
+                return { ...item, quantity: item.quantity - 1 };
+            }
+            return item;
+        }).filter(item => item.quantity > 0);
+        updateCart(updatedCart);
+    };
+
+
+    if (data.length === 0) {
+        return (
+            <div className="empty-cart">
+                <p>Your cart is empty</p>
+            </div>
+        );
+    }
+
+    const totalAmount = data.reduce((total, item) => total + (item.price * item.quantity), 0);
+
     return (
         <div className="bar-container">
-            {data && data.map((item, index) => (
-                <div className="item__container" key={item.id}>
-                    <div className='item__image-container'>
-                        <img className='item__image' src={item.sprite} alt={`${item.name} image`} />
+            <Divider />
+            <div className="shopping__header">
+                <div className="shopping__title">
+                    <div className="shopping__img-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" alt="Pokeball" />
                     </div>
-                    <div className="item__info-container">
-                        <ul className="item__info">
-                            <li className="item__name-container">
-                                <p className='item__name'>{item.name}</p>
-                                <p className="item__description">{item.description}</p>
-                            </li>
-                            <div className="item__price-details">
-                                <div className="item__price-container">
-                                    <p className='item__price'>Total: ${item.price}</p>
-                                </div>
-                                <div className="item__details-container">
-                                    <li className="item__details-type">
-                                        <p className="item__details-type-text">Type: {item.type}</p>
-                                        <p className="item__details-weight-text">Weight: {item.weight} lbs</p>
-                                        <p className="item__details-height-text">Height: {item.height} inch</p>
-                                    </li>
-                                </div>
-                            </div>
-                        </ul>
-                        <div className="options">
-                        </div>
+                    <Divider orientation="vertical" className="h-10" />
+                    <div className="shopping__text-container">
+                        <p className="shopping__text">Your cart</p>
                     </div>
                 </div>
-            ))}
+                <div className="shopping__topkmlist">
+                    <Link to='/PokemonList'>
+                        <p className="shopping__topkmlist-text">Continue Shopping</p>
+                    </Link>
+                </div>
+            </div>
+            <Divider />
+            <div className="table-sidebar">
+                <div className="mytable">
+                    <table className="shopping">
+                        <tbody>
+                            {data && data.map((item) => (
+                                <tr className="item__container" key={item.id}>
+                                    <td className='item__image-container'>
+                                        <img className='item__image' src={item.sprite} alt={`${item.name} image`} />
+                                    </td>
+                                    <td className="item__info">
+                                        <div className="item__name-container">
+                                            <p className='item__name'>{item.name}</p>
+                                        </div>
+                                    </td>
+                                    <td className="item__info">
+                                        <div className="item__quantity">
+                                            <span className="item__quantity-number">{item.quantity}</span>
+                                            <div className="item__quantity-buttons">
+                                                <button className="btn-cart" onClick={() => addQuantity(item.id)}>+</button>
+                                                <button className="btn-cart" onClick={() => subtractQuantity(item.id)}>-</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="item__info">
+                                        <div className="item__price-container">
+                                            <p className='item__price'>${(item.price * item.quantity).toFixed(2)}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="sidebar">
+                    <p className="sidebar__title">
+                        YOUR TOTAL:
+                    </p>
+                    <p className="sidebar__total">
+                        ${totalAmount.toFixed(2)}
+                    </p>
+
+                    <div className="sidebar__button">
+                        <Link to='/Checkout'>
+                            <button className="sidebar__btn-tocheckout">CHECKOUT</button>
+                        </Link>
+                    </div>
+                </div>
+
+            </div>
+            <Divider />
         </div>
     );
 };

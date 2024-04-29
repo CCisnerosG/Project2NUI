@@ -1,28 +1,87 @@
 .bar-container {}
 
-.item {
-    &__container {
-        width: 100%;
+.shopping {
+    &__header {
         display: flex;
-        margin-top: 30px;
+        height: 80px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__title{
+        display: flex;
         align-items: center;
     }
 
+    &__img-container {
+        width: 40px;
+        margin: 0 20px 0 100px;
+    }
+
+    &__text-container {
+        margin-left: 20px;
+    }
+
+    &__text {
+        font-size: 2rem;
+        font-weight: 200;
+    }
+
+    &__topkmlist{
+        margin-right: 100px;
+    }
+
+    &__topkmlist-text {
+        color: rgb(0, 128, 255);
+        font-size: 1.2rem;
+    }
+}
+
+.table-sidebar {
+    display: flex;
+    background-color: rgb(241, 241, 241);
+    height: 590px;
+}
+
+.mytable {
+    width: 70%;
+    height: 590px;
+    overflow: scroll;
+    display: block;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.shopping {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.item {
+    &__container {
+        width: 80%;
+        display: flex;
+        margin: 30px 0 0 100px;
+        align-items: center;
+        background-color: rgb(233, 233, 233);
+    }
+
     &__image-container {
-        width: 30%
+        width: 50%;
     }
 
     &__image {
         width: 100%;
     }
 
-    &__info-container {
-        width: 55%;
-    }
-
     &__info {
         display: flex;
-        flex-direction: column;
+        justify-content: space-evenly;
+        width: 80%;
+        align-items: center;
     }
 
     &__name-container {
@@ -30,36 +89,85 @@
     }
 
     &__name {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
-    &__description {
-        font-size: 0.8rem;
-    }
-
-    &__price-details {
+    &__quantity {
         display: flex;
-        flex-direction: column-reverse;
+        align-items: center;
     }
 
+    &__quantity-number {
+        margin-right: 10px;
+    }
+
+    &__quantity-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
 
     &__price-container {}
 
     &__price {}
-
-    &__subtotal {}
-
-    &__details-container {
-        font-size: 0.7rem;
-    }
-
-    &__details-type {}
-
-    &__details-type-text {}
-
-    &__details-weight-text {}
-
-    &__details-height-text {}
 }
 
-.options {}
+.btn-cart {
+    background-color: black;
+    width: 20px;
+    height: 20px;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.2;
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.sidebar {
+
+    background: rgb(113, 111, 111);
+    margin-left: 75px;
+    -webkit-box-shadow: -12px 2px 20px -6px rgba(171, 171, 171, 1);
+    -moz-box-shadow: -12px 2px 20px -6px rgba(171, 171, 171, 1);
+    box-shadow: -12px 2px 20px -6px rgba(171, 171, 171, 1);
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: rgb(252, 210, 3);
+    }
+
+    &__total {
+        font-size: 3rem;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+    }
+
+    &__button {
+        width: 100%;
+        background-color: rgb(49, 190, 49);
+        height: 60px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    &__btn-tocheckout {
+        font-size: 1.2rem;
+        font-weight: bold;
+        width: 100%;
+    }
+}
