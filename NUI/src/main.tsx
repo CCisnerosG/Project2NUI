@@ -9,7 +9,7 @@ import { UserProvider } from './context/user-context.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter >
       <NextUIProvider>
         <UserProvider>
           <PokemonProvider>

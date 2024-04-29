@@ -35,6 +35,7 @@
 
         &:hover .featured__text {
             top: 60px;
+            font-size: 5rem;
         }
     }
 
@@ -45,13 +46,14 @@
         transition: ease-in-out 0.3s;
 
         &:hover {
-            height: 1500px;
+            height: 2200px;
         }
     }
 
     &__img {
         width: 100%;
         object-fit: cover;
+        transition: ease-in-out 0.3s;
     }
 
     &__text {
@@ -63,7 +65,7 @@
         color: white;
         text-align: center;
         z-index: 1;
-        font-size: 5rem;
+        font-size: 2rem;
         font-weight: bold;
         transition: ease-in-out 0.3s;
     }

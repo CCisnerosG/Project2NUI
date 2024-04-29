@@ -1,0 +1,8 @@
+Checkout completo
+Flag en featured (tambien el responsiveness)
+Pagination y filters -----------
+Evolutions en details
+Pasar a shopping cart mediante localstorage
+Cambiar Login a Logout cuando se hace Login
+Hero bien hecho
+Menu desplegable que se cierre con click

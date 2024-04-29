@@ -26,7 +26,7 @@ const PokemonDetails = () => {
     const { id } = useParams();
     const pokemonData = usePokemonContext();
     const [bgColor, setBgColor] = useState("");
-
+    const [pokemon, setPokemon] = useState(null);
 
     useEffect(() => {
         if (pokemonData) {
@@ -35,6 +35,7 @@ const PokemonDetails = () => {
             if (type && typeColors[type]) {
                 setBgColor(typeColors[type]);
             }
+            setPokemon(pokemon);
         }
     }, [id, pokemonData]);
 
@@ -42,8 +43,9 @@ const PokemonDetails = () => {
         return <p>Loading...</p>;
     }
 
-    const pokemon = pokemonData.find(p => p.id === parseInt(id));
-    console.log(pokemon['evolution_chain']);
+    if (!pokemon) {
+        return <NotFound />;
+    }
 
     const renderEvolution = (evolution) => {
         return (
@@ -60,11 +62,6 @@ const PokemonDetails = () => {
             </>
         );
     };
-
-
-    if (!pokemon) {
-        return <NotFound />;
-    }
 
 
     return (
@@ -114,95 +111,7 @@ const PokemonDetails = () => {
                         <p>This pokemon doesn't have any evolutions!</p>
                     )}
                 </div>
-                {/* <div className="mytab">
-                    <ul className="nav nav-tabs mytab-content" id="myTab" role="tablist">
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                                type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Refunds and
-                                Shipping</button>
-                        </li>
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Reviews
-                                (3)</button>
-                        </li>
-                    </ul>
-                    <div className="tab-content" id="myTabContent">
-                        <div className="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
-                            tabIndex="0">
-                            <div className="mytab__text">
-                                <p>Free shipping with our PokéPartner membership.</p>
-                                <ul>
-                                    <li>There's no refunds, don't be like that.</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                            tabIndex="0">
-                            <div className="mytab__text">
-                                <div className="mytab__text-header">
-                                    <p className="mytab__text-title">
-                                        I completed my Pokédex!
-                                    </p>
-                                    <div className="mytab__text-rating">
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <p className="mytab__text-user">TotallyNotAsh - Apr 4th 2024</p>
-                                    </div>
-                                </div>
-                                <p>Great service! Totally legit.</p>
-                            </div>
-                            <div className="mytab__text">
-                                <div className="mytab__text-header">
-                                    <p className="mytab__text-title">
-                                        Fast delivery!
-                                    </p>
-                                    <div className="mytab__text-rating">
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <p className="mytab__text-user">Andrew - Jan 10th 2024</p>
-                                    </div>
-                                </div>
-                                <p>About to go for another one!</p>
-                            </div>
-                            <div className="mytab__text">
-                                <div className="mytab__text-header">
-                                    <p className="mytab__text-title">
-                                        Not quite satisfied...
-                                    </p>
-                                    <div className="mytab__text-rating">
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-fill"></i>
-                                        <i className="bi bi-star-half"></i>
-                                        <i className="bi bi-star"></i>
-                                        <p className="mytab__text-user">Mike - Apr 1st 2024</p>
-                                    </div>
-                                </div>
-                                <p>It evolved upon arrival.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <section className="partners">
-                    <h4 className="partners__title">Some of our partners</h4>
-                    <div className="partners__img-container">
-                        <img className="partners__img"
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/FedEx_Express.svg/640px-FedEx_Express.svg.png"
-                            alt="FedEx" />
-                        <img className="partners__img" src="https://superboxcr.com/wp-content/uploads/2018/11/Amazon-Logo-PNG.png"
-                            alt="Amazon" />
-                        <img className="partners__img"
-                            src="https://data.alibabagroup.com/ecms-files/886024452/296d05a1-c52a-4f5e-abf2-0d49d4c0d6b3.png"
-                            alt="Alibaba" />
-                    </div>
-                </section>
+                {/* Resto de tu código */}
             </div>
         </div >
     );

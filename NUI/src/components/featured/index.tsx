@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { usePokemonContext } from "../../context/pokemon-context";
 import './featured.scss'
 
@@ -12,18 +13,20 @@ const Featured = () => {
                 <div className="featured__header">
                     <h2>Now in LEGEND Season!</h2>
                 </div>
-                <div className="featured__items">
-                    {legendaryPokemon.map(pokemon => (
-                        <div key={pokemon.id} className="featured__card">
-                            <div className="featured__img-container">
-                                <img className="featured__img" src={pokemon.sprite} alt={pokemon.name} />
+                <Link to="/PokemonList">
+                    <div className="featured__items">
+                        {legendaryPokemon.map(pokemon => (
+                            <div key={pokemon.id} className="featured__card">
+                                <div className="featured__img-container">
+                                    <img className="featured__img" src={pokemon.sprite} alt={pokemon.name} />
+                                </div>
+                                <div className="featured__text">
+                                    {pokemon.name}
+                                </div>
                             </div>
-                            <div className="featured__text">
-                                {pokemon.name}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </Link>
             </section>
         </>
     )

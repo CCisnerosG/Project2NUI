@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
 import './nav.scss'
@@ -8,7 +8,7 @@ const NavNUI = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const closeMenu = () => {
-        setIsMenuOpen(false);
+        useState(false);
     };
 
     return (
