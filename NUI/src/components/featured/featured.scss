@@ -2,22 +2,24 @@
     &__header {
         font-size: 3rem;
         text-align: center;
+        margin: 30px 0 30px 0;
     }
 
     &__items {
         display: flex;
-        height: 600px;
-        overflow-x: scroll;
-        flex-wrap: wrap;
+        flex-direction: column;
 
-        @include for-tablet-portrait {
+        @include for-tablet-landscape {
             flex-wrap: nowrap;
+            height: 600px;
+            flex-direction: row;
+            height: 600px;
         }
     }
 
     &__card {
         position: relative;
-        height: 100%;
+        height: 270px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -36,6 +38,10 @@
         &:hover .featured__text {
             top: 60px;
             font-size: 5rem;
+        }
+
+        @include for-tablet-landscape{
+            height: 100%;
         }
     }
 

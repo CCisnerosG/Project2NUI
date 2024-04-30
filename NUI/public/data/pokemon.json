@@ -108,7 +108,13 @@
         "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/25.ogg",
         "evolution_chain": "https://pokeapi.co/api/v2/evolution-chain/25/",
         "isLegendary": false,
-        "evolution": []
+        "evolution": [
+            {
+                "name": "Raichu",
+                "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+                "type": "Electric"
+            }
+        ]
     },
     {
         "id": 39,

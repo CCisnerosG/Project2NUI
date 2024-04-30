@@ -1,10 +1,17 @@
-Checkout completo
-Flag en featured (tambien el responsiveness)
-Pagination y filters -----------
+Checkout forms
+Flag en featured responsiveness 80% hecho
+filters -----------
 Evolutions en details -----------arreglar
 Cambiar Login a Logout cuando se hace Login
------UI login
 Hero bien hecho
-Accesibilidad Pagination
 Validacion login ---Protected Route
 
+Vistas----------------
+Shopping Cart           ready
+Login                   ready
+Home                    80%
+Pokemon Details         80%
+Checkout                40%
+Product List            70%
+
+Obtener el length del localStorage y mostrarlo en un icono sobre el cart

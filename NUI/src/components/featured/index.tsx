@@ -11,7 +11,7 @@ const Featured = () => {
         <>
             <section className="featured">
                 <div className="featured__header">
-                    <h2>Now in LEGEND Season!</h2>
+                    <p>Now in LEGEND Season!</p>
                 </div>
                 <Link to="/PokemonList">
                     <div className="featured__items">

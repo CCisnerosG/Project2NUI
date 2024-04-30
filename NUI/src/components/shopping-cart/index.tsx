@@ -3,22 +3,30 @@ import './shopping.scss'
 import { Divider } from "@nextui-org/divider";
 import { Link } from "react-router-dom";
 
+interface Item {
+    id: number;
+    name: string;
+    sprite: string;
+    quantity: number;
+    price: number;
+}
+
 const Cart = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart'));
+        const storedCart = JSON.parse(localStorage.getItem('cart') || '[]') as Item[];
         if (storedCart) {
             setData(storedCart);
         }
     }, []);
 
-    const updateCart = (updatedCart) => {
+    const updateCart = (updatedCart: Item[]) => {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         setData(updatedCart);
     };
 
-    const addQuantity = (itemId) => {
+    const addQuantity = (itemId: number) => {
         const updatedCart = data.map(item => {
             if (item.id === itemId) {
                 return { ...item, quantity: item.quantity + 1 };
@@ -28,7 +36,7 @@ const Cart = () => {
         updateCart(updatedCart);
     };
 
-    const subtractQuantity = (itemId) => {
+    const subtractQuantity = (itemId: number) => {
         const updatedCart = data.map(item => {
             if (item.id === itemId && item.quantity >= 1) {
                 return { ...item, quantity: item.quantity - 1 };
@@ -38,6 +46,10 @@ const Cart = () => {
         updateCart(updatedCart);
     };
 
+    const deleteItem = (itemId: number) => {
+        const updatedCart = data.filter(item => item.id !== itemId);
+        updateCart(updatedCart);
+    };
 
     if (data.length === 0) {
         return (
@@ -97,6 +109,9 @@ const Cart = () => {
                                             <p className='item__price'>${(item.price * item.quantity).toFixed(2)}</p>
                                         </div>
                                     </td>
+                                    <td className="item__trash">
+                                        <button onClick={() => deleteItem(item.id)}><img className='item__trash-icon' src="/trash.svg" alt="Delete icon" /></button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -104,15 +119,17 @@ const Cart = () => {
                 </div>
 
                 <div className="sidebar">
-                    <p className="sidebar__title">
-                        YOUR TOTAL:
-                    </p>
-                    <p className="sidebar__total">
-                        ${totalAmount.toFixed(2)}
-                    </p>
+                    <div className="sidebar__info">
+                        <p className="sidebar__title">
+                            YOUR TOTAL:
+                        </p>
+                        <p className="sidebar__total">
+                            ${totalAmount.toFixed(2)}
+                        </p>
+                    </div>
 
                     <div className="sidebar__button">
-                        <Link to='/Checkout'>
+                        <Link to='/Checkout' className="sidebar__btn-tocheckout">
                             <button className="sidebar__btn-tocheckout">CHECKOUT</button>
                         </Link>
                     </div>
