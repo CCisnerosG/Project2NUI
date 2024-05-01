@@ -9,24 +9,30 @@ import ProductDetails from './views/product-details';
 import ShoppingCart from './views/shopping-cart';
 import { AuthProvider } from './hooks/useAuth';
 import Checkout from './components/checkout';
+import ProtectedRoute from './components/protected-route';
 
 
 function App() {
+  const darkMode = useDarkMode(false);
 
   return (
     <>
-      <NavNUI />
-      <AuthProvider>
-        <Routes>
-          <Route path='/' Component={HomePage} />
-          <Route path='/PokemonList' Component={PokemonList} />
-          <Route path="/ProductDetails/:id" Component={ProductDetails} />
-          <Route path='/Login' Component={Login} />
-          <Route path='/ShoppingCart' Component={ShoppingCart} />
-          <Route path='/Checkout' Component={Checkout} />
-        </Routes>
-      </AuthProvider>
-      <Footer />
+      <main className={`${darkMode.value ? 'dark' : ''} text-foreground bg-background`}>
+        <NavNUI />
+        <AuthProvider>
+          <Routes>
+            <Route path='/' Component={HomePage} />
+            <Route path='/PokemonList' Component={PokemonList} />
+            <Route path="/ProductDetails/:id" Component={ProductDetails} />
+            <Route path='/Login' Component={Login} />
+            <Route element={<ProtectedRoute />}>
+              <Route path='/ShoppingCart' Component={ShoppingCart} />
+              <Route path='/Checkout' Component={Checkout} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+        <Footer />
+      </main>
     </>
   )
 }

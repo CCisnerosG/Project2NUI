@@ -13,7 +13,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <NextUIProvider>
         <UserProvider>
           <PokemonProvider>
-            <App />
+            <main className="dark text-foreground bg-background">
+              <App />
+            </main>
           </PokemonProvider>
         </UserProvider>
       </NextUIProvider>
