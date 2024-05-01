@@ -1,16 +1,34 @@
 .checkout {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     width: 100%;
     background-color: rgb(241, 241, 241);
 
+    @include for-tablet-portrait {
+        flex-direction: row-reverse;
+    }
+
+
     &__summary {
         background-color: white;
-        width: 30%;
-        margin: 10px 100px 10px 10px;
+        width: 95%;
+        margin: 30px 100px 10px 10px;
         border-radius: 10px;
         padding-top: 25px;
         height: 100%;
+        -webkit-box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+
+        @include for-tablet-portrait {
+            width: 50%;
+            margin: 30px 20px 10px 10px;
+        }
+
+        @include for-tablet-landscape {
+            width: 30%;
+            margin: 30px 20px 10px 10px;
+        }
     }
 
     &__title {
@@ -43,7 +61,11 @@
 
 
     &__info-price {
-        width: 40%;
+        width: 18%;
+
+        @include for-tablet-portrait {
+            width: 40%;
+        }
     }
 
     &__divider {
@@ -63,10 +85,19 @@
     }
 
     &__forms {
-        width: 80%;
-        margin: 10px 25px 0 25px;
+        width: 95%;
+        margin: 30px 100px 10px 10px;
         background-color: white;
         border-radius: 10px;
+        -webkit-box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 17px -6px rgba(0, 0, 0, 0.75);
+
+        @include for-tablet-portrait {
+            width: 80%;
+            margin: 30px 25px 30px 25px;
+        }
+
     }
 
     &__total {
@@ -83,13 +114,13 @@
     &__title {
         font-size: 2rem;
         font-weight: 500;
-        margin: 50px 0 0 35px;
+        margin: 20px 0 0 35px;
     }
 
     &__header {
         display: flex;
         align-items: center;
-        margin: 25px 0 0 50px;
+        margin: 40px 0 0 50px;
     }
 
     &__header-number {
@@ -110,17 +141,35 @@
 
     &__name-lastname {
         display: flex;
-        margin: 20px 0 0 80px;
+        margin-top: 30px;
         gap: 50px;
     }
 
-    &__myinput {
-        width: 400px !important;
+    &__shipping-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    &__country-zip {
+    &__creditcard-form {
+        width: 100%;
         display: flex;
-        margin: 20px 0 0 80px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__myinput {
+        @include for-pc {
+            width: 400px !important;
+        }
+    }
+
+    &__country-phone {
+        display: flex;
+        margin-top: 30px;
         gap: 50px;
     }
 
@@ -130,6 +179,16 @@
         --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
         box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
         border-radius: 10px;
+        color: #71717A;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px 0 8px;
+
+        @include for-tablet-portrait {
+            width: 400px;
+            margin: 0;
+        }
     }
 
     &__select-input {
@@ -137,6 +196,65 @@
         width: 100%;
         height: 90%;
         border-radius: 10px;
+        font-weight: 400;
+        font-size: 0.9rem;
     }
 
+    &__city-state-zip {
+        display: flex;
+        margin-top: 30px;
+        gap: 50px;
+    }
+
+    &__myinput-three {
+
+        @include for-pc {
+            width: 250px !important;
+        }
+    }
+
+    &__address {
+        margin-top: 30px;
+        width: 81%;
+    }
+
+    &__img {
+        width: 15px;
+        height: 15px;
+        opacity: 0.8;
+        margin-left: 8px;
+    }
+
+    &__creditcard {
+
+        margin-top: 30px;
+        width: 81%;
+    }
+
+    &__security-expiration {
+        display: flex;
+        margin-top: 30px;
+        gap: 50px;
+    }
+
+    &__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0 30px 0;
+    }
+}
+
+.applepay {
+    filter: invert(1);
+    width: 35px;
+    height: 35px;
+}
+
+.forms__myinput label,
+.forms__myinput-one label,
+.forms__myinput-two label,
+.forms__myinput-three label {
+    color: black;
 }

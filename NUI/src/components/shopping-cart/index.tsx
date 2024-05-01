@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import './shopping.scss'
 import { Divider } from "@nextui-org/divider";
 import { Link } from "react-router-dom";
+import { Button } from "@nextui-org/react";
 
 interface Item {
     id: number;
@@ -54,7 +55,9 @@ const Cart = () => {
     if (data.length === 0) {
         return (
             <div className="empty-cart">
-                <p>Your cart is empty</p>
+                <p className="empty-cart-text">Your cart is empty</p>
+                <Link to={'/PokemonList'}><Button color="primary">Back to Shopping!</Button>
+                </Link>
             </div>
         );
     }

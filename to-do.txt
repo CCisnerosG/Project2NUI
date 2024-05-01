@@ -1,17 +1,15 @@
-Checkout forms
-Flag en featured responsiveness 80% hecho
-filters -----------
 Evolutions en details -----------arreglar
-Cambiar Login a Logout cuando se hace Login
+Cambiar Login a Logout cuando se hace Login ----
 Hero bien hecho
 Validacion login ---Protected Route
+Obtener el length del localStorage y mostrarlo en un icono sobre el cart
+Validaciones Ceckout
 
 Vistas----------------
 Shopping Cart           ready
 Login                   ready
 Home                    80%
 Pokemon Details         80%
-Checkout                40%
-Product List            70%
+Checkout                ready (necesita responsiveness)
+Product List            ready
 
-Obtener el length del localStorage y mostrarlo en un icono sobre el cart

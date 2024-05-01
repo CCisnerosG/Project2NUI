@@ -294,7 +294,7 @@
             {
                 "name": "Golbat",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png",
-                "type": "Poison/Flying"
+                "type": "Poison"
             }
         ]
     },
@@ -453,7 +453,7 @@
             {
                 "name": "Ledian",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/166.png",
-                "type": "Bug/Flying"
+                "type": "Bug"
             }
         ]
     },
@@ -611,12 +611,12 @@
             {
                 "name": "Skiploom",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/188.png",
-                "type": "Grass/Flying",
+                "type": "Grass",
                 "evolution": [
                     {
                         "name": "Jumpluff",
                         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/189.png",
-                        "type": "Grass/Flying"
+                        "type": "Grass"
                     }
                 ]
             }
@@ -954,12 +954,12 @@
             {
                 "name": "Staravia",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/397.png",
-                "type": "Normal/Flying",
+                "type": "Normal",
                 "evolution": [
                     {
                         "name": "Staraptor",
                         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/398.png",
-                        "type": "Normal/Flying"
+                        "type": "Normal"
                     }
                 ]
             }
@@ -1143,12 +1143,12 @@
             {
                 "name": "Wormadam",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/413.png",
-                "type": "Bug/Grass",
+                "type": "Bug",
                 "evolution": [
                     {
                         "name": "Mothim",
                         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/414.png",
-                        "type": "Bug/Flying"
+                        "type": "Bug"
                     }
                 ]
             }
@@ -1158,7 +1158,7 @@
         "id": 415,
         "name": "Combee",
         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/415.png",
-        "type": "Bug/Flying",
+        "type": "Bug",
         "weight": 55,
         "height": 3,
         "price": 74.99,
@@ -1174,7 +1174,7 @@
             {
                 "name": "Vespiquen",
                 "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/416.png",
-                "type": "Bug/Flying"
+                "type": "Bug"
             }
         ]
     },

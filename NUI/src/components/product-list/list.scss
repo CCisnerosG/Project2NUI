@@ -16,3 +16,83 @@
 .mypag-btn {
     margin: 15px 0px 0 40px;
 }
+
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: black;
+    height: 40px;
+    margin-top: 40px;
+}
+
+.searchbar {
+    text-align: center;
+    background-color: #F4F4F5;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border-radius: 10px;
+    height: 40px;
+}
+
+.searchbar::placeholder {
+    color: black;
+}
+
+.pkm-notfound {
+    text-align: center;
+    font-size: 2rem;
+    margin: 250px 0 250px 0;
+}
+
+.filter {
+
+    &__type {
+        display: flex;
+        align-items: center;
+        margin: 30px 0 30px 0;
+        flex-direction: column;
+    }
+
+
+    &__type-title {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__type-text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    &__type-btns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__gen {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    &__price {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+}
+
+
+.myaccordion {
+    width: 100%;
+    text-align: center;
+}
+
+.accord {
+    overflow-x: hidden;
+}

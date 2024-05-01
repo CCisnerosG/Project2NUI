@@ -22,9 +22,8 @@ function App() {
           <Route path='/PokemonList' Component={PokemonList} />
           <Route path="/ProductDetails/:id" Component={ProductDetails} />
           <Route path='/Login' Component={Login} />
-          <Route path='/ShoppingCart' element={<ShoppingCart />} />
-          <Route path='/Checkout' element={<Checkout />} />
-          {/* <Route path='/Checkout' Component={Checkout} /> */}
+          <Route path='/ShoppingCart' Component={ShoppingCart} />
+          <Route path='/Checkout' Component={Checkout} />
         </Routes>
       </AuthProvider>
       <Footer />
