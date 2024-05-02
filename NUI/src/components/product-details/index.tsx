@@ -22,7 +22,7 @@ const typeColors = {
     Steel: "#B8B8D0",
 };
 
-const PokemonDetails = ({ addToCart }) => {
+const PokemonDetails = () => {
     const { id } = useParams();
     const pokemonData = usePokemonContext();
     const [bgColor, setBgColor] = useState("");
@@ -46,8 +46,6 @@ const PokemonDetails = ({ addToCart }) => {
     if (!pokemon) {
         return <NotFound />;
     }
-
-
 
     const renderEvolution = (evolution) => {
         return (
@@ -80,7 +78,6 @@ const PokemonDetails = ({ addToCart }) => {
                         <p className="pokemon__header-title">{pokemon.name}</p>
                         <p className="pokemon__header-price">${pokemon.price}</p>
                     </div>
-
                 </div>
                 <div className="pokemon__description">
                     <p className="pokemon__info-type">{pokemon.type}</p>

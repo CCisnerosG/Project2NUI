@@ -112,7 +112,7 @@
         }
     }
 
-    &__header-info-text-btn{
+    &__header-info-text-btn {
         display: flex;
         justify-content: space-between;
         width: 90%;
@@ -219,7 +219,7 @@
         max-width: 50%;
     }
 
-    &__evolution-text{
+    &__evolution-text {
         margin-bottom: 30px;
     }
 
@@ -229,6 +229,7 @@
 
     &__evolution-evos {
         display: flex;
+        justify-content: center;
     }
 
     &__evolution-name {
@@ -238,6 +239,8 @@
 
     &__evolution-img-container {
         width: 50%;
+        border: 0.1px solid black;
+        border-radius: 5px;
     }
 
     &__evolution-img {

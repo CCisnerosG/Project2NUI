@@ -7,11 +7,12 @@ import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org
 import { Pagination } from "@nextui-org/react";
 
 interface PokeItem {
-    id: string;
+    id: number;
     name: string;
     type: string;
     generation: number;
     price: number;
+    quantity: number;
 }
 
 const PokeProducts = () => {
@@ -35,7 +36,7 @@ const PokeProducts = () => {
         }
     }, [])
 
-    const addToCart = (item) => {
+    const addToCart = (item: PokeItem) => {
         const index = cart.findIndex(cartItem => cartItem.id === item.id);
         if (index !== -1) {
             const updatedCart = [...cart];
@@ -224,6 +225,7 @@ const PokeProducts = () => {
 
                         {/* Pagination */}
                         {totalItems > itemsPerPage && (
+                            
                             <Pagination
                                 total={Math.ceil(totalItems / itemsPerPage)}
                                 color="secondary"

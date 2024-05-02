@@ -16,7 +16,7 @@ const Log = () => {
 
     const { login } = useAuth();
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
 
         const user = data.find(user => user.mail === username && user.pass === password);
@@ -50,7 +50,7 @@ const Log = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         startContent={
-                            <img src='user.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                            <img src='user.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='User icon' />
                         }
                     />
                     <Input className='myinput'
@@ -61,10 +61,10 @@ const Log = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         startContent={
-                            <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                            <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='Password Icon' />
                         }
                     />
-                    <Button color="danger" className='w-[80%]' onClick={handleLogin}>
+                    <Button color="primary" className='w-[80%]' onClick={handleLogin}>
                         Login
                     </Button>
                 </div>
