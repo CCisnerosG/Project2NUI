@@ -14,14 +14,6 @@ interface PokeItem {
     price: number;
 }
 
-interface Filters {
-    name: string;
-    type: string;
-    generation: string;
-    minPrice: string;
-    maxPrice: string;
-}
-
 const PokeProducts = () => {
     const [cart, setCart] = useState<PokeItem[]>([]);
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
@@ -83,28 +75,34 @@ const PokeProducts = () => {
     const handleNameFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value;
         setFilters({ ...filters, name });
+        setCurrentPage(1);
     };
 
     const handleAllTypesFilter = () => {
         setFilters({ ...filters, type: '' });
+        setCurrentPage(1);
     };
 
     const handleTypeFilterChange = (type: string) => {
         setFilters({ ...filters, type });
+        setCurrentPage(1);
     };
 
     const handleGenFilterChange = (generation: number) => {
         setFilters({ ...filters, generation });
+        setCurrentPage(1);
     }
 
     const handleMinPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const minPrice = event.target.value;
         setFilters({ ...filters, minPrice });
+        setCurrentPage(1);
     };
 
     const handleMaxPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const maxPrice = event.target.value;
         setFilters({ ...filters, maxPrice });
+        setCurrentPage(1);
     };
 
     const types = ['Grass', 'Electric', 'Normal', 'Fire', 'Poison', 'Ground', 'Bug', 'Psychic', 'Steel', 'Rock', 'Dark', 'Dragon'];
