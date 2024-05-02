@@ -1,8 +1,6 @@
 Evolutions en details -----------arreglar
-Cambiar Login a Logout cuando se hace Login ----
 Hero bien hecho
-Validacion login ---Protected Route
-Obtener el length del localStorage y mostrarlo en un icono sobre el cart
+Obtener el length del localStorage y mostrarlo en un icono sobre el cart ***
 Validaciones Ceckout
 
 Vistas----------------

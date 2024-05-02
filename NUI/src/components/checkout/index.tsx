@@ -1,12 +1,43 @@
-import React, { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import './checkout.scss'
 import { Divider } from "@nextui-org/divider";
-import { Button, Input, useDisclosure } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import ModalNUI from "../modal";
+import { useCountriesContext } from "../../context/countries-context";
 
 const Checkout = () => {
     const [data, setData] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [creditCardNumber, setCreditCardNumber] = useState('');
+    const [isValidCreditCard, setIsValidCreditCard] = useState(false);
+    const [cardType, setCardType] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState('');
+    const [selectedState, setSelectedState] = useState('');
+    const [states, setStates] = useState<string[]>([]);
+    const country = useCountriesContext();
+
+
+    useEffect(() => {
+        if (selectedCountry) {
+            const selectedCountryData = country.find(c => c.id === parseInt(selectedCountry));
+            if (selectedCountryData) {
+                setStates(selectedCountryData.states);
+            }
+        }
+    }, [selectedCountry, country]);
+
+    // Setteando pais
+    const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = event.target;
+        setSelectedCountry(value);
+        setSelectedState('');
+    };
+
+    // Seteando State de cada pais
+    const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = event.target;
+        setSelectedState(value);
+    };
 
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart'));
@@ -19,6 +50,56 @@ const Checkout = () => {
     const completePurchase = () => {
         localStorage.removeItem('cart');
     }
+
+
+    //Seteando Tarjeta de credito
+    function validateCreditCard(cardNumber: string) {
+        const cleanedNumber = cardNumber.replace(/\D/g, "");
+        const isVisa = cleanedNumber.match(/^4\d{12}(?:\d{3})?$/);
+        const isMastercard = cleanedNumber.match(/^5[1-5]\d{14}$/);
+        const isAmex = cleanedNumber.match(/^3[47]\d{13}$/);
+        const isValidLuhn = (num: string) => {
+            let sum = 0;
+            for (let i = 0; i < num.length; i++) {
+                let digit = parseInt(num[num.length - 1 - i]);
+                if (i % 2 === 1) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+                sum += digit;
+            }
+            return sum % 10 === 0;
+        };
+        return (isVisa || isMastercard || isAmex) && isValidLuhn(cleanedNumber);
+    }
+
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = event.target;
+        setCreditCardNumber(value);
+        setIsValidCreditCard(validateCreditCard(value));
+
+        if (value.match(/^4/)) {
+            setCardType('Visa');
+        } else if (value.match(/^5[1-5]/)) {
+            setCardType('Mastercard');
+        } else if (value.match(/^3[47]/)) {
+            setCardType('American Express');
+        } else {
+            setCardType('');
+        }
+    };
+
+    //CVV
+    function validateCVV(cvvNumber: string) {
+        if (setCardType('American Express')){
+
+        }
+
+    }
+
+
+
+
 
     const subtotalAmount = data.reduce((subtotal, item) => subtotal + (item.subtotal * item.quantity), 0);
     const taxesAmount = data.reduce((taxes, item) => taxes + (item.taxes * item.quantity), 0);
@@ -100,22 +181,39 @@ const Checkout = () => {
                     </div>
 
                     <div className="forms__country-phone">
-                        <div className="forms__select">
-                            <span className="forms__select-flag" aria-hidden="true"></span>
-                            <label htmlFor="country-selector" className="forms__label">Select Country</label>
-                            <select className="forms__select-input" name="country-selector" id="country-selector" aria-labelledby="country-selector-label">
-                                <option className="forms__select-input" value="0">Select Country</option>
-                                <option className="forms__select-input" value="US">United States</option>
-                                <option className="forms__select-input" value="MX">Mexico</option>
-                                <option className="forms__select-input" value="CR">Costa Rica</option>
-                            </select>
-                        </div>
+                        <Select
+                            isRequired
+                            label="Country"
+                            placeholder="Select a Country"
+                            className="forms__myinput"
+                            value={selectedCountry}
+                            onChange={handleCountryChange}
+                        >
+                            {country.map((country) => (
+                                <SelectItem key={country.id} value={country.id}>
+                                    {country.name}
+                                </SelectItem>
+                            ))}
+                        </Select>
 
                         <Input isRequired type="text" label="Phone Number" className="forms__myinput" />
                     </div>
 
                     <div className="forms__city-state-zip">
-                        <Input isRequired type="text" label="State" className="forms__myinput-three" />
+                        <Select
+                            isRequired
+                            label="State"
+                            placeholder="Select a State"
+                            className="max-w-xs forms__myinput-three"
+                            value={selectedState}
+                            onChange={handleStateChange}
+                        >
+                            {states.map((state, index) => (
+                                <SelectItem key={index} value={state}>
+                                    {state}
+                                </SelectItem>
+                            ))}
+                        </Select>
                         <Input isRequired type="text" label="City" className="forms__myinput-three" />
                         <Input isRequired type="text" label="Zip Code" className="forms__myinput-three" />
                     </div>
@@ -125,7 +223,6 @@ const Checkout = () => {
                     </div>
                 </div>
                 {/* Tarjeta */}
-
                 <div className="forms__header">
                     <div className="forms__header-number"><p>2</p>
                     </div>
@@ -140,22 +237,28 @@ const Checkout = () => {
                             type="text"
                             label="Credit Card Number (0000-0000-0000-0000)"
                             className="forms__myinput-one"
+                            value={creditCardNumber}
+                            onChange={handleChange}
                         />
+                        {isValidCreditCard ? (
+                            <p className="text-tiny text-primary">{cardType}</p>
+                        ) : (
+                            <p className="text-tiny text-danger">Credit card number not valid</p>
+                        )}
                     </div>
                     <div className="forms__security-expiration">
                         <Input isRequired type="password" label="CVV" className="forms__myinput" />
                         <Input isRequired type="date" label="Expiration Date" className="forms__myinput" />
                     </div>
-
-                    <div className="forms__buttons">
-                        <Button className=" bg-[black] text-[white]" onClick={completePurchase} onPress={onOpen}>
-                            Pay with <img className="applepay" src="apple-pay.svg" alt="Apple Pay" />
-                        </Button>
-                        <Button color="success" className="text-[black]" onClick={completePurchase} onPress={onOpen}>
-                            Pay
-                        </Button>
-                        <ModalNUI isOpen={isOpen} onClose={onClose} />
-                    </div>
+                </div>
+                <div className="forms__buttons">
+                    <Button type="submit" className=" bg-[black] text-[white]" onClick={completePurchase} onPress={onOpen}>
+                        Pay with <img className="applepay" src="apple-pay.svg" alt="Apple Pay" />
+                    </Button>
+                    <Button type="submit" color="success" className="text-[black]" onClick={completePurchase} onPress={onOpen}>
+                        Pay
+                    </Button>
+                    <ModalNUI isOpen={isOpen} onClose={onClose} />
                 </div>
             </div>
         </div >

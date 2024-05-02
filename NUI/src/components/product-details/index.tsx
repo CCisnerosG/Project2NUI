@@ -50,7 +50,6 @@ const PokemonDetails = () => {
     const renderEvolution = (evolution) => {
         return (
             <>
-                <p className="pokemon__evolution-title">This Pokémon evolves into</p>
                 <div className="pokemon__evolution">
                     <p className="pokemon__evolution-name">{evolution.name}</p>
                     <div className="pokemon__evolution-img-container">
@@ -75,8 +74,11 @@ const PokemonDetails = () => {
             </div>
             <div className="pokemon__info">
                 <div className="pokemon__header-info">
-                    <p className="pokemon__header-title">{pokemon.name}</p>
-                    <p className="pokemon__header-price">${pokemon.price}</p>
+                    <div className="pokemon__header-info-text">
+                        <p className="pokemon__header-title">{pokemon.name}</p>
+                        <p className="pokemon__header-price">${pokemon.price}</p>
+                    </div>
+
                 </div>
                 <div className="pokemon__description">
                     <p className="pokemon__info-type">{pokemon.type}</p>
@@ -105,13 +107,17 @@ const PokemonDetails = () => {
                     </audio>
                 </div>
                 <div className="pokemon__evolutions">
-                    {pokemon.evolution.length > 0 ? (
-                        pokemon.evolution.map(renderEvolution)
-                    ) : (
-                        <p>This pokemon doesn't have any evolutions!</p>
-                    )}
+                    <div className="pokemon__evolution-text">
+                        <p className="pokemon__evolution-title">Possible evolutions</p>
+                    </div>
+                    <div className="pokemon__evolution-evos">
+                        {pokemon.evolution.length > 0 ? (
+                            pokemon.evolution.map(renderEvolution)
+                        ) : (
+                            <p className="noevo">This pokemon doesn't have any evolutions!</p>
+                        )}
+                    </div>
                 </div>
-                {/* Resto de tu código */}
             </div>
         </div >
     );
