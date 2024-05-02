@@ -15,7 +15,27 @@ const Checkout = () => {
     const [selectedState, setSelectedState] = useState('');
     const [states, setStates] = useState<string[]>([]);
     const country = useCountriesContext();
+    const [zipCode, setZipCode] = useState('');
+    const [isValidZipCode, setIsValidZipCode] = useState(false);
+    const [cvv, setCVV] = useState('');
+    const [isValidCVV, setIsValidCVV] = useState(false);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [expirationDate, setExpirationDate] = useState("");
+    const [isExpirationValid, setIsExpirationValid] = useState(true);
 
+
+    useEffect(() => {
+        setIsFormValid(
+            selectedCountry !== '' &&
+            selectedState !== '' &&
+            isValidZipCode &&
+            creditCardNumber !== '' &&
+            isValidCreditCard &&
+            cvv !== '' &&
+            isValidCVV &&
+            isExpirationValid
+        );
+    }, [selectedCountry, selectedState, isValidZipCode, creditCardNumber, isValidCreditCard, cvv, isValidCVV, isExpirationValid]);
 
     useEffect(() => {
         if (selectedCountry) {
@@ -37,6 +57,20 @@ const Checkout = () => {
     const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
         setSelectedState(value);
+    };
+
+
+    //ZIP
+    const handleZipCode = (event: ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setZipCode(value);
+        setIsValidZipCode(verifyZipCode(value));
+    };
+
+    const verifyZipCode = (value: string) => {
+        const zipCodeRegex = /^\d{5}$/;
+        const isValid = zipCodeRegex.test(value);
+        return isValid;
     };
 
     useEffect(() => {
@@ -90,12 +124,42 @@ const Checkout = () => {
     };
 
     //CVV
-    function validateCVV(cvvNumber: string) {
-        if (setCardType('American Express')){
+    const handleCVV = (event: ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setCVV(value);
+        setIsValidCVV(verifyCVV(value));
+    };
 
-        }
-
+    function verifyCVV(value: string) {
+        const cvvRegex = /^\d{3}$/;
+        const isValid = cvvRegex.test(value);
+        return isValid;
     }
+
+    //Expiration Date
+    const handleExpirationChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        const cleanedValue = value.replace(/\D/g, ""); // Eliminar caracteres no numéricos
+        const formattedDate = formatExpirationDate(cleanedValue);
+        const isValid = validateExpirationDate(cleanedValue);
+        setExpirationDate(formattedDate);
+        setIsExpirationValid(isValid);
+    };
+
+    const formatExpirationDate = (value: string) => {
+        if (value.length === 0) return "";
+        if (value.length <= 2) return value;
+        return value.slice(0, 2) + "/" + value.slice(2);
+    };
+
+
+    const validateExpirationDate = (value: string) => {
+        const mm = value.slice(0, 2);
+        const yy = value.slice(2);
+        const mmInt = parseInt(mm);
+        const yyInt = parseInt(yy);
+        return mmInt >= 1 && mmInt <= 12 && yyInt >= 24;
+    };
 
 
 
@@ -215,7 +279,15 @@ const Checkout = () => {
                             ))}
                         </Select>
                         <Input isRequired type="text" label="City" className="forms__myinput-three" />
-                        <Input isRequired type="text" label="Zip Code" className="forms__myinput-three" />
+                        <div className="forms__city-state-zip-zip">
+                            <Input isRequired type="text" label="Zip" className="forms__myinput-three" onChange={handleZipCode}
+                                onBlur={verifyZipCode} />
+                            {isValidZipCode ? (
+                                <p className="text-tiny text-danger"></p>
+                            ) : (
+                                <p className="text-tiny text-danger">ZIP not valid</p>
+                            )}
+                        </div>
                     </div>
 
                     <div className="forms__address">
@@ -247,15 +319,38 @@ const Checkout = () => {
                         )}
                     </div>
                     <div className="forms__security-expiration">
-                        <Input isRequired type="password" label="CVV" className="forms__myinput" />
-                        <Input isRequired type="date" label="Expiration Date" className="forms__myinput" />
+                        <div className="forms__security-expiration-cvv">
+                            <Input isRequired type="password" label="CVV" className="forms__myinput" onChange={handleCVV}
+                                onBlur={verifyCVV} />
+                            {isValidCVV ? (
+                                <p className="text-tiny text-danger"></p>
+                            ) : (
+                                <p className="text-tiny text-danger">CVV not valid</p>
+                            )}
+                        </div>
+                        <div className="expiration">
+                            <Input isRequired
+                                type="text"
+                                label="Expiration Date MM/YY"
+                                className="forms__myinput"
+                                value={expirationDate}
+                                onChange={handleExpirationChange}
+                                maxLength={5} />
+                            {!isExpirationValid && (
+                                <>
+                                    <p className="text-tiny text-danger">Invalid expiration date (expiration year must be at least 24)</p>
+                                    <p className="text-tiny text-danger">Months must be 01-12</p>
+                                    <p className="text-tiny text-danger">Expiration year must be at least 24</p>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="forms__buttons">
-                    <Button type="submit" className=" bg-[black] text-[white]" onClick={completePurchase} onPress={onOpen}>
+                    <Button type="submit" className=" bg-[black] text-[white]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
                         Pay with <img className="applepay" src="apple-pay.svg" alt="Apple Pay" />
                     </Button>
-                    <Button type="submit" color="success" className="text-[black]" onClick={completePurchase} onPress={onOpen}>
+                    <Button type="submit" color="success" className="text-[black]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
                         Pay
                     </Button>
                     <ModalNUI isOpen={isOpen} onClose={onClose} />

@@ -1,13 +1,11 @@
-Evolutions en details -----------arreglar
 Hero bien hecho
 Obtener el length del localStorage y mostrarlo en un icono sobre el cart ***
-Validaciones Ceckout
 
 Vistas----------------
 Shopping Cart           ready
 Login                   ready
-Home                    80%
-Pokemon Details         80%
+Home                    90%
+Pokemon Details         ready
 Checkout                ready (necesita responsiveness)
 Product List            ready
 
