@@ -112,6 +112,12 @@
         }
     }
 
+    &__header-info-text-btn{
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+    }
+
     &__description {
         margin-left: 25px;
 

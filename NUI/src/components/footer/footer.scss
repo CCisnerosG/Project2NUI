@@ -13,7 +13,8 @@
     }
 
     &__legal {
-        margin-bottom: 20px;
+        margin: 20px 0 0 0;
+
     }
 
     &__legal-text {}
@@ -23,6 +24,15 @@
         justify-content: center;
         margin-top: 10px;
         gap: 10px;
+        margin-bottom: 20px;
     }
 
+}
+
+.logo {
+    @include for-pc {
+        &:hover {
+            color: yellow;
+        }
+    }
 }

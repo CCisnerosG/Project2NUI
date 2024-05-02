@@ -139,7 +139,7 @@ const Checkout = () => {
     //Expiration Date
     const handleExpirationChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
-        const cleanedValue = value.replace(/\D/g, ""); // Eliminar caracteres no numéricos
+        const cleanedValue = value.replace(/\D/g, "");
         const formattedDate = formatExpirationDate(cleanedValue);
         const isValid = validateExpirationDate(cleanedValue);
         setExpirationDate(formattedDate);
@@ -249,7 +249,7 @@ const Checkout = () => {
                             isRequired
                             label="Country"
                             placeholder="Select a Country"
-                            className="forms__myinput"
+                            className="forms__myinput myselectNUI"
                             value={selectedCountry}
                             onChange={handleCountryChange}
                         >
@@ -268,7 +268,7 @@ const Checkout = () => {
                             isRequired
                             label="State"
                             placeholder="Select a State"
-                            className="max-w-xs forms__myinput-three"
+                            className="max-w-xs forms__myinput-three myselectNUI"
                             value={selectedState}
                             onChange={handleStateChange}
                         >

@@ -22,7 +22,10 @@
     "next-themes": "^0.3.0",
     "react-creditcard-validator": "^1.0.6",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.23.0",
+    "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
     "rxjs": "^7.8.1",
     "sort-by": "^1.2.0"
   },

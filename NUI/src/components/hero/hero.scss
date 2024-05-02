@@ -2,7 +2,11 @@
     height: 700px;
     width: 100%;
     display: flex;
+    overflow-x: hidden;
 
+    // background-image: url('img/pokeball-hero.png');
+    // background-repeat: no-repeat;
+    background-position: bottom;
 
 
     background-image: url("https://besthqwallpapers.com/Uploads/7-3-2021/159659/pokeball-4k-space-minimal-pokemon-lets-go.jpg");
@@ -19,23 +23,52 @@
         // }
     }
 
-    &__img {
-        width: 100%;
-        object-fit: cover;
-        position: relative;
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        // background-image: url("https://besthqwallpapers.com/Uploads/7-3-2021/159659/pokeball-4k-space-minimal-pokemon-lets-go.jpg");
+    &__image-one {
+        display: none;
 
-        // @include for-pc {
-        //     &:hover {
-        //         transition: ease-in-out 0.5s;
-        //         opacity: 0.7;
-        //     }
-        // }
+        @include for-tablet-landscape {
+            display: block;
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
     }
+
+    &__image-two {
+        width: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: end;
+        height: 80%;
+        z-index: 10;
+
+    }
+
+    &__image-poke {
+        animation: slideAndRotate 2s forwards;
+    }
+
+    &__image-pika {
+        animation: slideFadeIn 1s forwards;
+    }
+
+
+    // &__img {
+    //     width: 100%;
+    //     object-fit: cover;
+    //     position: relative;
+    //     background-attachment: fixed;
+    //     background-position: center;
+    //     background-repeat: no-repeat;
+    //     // background-image: url("https://besthqwallpapers.com/Uploads/7-3-2021/159659/pokeball-4k-space-minimal-pokemon-lets-go.jpg");
+
+    //     // @include for-pc {
+    //     //     &:hover {
+    //     //         transition: ease-in-out 0.5s;
+    //     //         opacity: 0.7;
+    //     //     }
+    //     // }
+    // }
 
     &__text {
         text-align: center;
@@ -45,10 +78,19 @@
         transform: translate(-50%, -50%);
         color: white;
         pointer-events: none;
+        z-index: 100;
+
+        @include for-tablet-landscape {
+            left: 25%;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            -moz-animation: fadeIn 2s forwards;
+
+        }
     }
 
     &__text-title {
-        font-size: 6rem;
+        font-size: 6.5rem;
         margin-bottom: 20px;
         font-family: $poke-font;
         color: $fourth-color;
@@ -56,12 +98,12 @@
 
         @include for-tablet-portrait {
 
-            font-size: 8rem;
+            font-size: 6rem;
 
         }
 
         @include for-pc {
-            font-size: 10rem;
+            font-size: 8rem;
         }
     }
 
@@ -70,4 +112,47 @@
         font-family: $regular-font;
     }
 
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+
+}
+
+@keyframes slideAndRotate {
+    0% {
+        transform: translateX(100%) rotate(360deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
 }

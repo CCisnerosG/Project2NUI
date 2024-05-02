@@ -162,6 +162,7 @@
     }
 
     &__myinput {
+
         @include for-pc {
             width: 400px !important;
         }
@@ -279,3 +280,4 @@
 .forms__myinput-three label {
     color: black;
 }
+

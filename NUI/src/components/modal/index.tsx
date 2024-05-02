@@ -4,7 +4,7 @@ import './modal.scss'
 
 const ModalNUI = ({ isOpen, onClose }) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isDismissable={false} isKeyboardDismissDisabled={true}>
+        <Modal isOpen={isOpen} onClose={onClose} isDismissable={false} isKeyboardDismissDisabled={true} className="modal">
             <ModalContent>
                 <ModalHeader className="flex flex-col gap-1 modal__header">CHECKOUT COMPLETED</ModalHeader>
                 <ModalBody>

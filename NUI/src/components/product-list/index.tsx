@@ -6,18 +6,42 @@ import { useEffect, useState } from "react";
 import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
 
+interface PokeItem {
+    id: string;
+    name: string;
+    type: string;
+    generation: number;
+    price: number;
+}
+
+interface Filters {
+    name: string;
+    type: string;
+    generation: string;
+    minPrice: string;
+    maxPrice: string;
+}
+
 const PokeProducts = () => {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState<PokeItem[]>([]);
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
     useEffect(() => {
+
         if (cart.length > 0) {
             localStorage.setItem("cart", JSON.stringify(cart));
             console.log(cart)
         }
     }, [cart]);
+
+    useEffect(() => {
+        if (localStorage.getItem("cart")) {
+            const getItems = JSON.parse(localStorage.getItem('cart'));
+            setCart(getItems);
+        }
+    }, [])
 
     const addToCart = (item) => {
         const index = cart.findIndex(cartItem => cartItem.id === item.id);
@@ -25,16 +49,13 @@ const PokeProducts = () => {
             const updatedCart = [...cart];
             updatedCart[index].quantity += 1;
             setCart(updatedCart);
-            console.log("Este es el if")
         } else {
             const updatedItem = { ...item, quantity: 1 };
-            console.log(cart)
             setCart([...cart, updatedItem])
-            console.log("Este es el else")
         }
     };
 
-    const applyFilters = (items) => {
+    const applyFilters = (items: PokeItem[]): PokeItem[] => {
         return items.filter(item => {
             if (filters.name && !item.name.toLowerCase().includes(filters.name.toLowerCase())) {
                 return false;
@@ -55,11 +76,11 @@ const PokeProducts = () => {
         });
     };
 
-    const paginate = (pageNumber) => {
+    const paginate = (pageNumber: number) => {
         setCurrentPage(pageNumber);
     };
 
-    const handleNameFilterChange = (event) => {
+    const handleNameFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value;
         setFilters({ ...filters, name });
     };
@@ -68,20 +89,20 @@ const PokeProducts = () => {
         setFilters({ ...filters, type: '' });
     };
 
-    const handleTypeFilterChange = (type) => {
+    const handleTypeFilterChange = (type: string) => {
         setFilters({ ...filters, type });
     };
 
-    const handleGenFilterChange = (generation) => {
+    const handleGenFilterChange = (generation: number) => {
         setFilters({ ...filters, generation });
     }
 
-    const handleMinPriceFilterChange = (event) => {
+    const handleMinPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const minPrice = event.target.value;
         setFilters({ ...filters, minPrice });
     };
 
-    const handleMaxPriceFilterChange = (event) => {
+    const handleMaxPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const maxPrice = event.target.value;
         setFilters({ ...filters, maxPrice });
     };

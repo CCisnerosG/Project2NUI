@@ -2,42 +2,32 @@ import { useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { Link } from 'react-router-dom';
 import './nav.scss'
+import { useRecoilState } from "recoil";
+import loginState from "../../states/login-recoil";
 
 const NavNUI = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserSet, setIsUserSet] = useState(localStorage.getItem("user"));
     const [cartItemsCount, setCartItemsCount] = useState(0);
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
 
     const closeMenu = () => {
         useState(false);
     };
 
     useEffect(() => {
-        const handleStorageChange = () => {
-            setIsUserSet(localStorage.getItem("user"));
-            const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-            if (cartItems) {
-                setCartItemsCount(cartItems.length);
-            } else {
-                setCartItemsCount(0);
-            }
-        };
 
-        window.addEventListener("storage", handleStorageChange);
-
-        return () => {
-            window.removeEventListener("storage", handleStorageChange);
-        };
     }, []);
 
     const logOut = () => {
         localStorage.clear();
         setIsUserSet(null);
+        setIsLoggedIn(false);
     }
 
     const renderLoginButton = () => {
-        if (isUserSet != null) {
+        if (isLoggedIn == true) {
 
             return (
                 <Dropdown placement="bottom-end">
@@ -62,6 +52,26 @@ const NavNUI = () => {
                 <Button as={Link} color="secondary" to="/Login" variant="flat">
                     Login
                 </Button>
+            )
+        }
+    }
+
+    const renderLoginButtonDrop = () => {
+        if (isLoggedIn == true) {
+
+            return (
+                <Link to='/' key="logout" color="danger" onClick={() => {
+                    logOut();
+                    closeMenu();
+                }}>
+                    LOGOUT
+                </Link>
+            )
+        } else {
+            return (
+                <Link to="/Login" aria-current="page" onClick={closeMenu}>
+                    LOGIN
+                </Link>
             )
         }
     }
@@ -119,9 +129,7 @@ const NavNUI = () => {
                     <Link to="/ShoppingCart" onClick={closeMenu}>
                         SHOPPING CART
                     </Link>
-                    <Link to="/Login" aria-current="page" onClick={closeMenu}>
-                        LOGIN
-                    </Link>
+                    {renderLoginButtonDrop()}
                 </NavbarMenuItem>
             </NavbarMenu>
         </Navbar>

@@ -11,29 +11,36 @@ import { AuthProvider } from './hooks/useAuth';
 import Checkout from './components/checkout';
 import ProtectedRoute from './components/protected-route';
 import PageNotFound from './components/page-not-found';
+import ScrollToTop from './components/scroll-to-top';
+import {
+  RecoilRoot,
+} from 'recoil';
 
 
 function App() {
 
   return (
     <>
-      <NavNUI />
-      <AuthProvider>
-        <Routes>
-          <Route path='/' Component={HomePage} />
-          <Route path='/PokemonList' Component={PokemonList} />
-          <Route path="/ProductDetails/:id" Component={ProductDetails} />
-          <Route path='/Login' Component={Login} />
-          <Route element={<ProtectedRoute />}>
-            <Route path='/ShoppingCart' Component={ShoppingCart} />
-            <Route path='/Checkout' Component={Checkout} />
-          </Route>
-          <Route
-            path="*"
-            element={<PageNotFound />}
-          />
-        </Routes>
-      </AuthProvider>
+      <ScrollToTop />
+      <RecoilRoot>
+        <NavNUI />
+        <AuthProvider>
+          <Routes>
+            <Route path='/' Component={HomePage} />
+            <Route path='/PokemonList' Component={PokemonList} />
+            <Route path="/ProductDetails/:id" Component={ProductDetails} />
+            <Route path='/Login' Component={Login} />
+            <Route element={<ProtectedRoute />}>
+              <Route path='/ShoppingCart' Component={ShoppingCart} />
+              <Route path='/Checkout' Component={Checkout} />
+            </Route>
+            <Route
+              path="*"
+              element={<PageNotFound />}
+            />
+          </Routes>
+        </AuthProvider>
+      </RecoilRoot>
       <Footer />
     </>
   )

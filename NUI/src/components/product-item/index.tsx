@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './item.scss';
 import { Button } from "@nextui-org/react";
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
 
 const PokeItem = ({ item, addToCart }) => {
-
+    
+    const notification = () => {
+        toast.success(`${item.name} added to cart`)
+    }
 
     return (
         <>
+            <div><Toaster /></div>
             <div className="pkm">
                 <Link to={`/ProductDetails/${item.id}`}>
                     <div className="pkm__img-container">
@@ -36,7 +43,7 @@ const PokeItem = ({ item, addToCart }) => {
                     </div>
                 </Link>
                 <div className="mybtn__container">
-                    <Button className="mybtn" color="success" onClick={addToCart}>Add to Cart</Button>
+                    <Button className="mybtn" color="success" onClick={() => { addToCart(); notification(); }}>Add to Cart</Button>
                 </div>
             </div>
         </>
