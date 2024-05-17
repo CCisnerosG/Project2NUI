@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useUserContext } from '../../context/user-context';
 import { useRecoilState } from 'recoil';
 import loginState from '../../states/login-recoil';
+import { Link } from 'react-router-dom';
 
 
 const Log = () => {
@@ -64,6 +65,7 @@ const Log = () => {
                             <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='Password Icon' />
                         }
                     />
+                    <p className='signup__text'>Don't have an account? <Link to='/SignUp' className='signup__link'>Sign Up</Link></p>
                     <Button color="primary" className='w-[80%]' onClick={handleLogin}>
                         Login
                     </Button>

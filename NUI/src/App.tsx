@@ -8,13 +8,17 @@ import Login from './views/login';
 import ProductDetails from './views/product-details';
 import ShoppingCart from './views/shopping-cart';
 import { AuthProvider } from './hooks/useAuth';
-import Checkout from './components/checkout';
 import ProtectedRoute from './components/protected-route';
 import PageNotFound from './components/page-not-found';
 import ScrollToTop from './components/scroll-to-top';
 import {
   RecoilRoot,
 } from 'recoil';
+import Checkout from './views/checkout';
+import AdminHome from './views/admin';
+import AdminOrders from './views/admin-orders';
+import AdminProducts from './views/admin-products';
+import SignUp from './views/signup';
 
 
 function App() {
@@ -30,10 +34,14 @@ function App() {
             <Route path='/PokemonList' Component={PokemonList} />
             <Route path="/ProductDetails/:id" Component={ProductDetails} />
             <Route path='/Login' Component={Login} />
+            <Route path='/SignUp' Component={SignUp} />
             <Route element={<ProtectedRoute />}>
               <Route path='/ShoppingCart' Component={ShoppingCart} />
               <Route path='/Checkout' Component={Checkout} />
             </Route>
+            <Route path='/AdminHome' Component={AdminHome} />
+            <Route path='/AdminOrders' Component={AdminOrders} />
+            <Route path='/AdminProducts' Component={AdminProducts} />
             <Route
               path="*"
               element={<PageNotFound />}

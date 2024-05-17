@@ -5,7 +5,7 @@ import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/re
 import ModalNUI from "../modal";
 import { useCountriesContext } from "../../context/countries-context";
 
-const Checkout = () => {
+const Check = () => {
     const [data, setData] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [creditCardNumber, setCreditCardNumber] = useState('');
@@ -360,4 +360,4 @@ const Checkout = () => {
     )
 }
 
-export default Checkout;
+export default Check;

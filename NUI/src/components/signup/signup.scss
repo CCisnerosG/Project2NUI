@@ -6,7 +6,7 @@
     padding-bottom: 50px;
 }
 
-.login-container {
+.signup-container {
     max-width: 400px;
     margin: 0 auto;
     display: flex;
@@ -27,7 +27,7 @@
     }
 }
 
-.left-container {
+.right-container {
     display: flex;
     flex-direction: column;
 
@@ -35,9 +35,9 @@
         width: 40%;
         background: rgb(220, 218, 218);
         background: linear-gradient(90deg, rgb(190, 153, 153) 0%, rgb(231, 14, 54) 50%);
-        margin-right: 40px;
+        margin-left: 40px;
         height: 100%;
-        border-radius: 0 100px 100px 0;
+        border-radius: 100px 0 0 100px;
         align-items: center;
         justify-content: center;
     }
@@ -49,6 +49,7 @@
     font-size: 1.8rem;
     text-align: center;
     font-weight: bolder;
+    margin-bottom: 20px;
 
 }
 
@@ -71,27 +72,30 @@
     align-items: center;
 }
 
-.text {
-    color: rgb(1, 111, 238);
-    font-size: 4rem;
-    text-align: center;
-    margin-bottom: 60px;
-    font-weight: bolder;
-}
 
-.input-container {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.myinput {
-    margin-bottom: 40px;
 
-}
+
 
 .signup {
+    &__text-title {
+        color: rgb(1, 111, 238);
+        font-size: 4rem;
+        text-align: center;
+        margin-bottom: 17px;
+        font-weight: bolder;
+        margin-top: 37px;
+    }
+
+    &__input-container {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 30px;
+        height: 90%;
+    }
+
     &__text {
         font-size: 0.8rem;
         margin-bottom: 20px;
@@ -99,5 +103,9 @@
 
     &__link {
         color: rgb(1, 111, 238);
+    }
+
+    &__myinput {
+        margin-bottom: 20px;
     }
 }

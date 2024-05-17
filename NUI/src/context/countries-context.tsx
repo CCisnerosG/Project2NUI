@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
 interface Country {
@@ -14,8 +14,11 @@ const CountriesContext = createContext<CountriesContext>(null);
 
 export const useCountriesContext = () => useContext(CountriesContext) ?? [];
 
+interface CountriesProviderProps {
+    children: ReactNode;
+  }
 
-export const CountriesProvider: React.FC = ({ children }) => {
+export const CountriesProvider: React.FC<CountriesProviderProps> = ({ children }) => {
     const [data, setData] = useState<CountriesContext>(null);
 
     useEffect(() => {

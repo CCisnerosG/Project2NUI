@@ -1,10 +1,6 @@
-Obtener el length del localStorage y mostrarlo en un icono sobre el cart ***
-
-Vistas----------------
-Shopping Cart           ready
-Login                   ready
-Home                    ready
-Pokemon Details         ready
-Checkout                ready (necesita responsiveness)
-Product List            ready
-
+VER TEMA EVOLUCIONES
+Autenticacion de Login y admin
+ORDER
+TABLAS
+PANEL DE ADMIN
+-Falta agregar productos y todo orders

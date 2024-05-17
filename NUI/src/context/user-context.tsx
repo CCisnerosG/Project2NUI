@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { ReactNode, createContext, useContext, useEffect } from 'react';
 
 import axios from 'axios';
 import { useLocalStorage } from '../hooks/useLocalStorage';
@@ -14,7 +14,11 @@ const UserContext = createContext<UserContext>(null);
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserProvider: React.FC = ({ children }) => {
+interface UserProviderProps {
+    children: ReactNode;
+}
+
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [data, setData] = useLocalStorage<UserContext>('userData', null);
 
     useEffect(() => {

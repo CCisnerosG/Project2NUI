@@ -5,7 +5,7 @@ import './featured.scss'
 const Featured = () => {
     const pokemonData = usePokemonContext();
 
-    const legendaryPokemon = pokemonData ? pokemonData.filter(pokemon => pokemon.isLegendary) : [];
+    const legendaryPokemon = pokemonData ? pokemonData.filter(pokemon => pokemon.legendary) : [];
 
     return (
         <>

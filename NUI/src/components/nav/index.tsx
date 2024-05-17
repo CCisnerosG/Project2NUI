@@ -100,9 +100,14 @@ const NavNUI = () => {
                         HOME
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive>
+                <NavbarItem>
                     <Link to="/PokemonList" aria-current="page">
                         OUR POKÉMONS
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link to="/AdminHome" aria-current="page">
+                        ADMIN HOME
                     </Link>
                 </NavbarItem>
             </NavbarContent>

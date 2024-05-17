@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
 interface Pokemon {
@@ -15,8 +15,7 @@ interface Pokemon {
   description: string;
   generation: number;
   cries: string;
-  evolution_chain: string;
-  isLegendary: boolean;
+  legendary: boolean;
 }
 
 
@@ -26,11 +25,17 @@ const PokemonContext = createContext<PokemonContextType>(null);
 
 export const usePokemonContext = () => useContext(PokemonContext);
 
-export const PokemonProvider: React.FC = ({ children }) => {
+interface PokemonProviderProps {
+  children: ReactNode;
+}
+
+export const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) => {
   const [data, setData] = useState<PokemonContextType>(null);
 
+
+
   useEffect(() => {
-    axios.get<Pokemon[]>('/data/pokemon.json')
+    axios.get<Pokemon[]>('http://localhost:8080/api/v1/pokemon')
       .then(response => {
         setData(response.data);
       })

@@ -31,6 +31,7 @@ const PokemonDetails = () => {
     useEffect(() => {
         if (pokemonData) {
             const pokemon = pokemonData.find(p => p.id === parseInt(id));
+
             const type = pokemon?.type;
             if (type && typeColors[type]) {
                 setBgColor(typeColors[type]);
@@ -105,7 +106,7 @@ const PokemonDetails = () => {
                         <source src={pokemon.cries} type="audio/ogg" />
                     </audio>
                 </div>
-                <div className="pokemon__evolutions">
+                {/* <div className="pokemon__evolutions">
                     <div className="pokemon__evolution-text">
                         <p className="pokemon__evolution-title">Possible evolutions</p>
                     </div>
@@ -116,7 +117,7 @@ const PokemonDetails = () => {
                             <p className="noevo">This pokemon doesn't have any evolutions!</p>
                         )}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div >
     );
