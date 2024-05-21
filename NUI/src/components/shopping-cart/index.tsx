@@ -3,27 +3,28 @@ import './shopping.scss'
 import { Divider } from "@nextui-org/divider";
 import { Link } from "react-router-dom";
 import { Button } from "@nextui-org/react";
-
-interface Item {
-    id: number;
-    name: string;
-    sprite: string;
-    quantity: number;
-    price: number;
-}
+import axios from "axios";
 
 const Cart = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart') || '[]') as Item[];
-        if (storedCart) {
-            setData(storedCart);
-        }
+        const userId = localStorage.getItem("userId");
+        axios.get(`http://localhost:8080/api/v1/shoppingCart/products?userId=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                setData(response.data)
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
     }, []);
 
-    const updateCart = (updatedCart: Item[]) => {
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    const updateCart = (updatedCart) => {
         setData(updatedCart);
     };
 
@@ -37,13 +38,13 @@ const Cart = () => {
         updateCart(updatedCart);
     };
 
-    const subtractQuantity = (itemId: number) => {
+    const subtractQuantity = (itemId : number) => {
         const updatedCart = data.map(item => {
-            if (item.id === itemId && item.quantity >= 1) {
+            if (item.id === itemId && item.quantity > 1) {
                 return { ...item, quantity: item.quantity - 1 };
             }
             return item;
-        }).filter(item => item.quantity > 0);
+        });
         updateCart(updatedCart);
     };
 
@@ -51,6 +52,7 @@ const Cart = () => {
         const updatedCart = data.filter(item => item.id !== itemId);
         updateCart(updatedCart);
     };
+
 
     if (data.length === 0) {
         return (
@@ -89,13 +91,13 @@ const Cart = () => {
                     <table className="shopping">
                         <tbody>
                             {data && data.map((item) => (
-                                <tr className="item__container" key={item.id}>
+                                <tr className="item__container" key={item.pokemon.id}>
                                     <td className='item__image-container'>
-                                        <img className='item__image' src={item.sprite} alt={`${item.name} image`} />
+                                        <img className='item__image' src={item.pokemon.sprite} alt={`${item.pokemon.name} image`} />
                                     </td>
                                     <td className="item__info">
                                         <div className="item__name-container">
-                                            <p className='item__name'>{item.name}</p>
+                                            <p className='item__name'>{item.pokemon.name}</p>
                                         </div>
                                     </td>
                                     <td className="item__info">
@@ -109,11 +111,11 @@ const Cart = () => {
                                     </td>
                                     <td className="item__info">
                                         <div className="item__price-container">
-                                            <p className='item__price'>${(item.price * item.quantity).toFixed(2)}</p>
+                                            <p className='item__price'>${(item.pokemon.price * item.quantity).toFixed(2)}</p>
                                         </div>
                                     </td>
                                     <td className="item__trash">
-                                        <button onClick={() => deleteItem(item.id)}><img className='item__trash-icon' src="/trash.svg" alt="Delete icon" /></button>
+                                        <button onClick={() => deleteItem(item.pokemon.id)}><img className='item__trash-icon' src="/trash.svg" alt="Delete icon" /></button>
                                     </td>
                                 </tr>
                             ))}

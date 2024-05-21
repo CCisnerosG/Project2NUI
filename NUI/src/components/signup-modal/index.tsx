@@ -2,14 +2,19 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from
 import { Link } from "react-router-dom";
 import './modal.scss'
 
-const SignUpModal = ({ isOpen, onClose }) => {
+interface SignUpModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} isDismissable={false} isKeyboardDismissDisabled={true} className="modal">
             <ModalContent>
                 <ModalHeader className="flex flex-col gap-1 modal__header">SIGN UP SUCCESSFUL!</ModalHeader>
                 <ModalBody>
                     <p className="modal__title">THANKS FOR BEING PART OF OUR TEAM!</p>
-                    {/* <img src="https://cdn.dribbble.com/users/470545/screenshots/2842684/media/c416e1258f8df954fee4610ab5d1e53a.gif" alt="Pikachu happy" /> */}
+                    <img src="https://gifdb.com/images/high/my-neighbor-gengar-a57iyjj62ruv00m4.webp" alt="Gengar standing in the rain" />
                     <p className="modal__content">
                         You can now go and Log In!
                     </p>

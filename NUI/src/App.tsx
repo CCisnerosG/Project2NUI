@@ -7,7 +7,6 @@ import PokemonList from './views/product-list';
 import Login from './views/login';
 import ProductDetails from './views/product-details';
 import ShoppingCart from './views/shopping-cart';
-import { AuthProvider } from './hooks/useAuth';
 import ProtectedRoute from './components/protected-route';
 import PageNotFound from './components/page-not-found';
 import ScrollToTop from './components/scroll-to-top';
@@ -19,6 +18,7 @@ import AdminHome from './views/admin';
 import AdminOrders from './views/admin-orders';
 import AdminProducts from './views/admin-products';
 import SignUp from './views/signup';
+import Wishlist from './views/wishlist';
 
 
 function App() {
@@ -28,26 +28,22 @@ function App() {
       <ScrollToTop />
       <RecoilRoot>
         <NavNUI />
-        <AuthProvider>
-          <Routes>
-            <Route path='/' Component={HomePage} />
-            <Route path='/PokemonList' Component={PokemonList} />
-            <Route path="/ProductDetails/:id" Component={ProductDetails} />
-            <Route path='/Login' Component={Login} />
-            <Route path='/SignUp' Component={SignUp} />
-            <Route element={<ProtectedRoute />}>
-              <Route path='/ShoppingCart' Component={ShoppingCart} />
-              <Route path='/Checkout' Component={Checkout} />
-            </Route>
-            <Route path='/AdminHome' Component={AdminHome} />
-            <Route path='/AdminOrders' Component={AdminOrders} />
-            <Route path='/AdminProducts' Component={AdminProducts} />
-            <Route
-              path="*"
-              element={<PageNotFound />}
-            />
-          </Routes>
-        </AuthProvider>
+        <Routes>
+          <Route path='/' Component={HomePage} />
+          <Route path='/PokemonList' Component={PokemonList} />
+          <Route path="/ProductDetails/:id" Component={ProductDetails} />
+          <Route path='/Login' Component={Login} />
+          <Route path='/SignUp' Component={SignUp} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='/ShoppingCart' Component={ShoppingCart} />
+            <Route path='/Checkout' Component={Checkout} />
+            <Route path='/Wishlist' Component={Wishlist} />
+          </Route>
+          <Route path='/AdminHome' Component={AdminHome} />
+          <Route path='/AdminOrders' Component={AdminOrders} />
+          <Route path='/AdminProducts' Component={AdminProducts} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </RecoilRoot>
       <Footer />
     </>

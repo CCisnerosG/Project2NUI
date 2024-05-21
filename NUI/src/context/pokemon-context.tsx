@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
-interface Pokemon {
+export interface Pokemon {
   id: number;
   name: string;
   sprite: string;

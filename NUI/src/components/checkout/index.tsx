@@ -4,6 +4,7 @@ import { Divider } from "@nextui-org/divider";
 import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import ModalNUI from "../modal";
 import { useCountriesContext } from "../../context/countries-context";
+import axios from "axios";
 
 const Check = () => {
     const [data, setData] = useState([]);
@@ -74,10 +75,19 @@ const Check = () => {
     };
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart'));
-        if (storedCart) {
-            setData(storedCart);
-        }
+        const userId = localStorage.getItem("userId");
+        axios.get(`http://localhost:8080/api/v1/shoppingCart/products?userId=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                setData(response.data)
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
     }, []);
 
 
@@ -165,9 +175,9 @@ const Check = () => {
 
 
 
-    const subtotalAmount = data.reduce((subtotal, item) => subtotal + (item.subtotal * item.quantity), 0);
-    const taxesAmount = data.reduce((taxes, item) => taxes + (item.taxes * item.quantity), 0);
-    const saveAmount = data.reduce((save, item) => save + (item.save * item.quantity), 0);
+    const subtotalAmount = data.reduce((subtotal, item) => subtotal + (item.pokemon.subtotal * item.quantity), 0);
+    const taxesAmount = data.reduce((taxes, item) => taxes + (item.pokemon.taxes * item.quantity), 0);
+    const saveAmount = data.reduce((save, item) => save + (item.pokemon.save * item.quantity), 0);
     const totalAmount = ((subtotalAmount + taxesAmount) - saveAmount);
 
 
@@ -181,15 +191,15 @@ const Check = () => {
                     <table className="checkout__table">
                         <tbody>
                             {data && data.map((item) => (
-                                <tr className="checkout__item-container" key={item.id}>
+                                <tr className="checkout__item-container" key={item.pokemon.id}>
                                     <td className="checkout__info-quantity">
                                         <div className="checkout__quantity">x{item.quantity}</div>
                                     </td>
                                     <td className="checkout__info-name">
-                                        <div className='checkout__name'>{item.name}</div>
+                                        <div className='checkout__name'>{item.pokemon.name}</div>
                                     </td>
                                     <td className="checkout__info-price">
-                                        <div className="checkout__info-price">${(item.subtotal * item.quantity).toFixed(2)}</div>
+                                        <div className="checkout__info-price">${(item.pokemon.subtotal * item.quantity).toFixed(2)}</div>
                                     </td>
                                 </tr>
                             ))}

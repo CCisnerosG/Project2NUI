@@ -27,7 +27,9 @@ const Sign = () => {
             <div className="signup-container">
                 <div className="signup__input-container">
                     <p className="signup__text-title">SIGN UP</p>
-                    <Input className='signup__myinput'
+                    <Input
+                        isRequired
+                        className='signup__myinput'
                         type="text"
                         label="Full Name"
                         placeholder="John Doe"
@@ -39,7 +41,9 @@ const Sign = () => {
                             <img src='user.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='User icon' />
                         }
                     />
-                    <Input className='signup__myinput'
+                    <Input
+                        isRequired
+                        className='signup__myinput'
                         type="email"
                         label="Email"
                         placeholder="you@example.com"
@@ -51,7 +55,9 @@ const Sign = () => {
                             <img src='user.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='User icon' />
                         }
                     />
-                    <Input className='signup__myinput'
+                    <Input
+                        isRequired
+                        className='signup__myinput'
                         type="password"
                         label="Password"
                         id='password'

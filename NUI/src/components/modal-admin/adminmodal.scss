@@ -1,3 +1,27 @@
+.admin {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__button {
+        width: 10%;
+    }
+
+    &__table {
+        width: 90%;
+    }
+}
+
+.my__table {
+    max-height: 75vh;
+    overflow: scroll;
+    margin: 10px 0 10px 0;
+}
+
 .modal {
     &__header {
         text-align: center;
@@ -18,14 +42,10 @@
     }
 }
 
-.admin__modal>button {
-    display: none;
-}
-
 .admin__modal {
     width: 90%;
-    max-height: 50rem;
-    overflow: scroll;
+    max-height: 40rem;
+    overflow-y: auto !important;
 }
 
 .pokemon {
@@ -38,4 +58,8 @@
         display: flex;
         gap: 10px;
     }
+}
+
+.input label {
+    color: black;
 }

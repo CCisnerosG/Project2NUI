@@ -8,8 +8,6 @@ import loginState from "../../states/login-recoil";
 const NavNUI = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isUserSet, setIsUserSet] = useState(localStorage.getItem("user"));
-    const [cartItemsCount, setCartItemsCount] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
 
     const closeMenu = () => {
@@ -22,7 +20,6 @@ const NavNUI = () => {
 
     const logOut = () => {
         localStorage.clear();
-        setIsUserSet(null);
         setIsLoggedIn(false);
     }
 
@@ -106,6 +103,11 @@ const NavNUI = () => {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
+                    <Link to="/Wishlist" aria-current="page">
+                        WISHLIST
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
                     <Link to="/AdminHome" aria-current="page">
                         ADMIN HOME
                     </Link>
@@ -130,6 +132,9 @@ const NavNUI = () => {
                     </Link>
                     <Link to="/PokemonList" aria-current="page" onClick={closeMenu}>
                         OUR POKÉMONS
+                    </Link>
+                    <Link to="/Wishlist" onClick={closeMenu}>
+                        WISHLIST
                     </Link>
                     <Link to="/ShoppingCart" onClick={closeMenu}>
                         SHOPPING CART

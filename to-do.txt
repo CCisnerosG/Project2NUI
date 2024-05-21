@@ -1,6 +1,16 @@
-VER TEMA EVOLUCIONES
-Autenticacion de Login y admin
-ORDER
-TABLAS
-PANEL DE ADMIN
--Falta agregar productos y todo orders
+ORDERS (ADMIN Y USER)
+EVOLUCIONES
+WISHLIST A CART
+VALIDACION DE ROLES ----> /ME
+FILTER
+PAGINATION
+
+CONSULTAS FILTERING Y URLS
+Animacion login-signup
+
+------------------
+FILTERING
+throttling
+Service aparte para url
+Queryparams para filters
+------------------

@@ -1,10 +1,11 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { useRecoilValue } from "recoil";
+import loginState from "../../states/login-recoil";
 
 const ProtectedRoute = () => {
-  const { user } = useAuth();
-  
-  return user ? <Outlet/> : <Navigate to='/Login'/> 
+  const isLoggedIn = useRecoilValue(loginState);
+
+  return isLoggedIn ? <Outlet /> : <Navigate to='/Login' />
 };
 
 export default ProtectedRoute;

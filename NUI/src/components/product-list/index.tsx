@@ -2,9 +2,11 @@ import PokeItem from "../product-item";
 import './list.scss';
 import { Divider } from "@nextui-org/divider";
 import { usePokemonContext } from "../../context/pokemon-context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 interface PokeItem {
     id: number;
@@ -16,37 +18,70 @@ interface PokeItem {
 }
 
 const PokeProducts = () => {
-    const [cart, setCart] = useState<PokeItem[]>([]);
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    useEffect(() => {
-
-        if (cart.length > 0) {
-            localStorage.setItem("cart", JSON.stringify(cart));
-            console.log(cart)
-        }
-    }, [cart]);
-
-    useEffect(() => {
-        if (localStorage.getItem("cart")) {
-            const getItems = JSON.parse(localStorage.getItem('cart'));
-            setCart(getItems);
-        }
-    }, [])
 
     const addToCart = (item: PokeItem) => {
-        const index = cart.findIndex(cartItem => cartItem.id === item.id);
-        if (index !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[index].quantity += 1;
-            setCart(updatedCart);
-        } else {
-            const updatedItem = { ...item, quantity: 1 };
-            setCart([...cart, updatedItem])
-        }
-    };
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = localStorage.getItem("userId");
+        console.log(userId);
+        console.log(item.id);
+        console.log(localStorage.getItem("token"));
+
+        console.log(user.userId);
+        axios.post(`http://localhost:8080/api/v1/shoppingCart/add?userId=${user.userId}&pokemonId=${item.id}&quantity=${1}`, null, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    console.log('Sirvio la pus');
+                } else {
+                    console.log('No sirve');
+                }
+            })
+            .catch(error => {
+                toast.error(`Error: ${error.message}`);
+            });
+    }
+
+    const addToWishlist = (item: PokeItem) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        console.log(user.userId);
+        console.log(user.token);
+        console.log(item.name);
+        axios.post(`http://localhost:8080/api/v1/wishlist/add?userId=${user.userId}&pokemonId=${item.id}`, null, {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    console.log('Sirvio la pus');
+                } else {
+                    console.log('No sirve');
+                }
+            })
+            .catch(error => {
+                toast.error(`Error: ${error.message}`);
+            });
+    }
+
+
+    // const index = cart.findIndex(cartItem => cartItem.id === item.id);
+    // if (index !== -1) {
+    //     const updatedCart = [...cart];
+    //     updatedCart[index].quantity += 1;
+    //     setCart(updatedCart);
+    // } else {
+    //     const updatedItem = { ...item, quantity: 1 };
+    //     setCart([...cart, updatedItem])
+    // }
+
 
     const applyFilters = (items: PokeItem[]): PokeItem[] => {
         return items.filter(item => {
@@ -217,7 +252,7 @@ const PokeProducts = () => {
                         <div className="list-container">
                             <div className="list">
                                 {currentItems.map((item) => (
-                                    <PokeItem key={item.id} item={item} addToCart={() => addToCart(item)} />
+                                    <PokeItem key={item.id} item={item} addToCart={addToCart} addToWishlist={addToWishlist} />
                                 ))}
                             </div>
                         </div>
@@ -225,7 +260,7 @@ const PokeProducts = () => {
 
                         {/* Pagination */}
                         {totalItems > itemsPerPage && (
-                            
+
                             <Pagination
                                 total={Math.ceil(totalItems / itemsPerPage)}
                                 color="secondary"
