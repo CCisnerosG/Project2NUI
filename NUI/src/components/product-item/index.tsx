@@ -30,7 +30,7 @@ interface PokeItemProps {
         taxes: number;
         save: number;
     }) => void;
-        addToWishlist: (item: {
+    addToWishlist: (item: {
         id: number;
         name: string;
         type: string;
@@ -51,12 +51,25 @@ const PokeItem: React.FC<PokeItemProps> = ({ item, addToCart, addToWishlist }) =
         toast.success(`${item.name} added to cart`)
     }
 
+    const wishlistNotification = () => {
+        toast.success(`${item.name} added to wishlist`)
+    }
+
 
     return (
         <>
             <div><Toaster /></div>
             <div className="pkm">
-                <button className="btn-image" onClick={() => addToWishlist(item)}><img src="/heart.svg" alt="Add to wishlist icon" /></button>
+                <Button
+                    isIconOnly
+                    className="text-default-900/60 data-[hover]:bg-foreground/10 my-heart"
+                    radius="full"
+                    variant="light"
+                    // onPress={() => setLiked((v) => !v)}
+                    onClick={() => { addToWishlist(item); wishlistNotification(); }}
+                >
+                    <img className="btn-image-img" src="/heart.svg" alt="Add to wishlist icon" />
+                </Button>
                 <Link to={`/ProductDetails/${item.id}`}>
                     <div className="pkm__img-container">
                         <img className="pkm__img" src={item.sprite} alt={`Pokemon ${item.name}`} />
@@ -86,7 +99,7 @@ const PokeItem: React.FC<PokeItemProps> = ({ item, addToCart, addToWishlist }) =
                 <div className="mybtn__container">
                     <Button className="mybtn" color="success" onClick={() => { addToCart(item); notification(); }}>Add to Cart</Button>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

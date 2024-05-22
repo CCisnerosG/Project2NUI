@@ -1,8 +1,7 @@
 import PokeItem from "../product-item";
 import './list.scss';
 import { Divider } from "@nextui-org/divider";
-import { usePokemonContext } from "../../context/pokemon-context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
 import axios from "axios";
@@ -19,8 +18,23 @@ interface PokeItem {
 
 const PokeProducts = () => {
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const [data, setData] = useState([]);
+    const [totalItems, setTotalItems] = useState();
+    // const itemsPerPage = 10;
+
+    useEffect(() => {
+        // axios.get('http://localhost:8080/api/v1/pokemon')
+        //     .then(response => {
+        //         setTotalItems(response.data.length);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching the data:', error);
+        //     });
+        filter()
+    }, [currentPage, filters]);
+
 
 
     const addToCart = (item: PokeItem) => {
@@ -72,41 +86,36 @@ const PokeProducts = () => {
     }
 
 
-    // const index = cart.findIndex(cartItem => cartItem.id === item.id);
-    // if (index !== -1) {
-    //     const updatedCart = [...cart];
-    //     updatedCart[index].quantity += 1;
-    //     setCart(updatedCart);
-    // } else {
-    //     const updatedItem = { ...item, quantity: 1 };
-    //     setCart([...cart, updatedItem])
-    // }
+    const filter = () => {
+        const params: any = {
+            // page: currentPage,
+            // size: 10
+        };
 
+        if (filters.name) params.name = filters.name;
+        if (filters.type) params.type = filters.type;
+        if (filters.generation) params.generation = filters.generation;
+        if (filters.minPrice) params.minPrice = filters.minPrice;
+        if (filters.maxPrice) params.maxPrice = filters.maxPrice;
 
-    const applyFilters = (items: PokeItem[]): PokeItem[] => {
-        return items.filter(item => {
-            if (filters.name && !item.name.toLowerCase().includes(filters.name.toLowerCase())) {
-                return false;
-            }
-            if (filters.type && item.type !== filters.type) {
-                return false;
-            }
-            if (filters.generation && item.generation !== parseInt(filters.generation)) {
-                return false;
-            }
-            if (filters.minPrice && item.price < parseInt(filters.minPrice)) {
-                return false;
-            }
-            if (filters.maxPrice && item.price > parseInt(filters.maxPrice)) {
-                return false;
-            }
-            return true;
-        });
-    };
+        axios.get(`http://localhost:8080/api/v1/pokemon/filter?`, {
+            params: params
+        })
+            .then(response => {
+                setData(response.data.content);
+                setTotalItems(response.data.length);
+                console.log(totalItems);
+                const totalPages = Math.ceil(totalItems / 10);
+                setTotalPages(totalPages);
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+    }
 
-    const paginate = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
-    };
+    // const paginate = (pageNumber: number) => {
+    //     setCurrentPage(pageNumber);
+    // };
 
     const handleNameFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value;
@@ -124,7 +133,7 @@ const PokeProducts = () => {
         setCurrentPage(1);
     };
 
-    const handleGenFilterChange = (generation: number) => {
+    const handleGenFilterChange = (generation: string) => {
         setFilters({ ...filters, generation });
         setCurrentPage(1);
     }
@@ -141,15 +150,22 @@ const PokeProducts = () => {
         setCurrentPage(1);
     };
 
+    const handlePageChange = (newPage: number) => {
+        if (newPage >= 0 && newPage < totalPages) {
+            setCurrentPage(newPage);
+        }
+    };
+
+
     const types = ['Grass', 'Electric', 'Normal', 'Fire', 'Poison', 'Ground', 'Bug', 'Psychic', 'Steel', 'Rock', 'Dark', 'Dragon'];
     const generations = ['Kanto', 'Johto', 'Hoen', 'Sinnoh']
 
-    const data = usePokemonContext();
-    const filteredItems = data ? applyFilters(data) : [];
-    const totalItems = filteredItems.length;
-    const lastItem = currentPage * itemsPerPage;
-    const firstItem = lastItem - itemsPerPage;
-    const currentItems = filteredItems.slice(firstItem, lastItem);
+    // const filteredItems = context ? filter(context) : [];
+    // const totalItems = filteredItems.length;
+    // const lastItem = currentPage * itemsPerPage;
+    // const firstItem = lastItem - itemsPerPage;
+    // const currentItems = filteredItems.slice(firstItem, lastItem);
+
 
     return (
         <>
@@ -240,18 +256,18 @@ const PokeProducts = () => {
             </Accordion>
 
 
-            {totalItems === 0 && (
+            {data.length === 0 && (
                 <p className="pkm-notfound">Pokémon not found</p>
             )
             }
 
             {
-                totalItems > 0 && (
+                data.length > 0 && (
                     <>
-                        <p className="text-small text-default-500 ml-9">Selected Page: {currentPage}</p>
+                        <p className="text-small text-default-500 ml-9">Selected Page: {currentPage + 1}</p>
                         <div className="list-container">
                             <div className="list">
-                                {currentItems.map((item) => (
+                                {data.map((item) => (
                                     <PokeItem key={item.id} item={item} addToCart={addToCart} addToWishlist={addToWishlist} />
                                 ))}
                             </div>
@@ -259,13 +275,12 @@ const PokeProducts = () => {
                         <Divider className="my-4" />
 
                         {/* Pagination */}
-                        {totalItems > itemsPerPage && (
-
+                        {totalPages > 0 && (
                             <Pagination
-                                total={Math.ceil(totalItems / itemsPerPage)}
+                                total={totalPages}
                                 color="secondary"
-                                page={currentPage}
-                                onChange={paginate}
+                                current={currentPage + 1}
+                                onChange={handlePageChange}
                                 className="ml-7"
                             />
                         )}
@@ -274,7 +289,7 @@ const PokeProducts = () => {
                                 size="sm"
                                 variant="flat"
                                 color="secondary"
-                                onClick={() => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))}
+                                onClick={() => setCurrentPage(currentPage - 1)}
                             >
                                 Previous
                             </Button>
@@ -282,8 +297,8 @@ const PokeProducts = () => {
                                 size="sm"
                                 variant="flat"
                                 color="secondary"
-                                onClick={() => setCurrentPage((prev) => (prev < 10 ? prev + 1 : prev))}
-                                style={{ display: totalItems > itemsPerPage ? 'block' : 'none' }}
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                            // style={{ display: totalItems > 10 ? 'block' : 'none' }}
                             >
                                 Next
                             </Button>

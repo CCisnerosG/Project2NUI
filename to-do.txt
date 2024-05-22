@@ -1,16 +1,15 @@
 ORDERS (ADMIN Y USER)
 EVOLUCIONES
-WISHLIST A CART
 VALIDACION DE ROLES ----> /ME
-FILTER
 PAGINATION
 
 CONSULTAS FILTERING Y URLS
 Animacion login-signup
+Sprite para el toast
+
 
 ------------------
-FILTERING
-throttling
+FILTERING SEARCH
 Service aparte para url
 Queryparams para filters
 ------------------

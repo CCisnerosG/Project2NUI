@@ -117,5 +117,16 @@
 }
 
 .btn-image {
-    width: 6%;
+    width: 10%;
+
 }
+
+.btn-image-img {
+    @include for-pc {
+        :hover {
+            background-color: #EB846A;
+            font-variation-settings: 'FILL' 100,
+        }
+    }
+}
+

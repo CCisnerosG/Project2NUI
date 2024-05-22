@@ -5,8 +5,22 @@ import { Link } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 
-const Cart = () => {
-    const [data, setData] = useState([]);
+interface Pokemon {
+    id: number;
+    name: string;
+    sprite: string;
+    price: number;
+}
+
+interface CartItem {
+    id: number;
+    pokemon: Pokemon;
+    quantity: number;
+    price: number;
+}
+
+const Cart: React.FC = () => {
+    const [data, setData] = useState<CartItem[]>([]);
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
@@ -24,35 +38,65 @@ const Cart = () => {
             });
     }, []);
 
-    const updateCart = (updatedCart) => {
-        setData(updatedCart);
+    const updateQuantity = (itemId: number, newQuantity: number) => {
+        axios.put(`http://localhost:8080/api/v1/shoppingCart/${itemId}?quantity=${newQuantity}`, {
+            // quantity: newQuantity
+        }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                const updatedData = data.map(item => {
+                    if (item.id === itemId) {
+                        return { ...item, quantity: newQuantity };
+                    }
+                    return item;
+                });
+                setData(updatedData);
+            })
+            .catch(error => {
+                console.error('Error updating quantity:', error);
+            });
     };
 
     const addQuantity = (itemId: number) => {
-        const updatedCart = data.map(item => {
-            if (item.id === itemId) {
-                return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-        });
-        updateCart(updatedCart);
+        const itemToUpdate = data.find(item => item.pokemon.id === itemId);
+        if (itemToUpdate) {
+            const newQuantity = itemToUpdate.quantity + 1;
+            updateQuantity(itemId, newQuantity);
+        }
     };
 
-    const subtractQuantity = (itemId : number) => {
-        const updatedCart = data.map(item => {
-            if (item.id === itemId && item.quantity > 1) {
-                return { ...item, quantity: item.quantity - 1 };
-            }
-            return item;
-        });
-        updateCart(updatedCart);
+    const substractQuantity = (itemId: number) => {
+        const itemToUpdate = data.find(item => item.pokemon.id === itemId);
+        if (itemToUpdate && itemToUpdate.quantity > 1) {
+            const newQuantity = itemToUpdate.quantity - 1;
+            updateQuantity(itemId, newQuantity);
+        }
+        if (itemToUpdate && itemToUpdate.quantity == 1) {
+            itemToUpdate.quantity - 1;
+            deleteItem(itemId);
+        }
     };
+
+
 
     const deleteItem = (itemId: number) => {
-        const updatedCart = data.filter(item => item.id !== itemId);
-        updateCart(updatedCart);
+        axios.delete(`http://localhost:8080/api/v1/shoppingCart/${itemId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                setData(data.filter(item => item.id !== itemId))
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
     };
-
 
     if (data.length === 0) {
         return (
@@ -104,8 +148,8 @@ const Cart = () => {
                                         <div className="item__quantity">
                                             <span className="item__quantity-number">{item.quantity}</span>
                                             <div className="item__quantity-buttons">
-                                                <button className="btn-cart" onClick={() => addQuantity(item.id)}>+</button>
-                                                <button className="btn-cart" onClick={() => subtractQuantity(item.id)}>-</button>
+                                                <button className="btn-cart" onClick={() => addQuantity(item.pokemon.id)}>+</button>
+                                                <button className="btn-cart" onClick={() => substractQuantity(item.pokemon.id)}>-</button>
                                             </div>
                                         </div>
                                     </td>

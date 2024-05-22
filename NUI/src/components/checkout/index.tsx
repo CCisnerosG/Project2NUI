@@ -92,7 +92,20 @@ const Check = () => {
 
 
     const completePurchase = () => {
-        localStorage.removeItem('cart');
+        const userId = localStorage.getItem("userId");
+        axios.post(`http://localhost:8080/api/v1/order/from-cart?userId=${userId}`, null, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                setData(response.data)
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+
     }
 
 
