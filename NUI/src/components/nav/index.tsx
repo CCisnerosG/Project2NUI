@@ -114,7 +114,7 @@ const NavNUI = () => {
                 </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
+                <NavbarItem className="lg:flex mynavitem">
                     <Link to="/ShoppingCart">
                         <span className="material-symbols-outlined myShoppingBag">
                             shopping_bag

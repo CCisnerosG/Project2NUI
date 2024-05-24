@@ -21,10 +21,14 @@ interface CartItem {
 
 const Cart: React.FC = () => {
     const [data, setData] = useState<CartItem[]>([]);
+    // const [quantity, setQuantity] = useState<number>();
 
     useEffect(() => {
-        const userId = localStorage.getItem("userId");
-        axios.get(`http://localhost:8080/api/v1/shoppingCart/products?userId=${userId}`, {
+        fetchCart();
+    }, [data]);
+
+    const fetchCart = () => {
+        axios.get(`http://localhost:8080/api/v1/shoppingCart/products`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
@@ -36,7 +40,7 @@ const Cart: React.FC = () => {
             .catch(error => {
                 console.error('Error fetching products:', error);
             });
-    }, []);
+    }
 
     const updateQuantity = (itemId: number, newQuantity: number) => {
         axios.put(`http://localhost:8080/api/v1/shoppingCart/${itemId}?quantity=${newQuantity}`, {
@@ -48,13 +52,14 @@ const Cart: React.FC = () => {
         })
             .then(response => {
                 console.log(response.data);
-                const updatedData = data.map(item => {
-                    if (item.id === itemId) {
-                        return { ...item, quantity: newQuantity };
-                    }
-                    return item;
+                setData(prevData => {
+                    return prevData.map(item => {
+                        if (item.id === itemId) {
+                            return { ...item, quantity: newQuantity };
+                        }
+                        return item;
+                    });
                 });
-                setData(updatedData);
             })
             .catch(error => {
                 console.error('Error updating quantity:', error);
@@ -65,6 +70,13 @@ const Cart: React.FC = () => {
         const itemToUpdate = data.find(item => item.pokemon.id === itemId);
         if (itemToUpdate) {
             const newQuantity = itemToUpdate.quantity + 1;
+            const updatedData = data.map(item => {
+                if (item.pokemon.id === itemId) {
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            });
+            setData(updatedData);
             updateQuantity(itemId, newQuantity);
         }
     };
@@ -73,15 +85,19 @@ const Cart: React.FC = () => {
         const itemToUpdate = data.find(item => item.pokemon.id === itemId);
         if (itemToUpdate && itemToUpdate.quantity > 1) {
             const newQuantity = itemToUpdate.quantity - 1;
+            const updatedData = data.map(item => {
+                if (item.pokemon.id === itemId) {
+                    return { ...item, quantity: newQuantity };
+                }
+                return item;
+            });
+            setData(updatedData);
             updateQuantity(itemId, newQuantity);
         }
-        if (itemToUpdate && itemToUpdate.quantity == 1) {
-            itemToUpdate.quantity - 1;
+        if (itemToUpdate && itemToUpdate.quantity === 1) {
             deleteItem(itemId);
         }
     };
-
-
 
     const deleteItem = (itemId: number) => {
         axios.delete(`http://localhost:8080/api/v1/shoppingCart/${itemId}`, {
@@ -91,7 +107,7 @@ const Cart: React.FC = () => {
         })
             .then(response => {
                 console.log(response.data);
-                setData(data.filter(item => item.id !== itemId))
+                setData(prevData => prevData.filter(item => item.id !== itemId));
             })
             .catch(error => {
                 console.error('Error fetching products:', error);

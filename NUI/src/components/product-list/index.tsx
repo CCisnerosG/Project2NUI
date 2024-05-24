@@ -1,7 +1,7 @@
 import PokeItem from "../product-item";
 import './list.scss';
 import { Divider } from "@nextui-org/divider";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org/react";
 import { Pagination } from "@nextui-org/react";
 import axios from "axios";
@@ -14,38 +14,40 @@ interface PokeItem {
     generation: number;
     price: number;
     quantity: number;
+    sprite: string;
+    height: number;
+    weight: number;
+    subtotal: number;
+    taxes: number;
+    total: number;
+    save: number;
+}
+
+interface FilterParams {
+    name?: string;
+    type?: string;
+    generation?: string;
+    minPrice?: string;
+    maxPrice?: string;
+    page: number;
 }
 
 const PokeProducts = () => {
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = React.useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<PokeItem[]>([]);
     const [totalItems, setTotalItems] = useState();
     // const itemsPerPage = 10;
 
     useEffect(() => {
-        // axios.get('http://localhost:8080/api/v1/pokemon')
-        //     .then(response => {
-        //         setTotalItems(response.data.length);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error fetching the data:', error);
-        //     });
         filter()
     }, [currentPage, filters]);
 
 
-
     const addToCart = (item: PokeItem) => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const userId = localStorage.getItem("userId");
-        console.log(userId);
-        console.log(item.id);
         console.log(localStorage.getItem("token"));
-
-        console.log(user.userId);
-        axios.post(`http://localhost:8080/api/v1/shoppingCart/add?userId=${user.userId}&pokemonId=${item.id}&quantity=${1}`, null, {
+        axios.post(`http://localhost:8080/api/v1/shoppingCart/add?&pokemonId=${item.id}&quantity=${1}`, null, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
@@ -63,14 +65,9 @@ const PokeProducts = () => {
     }
 
     const addToWishlist = (item: PokeItem) => {
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        console.log(user.userId);
-        console.log(user.token);
-        console.log(item.name);
-        axios.post(`http://localhost:8080/api/v1/wishlist/add?userId=${user.userId}&pokemonId=${item.id}`, null, {
+        axios.post(`http://localhost:8080/api/v1/wishlist/add?&pokemonId=${item.id}`, null, {
             headers: {
-                'Authorization': `Bearer ${user.token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
             .then(response => {
@@ -85,11 +82,9 @@ const PokeProducts = () => {
             });
     }
 
-
     const filter = () => {
-        const params: any = {
-            // page: currentPage,
-            // size: 10
+        const params: FilterParams = {
+            page: currentPage,
         };
 
         if (filters.name) params.name = filters.name;
@@ -103,10 +98,8 @@ const PokeProducts = () => {
         })
             .then(response => {
                 setData(response.data.content);
-                setTotalItems(response.data.length);
-                console.log(totalItems);
-                const totalPages = Math.ceil(totalItems / 10);
-                setTotalPages(totalPages);
+                setTotalItems(response.data.size);
+                setTotalPages(response.data.totalPages);
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
@@ -120,34 +113,34 @@ const PokeProducts = () => {
     const handleNameFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value;
         setFilters({ ...filters, name });
-        setCurrentPage(1);
+        setCurrentPage(0);
     };
 
     const handleAllTypesFilter = () => {
         setFilters({ ...filters, type: '' });
-        setCurrentPage(1);
+        setCurrentPage(0);
     };
 
     const handleTypeFilterChange = (type: string) => {
         setFilters({ ...filters, type });
-        setCurrentPage(1);
+        setCurrentPage(0);
     };
 
     const handleGenFilterChange = (generation: string) => {
         setFilters({ ...filters, generation });
-        setCurrentPage(1);
+        setCurrentPage(0);
     }
 
     const handleMinPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const minPrice = event.target.value;
         setFilters({ ...filters, minPrice });
-        setCurrentPage(1);
+        setCurrentPage(0);
     };
 
     const handleMaxPriceFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const maxPrice = event.target.value;
         setFilters({ ...filters, maxPrice });
-        setCurrentPage(1);
+        setCurrentPage(0);
     };
 
     const handlePageChange = (newPage: number) => {
@@ -156,16 +149,21 @@ const PokeProducts = () => {
         }
     };
 
+    const handlePreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
 
     const types = ['Grass', 'Electric', 'Normal', 'Fire', 'Poison', 'Ground', 'Bug', 'Psychic', 'Steel', 'Rock', 'Dark', 'Dragon'];
     const generations = ['Kanto', 'Johto', 'Hoen', 'Sinnoh']
-
-    // const filteredItems = context ? filter(context) : [];
-    // const totalItems = filteredItems.length;
-    // const lastItem = currentPage * itemsPerPage;
-    // const firstItem = lastItem - itemsPerPage;
-    // const currentItems = filteredItems.slice(firstItem, lastItem);
-
 
     return (
         <>
@@ -185,7 +183,8 @@ const PokeProducts = () => {
                     <div className="filter__type">
                         <div className="filter__type-btns">
                             <Button
-                                variant={filters.type === '' ? "contained" : "flat"}
+                                color="primary"
+                                variant={filters.type === '' ? "solid" : "bordered"}
                                 onClick={handleAllTypesFilter}
                             >
                                 All
@@ -193,7 +192,8 @@ const PokeProducts = () => {
                             {types.map((type) => (
                                 <Button
                                     key={type}
-                                    variant={filters.type === type.toLowerCase() ? "contained" : "flat"}
+                                    color="primary"
+                                    variant={filters.type === type ? "solid" : "bordered"}
                                     onClick={() => handleTypeFilterChange(type)}
                                 >
                                     {type}
@@ -210,7 +210,7 @@ const PokeProducts = () => {
                             orientation="horizontal"
                         >
                             <Radio
-                                variant={filters.generation === '' ? "contained" : "flat"}
+                                variant={filters.generation === '' ? "bordered" : "solid"}
                                 onClick={() => handleGenFilterChange('')}
                             >
                                 All
@@ -279,7 +279,7 @@ const PokeProducts = () => {
                             <Pagination
                                 total={totalPages}
                                 color="secondary"
-                                current={currentPage + 1}
+                                page={currentPage + 1}
                                 onChange={handlePageChange}
                                 className="ml-7"
                             />
@@ -289,7 +289,8 @@ const PokeProducts = () => {
                                 size="sm"
                                 variant="flat"
                                 color="secondary"
-                                onClick={() => setCurrentPage(currentPage - 1)}
+                                isDisabled={currentPage === 0}
+                                onClick={handlePreviousPage}
                             >
                                 Previous
                             </Button>
@@ -297,8 +298,8 @@ const PokeProducts = () => {
                                 size="sm"
                                 variant="flat"
                                 color="secondary"
-                                onClick={() => setCurrentPage(currentPage + 1)}
-                            // style={{ display: totalItems > 10 ? 'block' : 'none' }}
+                                isDisabled={currentPage === totalPages - 1}
+                                onClick={handleNextPage}
                             >
                                 Next
                             </Button>

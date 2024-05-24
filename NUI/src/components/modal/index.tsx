@@ -2,7 +2,12 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from
 import { Link } from "react-router-dom";
 import './modal.scss'
 
-const ModalNUI = ({ isOpen, onClose }) => {
+interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const ModalNUI: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} isDismissable={false} isKeyboardDismissDisabled={true} className="modal">
             <ModalContent>

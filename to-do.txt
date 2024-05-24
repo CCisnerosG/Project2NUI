@@ -1,15 +1,16 @@
-ORDERS (ADMIN Y USER)
+ORDERS ADMIN
 EVOLUCIONES
 VALIDACION DE ROLES ----> /ME
-PAGINATION
 
-CONSULTAS FILTERING Y URLS
-Animacion login-signup
+Filtering debounce
+---Animacion login-signup
 Sprite para el toast
+---Integracion Pp
 
+TypeScript
+checkout
+nav
+product-list
+signup
+wishlist
 
-------------------
-FILTERING SEARCH
-Service aparte para url
-Queryparams para filters
-------------------

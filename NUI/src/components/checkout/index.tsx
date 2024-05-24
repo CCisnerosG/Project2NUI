@@ -6,6 +6,44 @@ import ModalNUI from "../modal";
 import { useCountriesContext } from "../../context/countries-context";
 import axios from "axios";
 
+// interface Pokemon {
+//     id: number;
+//     name: string;
+//     subtotal: number;
+//     taxes: number;
+//     save: number;
+// }
+
+interface Pokemon {
+    id: number;
+    name: string;
+    subtotal: number;
+    taxes: number;
+    save: number;
+}
+
+interface CartItem {
+    pokemon: Pokemon;
+    quantity: number;
+}
+
+const data: CartItem[] = [];
+
+// interface Country {
+//     id: number;
+//     name: string;
+//     states: string[];
+// }
+
+interface PokemonData {
+    pokemon: {
+        subtotal: number;
+        taxes: number;
+        save: number;
+    },
+    quantity: number;
+}
+
 const Check = () => {
     const [data, setData] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,7 +52,8 @@ const Check = () => {
     const [cardType, setCardType] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
-    const [states, setStates] = useState<string[]>([]);
+    const [states, setStates] = useState([]);
+    const [city, setCity] = useState('');
     const country = useCountriesContext();
     const [zipCode, setZipCode] = useState('');
     const [isValidZipCode, setIsValidZipCode] = useState(false);
@@ -23,6 +62,9 @@ const Check = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [expirationDate, setExpirationDate] = useState("");
     const [isExpirationValid, setIsExpirationValid] = useState(true);
+    const [address, setAddress] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('');
+
 
 
     useEffect(() => {
@@ -60,6 +102,11 @@ const Check = () => {
         setSelectedState(value);
     };
 
+    // City
+    const handleCityChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = event.target;
+        setCity(value);
+    };
 
     //ZIP
     const handleZipCode = (event: ChangeEvent<HTMLInputElement>) => {
@@ -68,15 +115,14 @@ const Check = () => {
         setIsValidZipCode(verifyZipCode(value));
     };
 
-    const verifyZipCode = (value: string) => {
+    const verifyZipCode = (value: string): boolean => {
         const zipCodeRegex = /^\d{5}$/;
         const isValid = zipCodeRegex.test(value);
         return isValid;
     };
 
     useEffect(() => {
-        const userId = localStorage.getItem("userId");
-        axios.get(`http://localhost:8080/api/v1/shoppingCart/products?userId=${userId}`, {
+        axios.get(`http://localhost:8080/api/v1/shoppingCart/products?`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
@@ -90,14 +136,36 @@ const Check = () => {
             });
     }, []);
 
+    useEffect(() => {
+        const combinedAddress = `${selectedCountry}, ${selectedState}, ${city} ,${zipCode}, ${address}`;
+        setAddress(combinedAddress);
+    }, [selectedCountry, selectedState, zipCode]);
+
+
+    useEffect(() => {
+        const combinedPaymentMethod = `${creditCardNumber} (${cardType})`;
+        setPaymentMethod(combinedPaymentMethod);
+    }, [creditCardNumber, cardType]);
+
+
+    const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setAddress(event.target.value);
+    };
+
 
     const completePurchase = () => {
-        const userId = localStorage.getItem("userId");
-        axios.post(`http://localhost:8080/api/v1/order/from-cart?userId=${userId}`, null, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
-            }
-        })
+        const params = {
+            address: address,
+            paymentMethod: paymentMethod,
+        }
+
+        axios.post(`http://localhost:8080/api/v1/order/from-cart?address=${params.address}&paymentMethod=${params.paymentMethod}`,
+            {}
+            , {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            })
             .then(response => {
                 console.log(response.data);
                 setData(response.data)
@@ -188,9 +256,9 @@ const Check = () => {
 
 
 
-    const subtotalAmount = data.reduce((subtotal, item) => subtotal + (item.pokemon.subtotal * item.quantity), 0);
-    const taxesAmount = data.reduce((taxes, item) => taxes + (item.pokemon.taxes * item.quantity), 0);
-    const saveAmount = data.reduce((save, item) => save + (item.pokemon.save * item.quantity), 0);
+    const subtotalAmount = data.reduce((subtotal, item: PokemonData) => subtotal + (item.pokemon.subtotal * item.quantity), 0);
+    const taxesAmount = data.reduce((taxes, item: PokemonData) => taxes + (item.pokemon.taxes * item.quantity), 0);
+    const saveAmount = data.reduce((save, item: PokemonData) => save + (item.pokemon.save * item.quantity), 0);
     const totalAmount = ((subtotalAmount + taxesAmount) - saveAmount);
 
 
@@ -203,7 +271,7 @@ const Check = () => {
                 <div className="checkout__table-container">
                     <table className="checkout__table">
                         <tbody>
-                            {data && data.map((item) => (
+                            {data && data.map((item: CartItem) => (
                                 <tr className="checkout__item-container" key={item.pokemon.id}>
                                     <td className="checkout__info-quantity">
                                         <div className="checkout__quantity">x{item.quantity}</div>
@@ -301,7 +369,7 @@ const Check = () => {
                                 </SelectItem>
                             ))}
                         </Select>
-                        <Input isRequired type="text" label="City" className="forms__myinput-three" />
+                        <Input isRequired type="text" label="City" className="forms__myinput-three" onChange={handleCityChange} />
                         <div className="forms__city-state-zip-zip">
                             <Input isRequired type="text" label="Zip" className="forms__myinput-three" onChange={handleZipCode}
                                 onBlur={verifyZipCode} />
@@ -314,7 +382,7 @@ const Check = () => {
                     </div>
 
                     <div className="forms__address">
-                        <Input isRequired type="text" label="Address" className="forms__myinput-one" />
+                        <Input isRequired type="text" label="Address" className="forms__myinput-one" onChange={handleAddressChange} />
                     </div>
                 </div>
                 {/* Tarjeta */}

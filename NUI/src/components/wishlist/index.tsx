@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Divider } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import './wishlist.scss';
+import toast from "react-hot-toast";
 
 interface WishlistItem {
     id: number;
@@ -51,11 +52,10 @@ const Wish = () => {
     }
 
     const handleToCart = () => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        axios.post(`http://localhost:8080/api/v1/shoppingCart/moveFromWishlist?userId=${user.userId}`, null,
+        axios.post(`http://localhost:8080/api/v1/shoppingCart/moveFromWishlist?`, null,
             {
                 headers: {
-                    'Authorization': `Bearer ${user.token}`
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
             .then(response => {
@@ -80,6 +80,26 @@ const Wish = () => {
                 console.error('Error fetching products:', error);
             });
     };
+
+    const oneProductToCart = (itemId: number) => {
+        console.log(localStorage.getItem("token"));
+        axios.post(`http://localhost:8080/api/v1/shoppingCart/add?&pokemonId=${itemId}&quantity=${1}`, null, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    console.log('Sirvio la pus');
+                } else {
+                    console.log('No sirve');
+                }
+            })
+            .catch(error => {
+                console.log(`Error: ${error.message}`);
+            });
+        deleteItem(itemId);
+    }
 
     return (
         <>
@@ -113,7 +133,7 @@ const Wish = () => {
                             </TableCell>
                             <TableCell>${item.pokemon.price}</TableCell>
                             <TableCell>
-                                <Button color="success" className="p-0">Add to Cart</Button>
+                                <Button color="success" className="p-0" onClick={() => oneProductToCart(item.pokemon.id)}>Add to Cart</Button>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -13,3 +13,11 @@
 .navbar-img {
     margin: 0;
 }
+
+.mynavitem {
+    display: none;
+
+    @include for-phone-only {
+        display: block;
+    }
+}

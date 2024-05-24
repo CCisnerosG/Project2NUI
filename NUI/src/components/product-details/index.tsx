@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { usePokemonContext } from "../../context/pokemon-context";
+import { usePokemonContext, Pokemon } from "../../context/pokemon-context";
 import NotFound from "../product-not-found";
 import './product-details.scss'
 import { Divider } from "@nextui-org/divider";
 
-const typeColors = {
+const typeColors: { [key: string]: string } = {
     Normal: "#A8A878",
     Fire: "#F08030",
     Water: "#6890F0",
@@ -26,17 +26,18 @@ const PokemonDetails = () => {
     const { id } = useParams();
     const pokemonData = usePokemonContext();
     const [bgColor, setBgColor] = useState("");
-    const [pokemon, setPokemon] = useState(null);
+    const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
     useEffect(() => {
-        if (pokemonData) {
-            const pokemon = pokemonData.find(p => p.id === parseInt(id));
-
-            const type = pokemon?.type;
-            if (type && typeColors[type]) {
-                setBgColor(typeColors[type]);
+        if (pokemonData && id) {
+            const foundPokemon = pokemonData.find(p => p.id === parseInt(id));
+            if (foundPokemon) {
+                const type = foundPokemon.type;
+                if (type && typeColors[type]) {
+                    setBgColor(typeColors[type]);
+                }
+                setPokemon(foundPokemon);
             }
-            setPokemon(pokemon);
         }
     }, [id, pokemonData]);
 
@@ -48,20 +49,20 @@ const PokemonDetails = () => {
         return <NotFound />;
     }
 
-    const renderEvolution = (evolution) => {
-        return (
-            <>
-                <div className="pokemon__evolution">
-                    <p className="pokemon__evolution-name">{evolution.name}</p>
-                    <div className="pokemon__evolution-img-container">
-                        <img className="pokemon__evolution-img" src={evolution.sprite} alt={`Image of ${evolution.name}`} />
-                    </div>
-                </div>
+    // const renderEvolution = (evolution) => {
+    //     return (
+    //         <>
+    //             <div className="pokemon__evolution">
+    //                 <p className="pokemon__evolution-name">{evolution.name}</p>
+    //                 <div className="pokemon__evolution-img-container">
+    //                     <img className="pokemon__evolution-img" src={evolution.sprite} alt={`Image of ${evolution.name}`} />
+    //                 </div>
+    //             </div>
 
-                {evolution.evolution && evolution.evolution.map(renderEvolution)}
-            </>
-        );
-    };
+    //             {evolution.evolution && evolution.evolution.map(renderEvolution)}
+    //         </>
+    //     );
+    // };
 
 
     return (

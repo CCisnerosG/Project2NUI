@@ -1,0 +1,118 @@
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background ;
+
+    &__container {
+        width: 80%;
+        height: 77vh;
+        border: 1px solid rgb(244, 244, 245);
+        border-radius: 15px;
+        background-color: white;
+        margin: 20px 0 20px 0;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        flex-direction: column;
+        overflow: scroll;
+    }
+
+    &__section-title {
+        width: 100%;
+        margin: 10px 0 10px 0;
+        // text-align: center;
+    }
+
+    &__section {
+        width: 95%;
+    }
+
+    &__panel {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: rgb(244, 244, 245);
+        align-items: center;
+
+        @include for-tablet-portrait {
+            flex-direction: row;
+        }
+    }
+
+    &__panel-left {
+        display: none;
+
+        @include for-tablet-landscape {
+            display: block;
+            width: 30%;
+            margin: 10px 0 10px 10px;
+            background-color: white;
+            border-radius: 10px;
+        }
+    }
+
+    &__panel-right {
+        width: 95%;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+
+        @include for-tablet-portrait {
+            width: 70%;
+            margin: 10px 10px 10px 0;
+        }
+    }
+
+    &__panel-right-section-one {}
+
+    &__panel-right-title {
+        font-size: 1.8rem;
+    }
+
+    &__panel-right-subtitle {
+        color: rgb(99, 99, 99);
+    }
+
+    &__panel-right-userinfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 10px 0 10px 0;
+        padding: 20px 0 20px 0;
+    }
+
+    &__panel-right-section-two {
+        // display: flex;
+        // justify-content: space-between;
+        padding: 20px 0 20px 0;
+        align-items: center;
+        margin: 10px 0 10px 0;
+    }
+
+    &__panel-right-orderinfo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__panel-right-section-three {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 10px 0 10px 0
+    }
+
+    &__panel-right-section-three-slider {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.mydivider-admin {
+    rotate: 90deg;
+    width: 60px !important;
+}
