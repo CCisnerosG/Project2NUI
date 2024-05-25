@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, useDisclosure, CircularProgress } from "@nextui-org/react";
-import { usePokemonContext } from "../../context/pokemon-context";
 import './admintable.scss';
 import axios from "axios";
 import ModalAdmin from "../modal-admin";
 import { Pokemon } from "../../context/pokemon-context";
 
 export default function ProductTable() {
+    const [data, setData] = useState<Pokemon[] | null>(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const data = usePokemonContext();
     const [isCreating, setIsCreating] = useState(false);
     const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/pokemon')
+            .then(response => {
+                setData(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching the data:', error);
+            });
+    }, [data]);
 
     if (!data) {
         return <div><CircularProgress label="Loading..." /></div>;
@@ -45,7 +53,7 @@ export default function ProductTable() {
     return (
         <>
             <div className="admin__container">
-                <Button color="success" className="admin__button" onClick={() => handleCreatePokemon()}>Create new Pokemon</Button>
+                <Button color="success" className="admin__button" onClick={() => handleCreatePokemon()}>New Pokemon</Button>
                 <div className="admin__table">
                     <Table aria-label="Example static collection table" className="my__table">
                         <TableHeader >
@@ -56,7 +64,7 @@ export default function ProductTable() {
                             <TableColumn className="my__tableheader">ACTION</TableColumn>
                         </TableHeader>
                         <TableBody>
-                            {data.map((pokemon) => (
+                            {data.map((pokemon: Pokemon) => (
                                 <TableRow key={pokemon.id}>
                                     <TableCell>{pokemon.id}</TableCell>
                                     <TableCell><img src={pokemon.sprite} alt={pokemon.name} className="pkm-img-admin" /></TableCell>

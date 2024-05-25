@@ -32,29 +32,25 @@ interface Order {
 
 const AdminOrderPanel: React.FC = () => {
     const [data, setData] = useState([]);
-    const [formattedDate, setFormattedDate] = useState('');
+    // const [formattedDate, setFormattedDate] = useState('');
     const [selectedValue, setSelectedValue] = useState<number | number[]>(1);
 
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/v1/order', {
-            headers:
-                { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
             .then(response => {
-                const orders = response.data.map((order: Order) => {
-                    const isoDate = order.orderDate;
-                    const date = parseISO(isoDate);
-                    setFormattedDate(format(date, 'MMM / dd / yy'));
-                    return { ...order, formattedDate };
-                });
-                setData(orders);
-                console.log(orders);
+                setData(response.data)
+                // setData(response.data.map((order: Order) => ({
+                //     ...order,
+                //     formattedDate: format(parseISO(order.orderDate), 'MMM / dd / yy')
+                // })));
             })
             .catch(error => {
                 console.error('Error fetching the data:', error);
             });
-    }, [formattedDate]);
+    }, [data]);
 
     const handleChange = (value: number | number[], orderId: string) => {
         setSelectedValue(value);

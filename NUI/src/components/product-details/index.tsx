@@ -4,6 +4,8 @@ import { usePokemonContext, Pokemon } from "../../context/pokemon-context";
 import NotFound from "../product-not-found";
 import './product-details.scss'
 import { Divider } from "@nextui-org/divider";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const typeColors: { [key: string]: string } = {
     Normal: "#A8A878",
@@ -20,11 +22,13 @@ const typeColors: { [key: string]: string } = {
     Dragon: "#7038F8",
     Dark: "#705848",
     Steel: "#B8B8D0",
+    Ice: "#52B0C5"
 };
 
 const PokemonDetails = () => {
     const { id } = useParams();
     const pokemonData = usePokemonContext();
+    console.log(pokemonData);
     const [bgColor, setBgColor] = useState("");
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
@@ -64,10 +68,12 @@ const PokemonDetails = () => {
     //     );
     // };
 
-
     return (
         < div className="pokemon__product" >
             <div className="pokemon__header">
+                <div className="pokemon__other_sprites">
+                    <img className="pokemon__other_sprites-img" src={pokemon.icon_sprite} alt={`${pokemon.name} icon`} />
+                </div>
                 <p className="pokemon__header-title">{pokemon.name}</p>
                 <p className="pokemon__header-price">${pokemon.price}</p>
             </div>
@@ -76,8 +82,13 @@ const PokemonDetails = () => {
             </div>
             <div className="pokemon__info">
                 <div className="pokemon__header-info">
-                    <div className="pokemon__header-info-text">
-                        <p className="pokemon__header-title">{pokemon.name}</p>
+                    <div className="pokemon__header-icon-info-text">
+                        <div className="pokemon__header-icon-title">
+                            <p className="pokemon__header-title">{pokemon.name}</p>
+                            <div className="pokemon__other_sprites">
+                                <img className="pokemon__other_sprites-img" src={pokemon.icon_sprite} alt={`${pokemon.name} icon`} />
+                            </div>
+                        </div>
                         <p className="pokemon__header-price">${pokemon.price}</p>
                     </div>
                 </div>

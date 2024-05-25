@@ -6,22 +6,8 @@ import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org
 import { Pagination } from "@nextui-org/react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Pokemon } from "../../context/pokemon-context";
 
-interface PokeItem {
-    id: number;
-    name: string;
-    type: string;
-    generation: number;
-    price: number;
-    quantity: number;
-    sprite: string;
-    height: number;
-    weight: number;
-    subtotal: number;
-    taxes: number;
-    total: number;
-    save: number;
-}
 
 interface FilterParams {
     name?: string;
@@ -36,46 +22,36 @@ const PokeProducts = () => {
     const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
     const [currentPage, setCurrentPage] = React.useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [data, setData] = useState<PokeItem[]>([]);
+    const [data, setData] = useState<Pokemon[]>([]);
     const [totalItems, setTotalItems] = useState();
-    // const itemsPerPage = 10;
 
     useEffect(() => {
         filter()
     }, [currentPage, filters]);
 
 
-    const addToCart = (item: PokeItem) => {
-        console.log(localStorage.getItem("token"));
+    const addToCart = (item: Pokemon) => {
         axios.post(`http://localhost:8080/api/v1/shoppingCart/add?&pokemonId=${item.id}&quantity=${1}`, null, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
         })
             .then(response => {
-                if (response.status == 200) {
-                    console.log('Sirvio la pus');
-                } else {
-                    console.log('No sirve');
-                }
+                response.data
             })
             .catch(error => {
                 toast.error(`Error: ${error.message}`);
             });
     }
 
-    const addToWishlist = (item: PokeItem) => {
+    const addToWishlist = (item: Pokemon) => {
         axios.post(`http://localhost:8080/api/v1/wishlist/add?&pokemonId=${item.id}`, null, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
             .then(response => {
-                if (response.status == 200) {
-                    console.log('Sirvio la pus');
-                } else {
-                    console.log('No sirve');
-                }
+                response.data
             })
             .catch(error => {
                 toast.error(`Error: ${error.message}`);
@@ -105,10 +81,6 @@ const PokeProducts = () => {
                 console.error('Error fetching products:', error);
             });
     }
-
-    // const paginate = (pageNumber: number) => {
-    //     setCurrentPage(pageNumber);
-    // };
 
     const handleNameFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.value;
@@ -162,7 +134,7 @@ const PokeProducts = () => {
     };
 
 
-    const types = ['Grass', 'Electric', 'Normal', 'Fire', 'Poison', 'Ground', 'Bug', 'Psychic', 'Steel', 'Rock', 'Dark', 'Dragon'];
+    const types = ['Grass', 'Electric', 'Normal', 'Fire', 'Poison', 'Ground', 'Bug', 'Psychic', 'Steel', 'Rock', 'Dark', 'Dragon', 'Ice'];
     const generations = ['Kanto', 'Johto', 'Hoen', 'Sinnoh']
 
     return (

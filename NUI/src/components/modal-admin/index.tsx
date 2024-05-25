@@ -26,6 +26,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
     const [generation, setGeneration] = useState('');
     const [cries, setCries] = useState('');
     const [legendary, setLegendary] = useState('');
+    const [icon_sprite, setIcon_Sprite] = useState('');
 
     useEffect(() => {
         if (!isCreating && pokemon) {
@@ -43,6 +44,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
             setGeneration(pokemon.generation.toString());
             setCries(pokemon.cries);
             setLegendary(pokemon.legendary.toString());
+            setIcon_Sprite(pokemon.icon_sprite.toString());
         }
     }, [isCreating, pokemon]);
 
@@ -65,7 +67,8 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
             save: parseInt(save),
             generation: parseInt(generation),
             cries,
-            legendary: stringToBoolean(legendary)
+            legendary: stringToBoolean(legendary),
+            icon_sprite,
         };
         if (isCreating) {
             axios.post('http://localhost:8080/api/v1/pokemon', newPokemon, {
@@ -110,6 +113,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                     <Input className="input" isRequired value={name} label="Name" onChange={(e) => setName(e.target.value)} />
                     <Input className="input" isRequired value={description} label="Description" onChange={(e) => setDescription(e.target.value)} />
                     <Input className="input" isRequired value={sprite} label="Sprite" onChange={(e) => setSprite(e.target.value)} />
+                    <Input className="input" isRequired value={icon_sprite} label="Pokemon Icon" onChange={(e) => setIcon_Sprite(e.target.value)} />
                     <div className="pokemon__type-weight-height">
                         <Input className="input" isRequired value={type} label="Type" onChange={(e) => setType(e.target.value)} />
                         <Input className="input" type="number" isRequired value={weight} label="Weight" onChange={(e) => setWeight(e.target.value)} />

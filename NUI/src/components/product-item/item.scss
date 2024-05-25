@@ -129,4 +129,10 @@
         }
     }
 }
-
+.toast{
+    display: flex;
+    align-items: center;
+}
+.toast-icon {
+    width: 50px;
+}

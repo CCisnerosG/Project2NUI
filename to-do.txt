@@ -1,10 +1,9 @@
 ORDERS ADMIN
 EVOLUCIONES
 VALIDACION DE ROLES ----> /ME
+Login despues de loggearse
 
-Filtering debounce
----Animacion login-signup
-Sprite para el toast
+---Animacion login-signup ***
 ---Integracion Pp
 
 TypeScript

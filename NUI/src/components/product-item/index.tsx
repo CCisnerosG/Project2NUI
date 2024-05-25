@@ -16,6 +16,7 @@ interface PokeItemProps {
         subtotal: number;
         taxes: number;
         save: number;
+        icon_sprite: string;
     };
     addToCart: (item: {
         id: number;
@@ -48,11 +49,23 @@ interface PokeItemProps {
 const PokeItem: React.FC<PokeItemProps> = ({ item, addToCart, addToWishlist }) => {
 
     const notification = () => {
-        toast.success(`${item.name} added to cart`)
+        // toast.success(`${item.name} added to cart`)
+        toast(
+            <div className="toast">
+                <img className='toast-icon' src={item.icon_sprite} alt={item.name} />
+                <p>{item.name} added to cart</p>
+            </div>
+        )
     }
 
     const wishlistNotification = () => {
-        toast.success(`${item.name} added to wishlist`)
+        // toast.success(`${item.name} added to wishlist`)
+        toast(
+            <div className="toast">
+                <img className='toast-icon' src={item.icon_sprite} alt={item.name} />
+                <p>{item.name} added to cart</p>
+            </div>
+        )
     }
 
 

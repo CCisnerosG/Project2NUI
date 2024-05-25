@@ -27,8 +27,6 @@ interface CartItem {
     quantity: number;
 }
 
-const data: CartItem[] = [];
-
 // interface Country {
 //     id: number;
 //     name: string;
@@ -64,6 +62,7 @@ const Check = () => {
     const [isExpirationValid, setIsExpirationValid] = useState(true);
     const [address, setAddress] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [combinedAddress, setCombinedAddress] = useState('');
 
 
 
@@ -93,19 +92,28 @@ const Check = () => {
     const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
         setSelectedCountry(value);
-        setSelectedState('');
+        console.log(value);
     };
 
     // Seteando State de cada pais
     const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
         setSelectedState(value);
+        console.log(value);
     };
 
     // City
     const handleCityChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
         setCity(value);
+        console.log(value);
+    };
+
+    //Address
+    const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setAddress(value);
+        console.log(value);
     };
 
     //ZIP
@@ -113,6 +121,7 @@ const Check = () => {
         const { value } = event.target;
         setZipCode(value);
         setIsValidZipCode(verifyZipCode(value));
+        console.log(value);
     };
 
     const verifyZipCode = (value: string): boolean => {
@@ -137,10 +146,10 @@ const Check = () => {
     }, []);
 
     useEffect(() => {
-        const combinedAddress = `${selectedCountry}, ${selectedState}, ${city} ,${zipCode}, ${address}`;
-        setAddress(combinedAddress);
-    }, [selectedCountry, selectedState, zipCode]);
-
+        const newCombinedAddress = `${selectedCountry}, ${selectedState}, ${city}, ${zipCode}, ${address}`;
+        setCombinedAddress(newCombinedAddress);
+        console.log(newCombinedAddress);
+    }, [selectedCountry, selectedState, city, zipCode, address]);
 
     useEffect(() => {
         const combinedPaymentMethod = `${creditCardNumber} (${cardType})`;
@@ -148,32 +157,29 @@ const Check = () => {
     }, [creditCardNumber, cardType]);
 
 
-    const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setAddress(event.target.value);
-    };
-
 
     const completePurchase = () => {
-        const params = {
-            address: address,
-            paymentMethod: paymentMethod,
+        if (combinedAddress) {
+            const params = {
+                address: combinedAddress,
+                paymentMethod: paymentMethod,
+            }
+
+            axios.post(`http://localhost:8080/api/v1/order/from-cart?address=${params.address}&paymentMethod=${params.paymentMethod}`,
+                {}
+                , {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
+                .then(response => {
+                    response.data;
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
         }
-
-        axios.post(`http://localhost:8080/api/v1/order/from-cart?address=${params.address}&paymentMethod=${params.paymentMethod}`,
-            {}
-            , {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`
-                }
-            })
-            .then(response => {
-                console.log(response.data);
-                setData(response.data)
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-            });
-
     }
 
 

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Divider } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import './wishlist.scss';
-import toast from "react-hot-toast";
 
 interface WishlistItem {
     id: number;
@@ -52,7 +51,7 @@ const Wish = () => {
     }
 
     const handleToCart = () => {
-        axios.post(`http://localhost:8080/api/v1/shoppingCart/moveFromWishlist?`, null,
+        axios.post(`http://localhost:8080/api/v1/shoppingCart/moveFromWishlist`, null,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

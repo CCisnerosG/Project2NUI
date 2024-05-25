@@ -16,6 +16,7 @@ export interface Pokemon {
   generation: number;
   cries: string;
   legendary: boolean;
+  icon_sprite: string;
 }
 
 

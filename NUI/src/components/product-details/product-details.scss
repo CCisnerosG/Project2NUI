@@ -112,10 +112,15 @@
         }
     }
 
-    &__header-info-text-btn {
+    &__header-icon-info-text-btn {
         display: flex;
         justify-content: space-between;
         width: 90%;
+    }
+
+    &__header-icon-title {
+        display: flex;
+        align-items: center;
     }
 
     &__description {
@@ -245,6 +250,15 @@
 
     &__evolution-img {
         width: 100%;
+    }
+
+    &__other_sprites {
+        display: flex;
+        align-items: center;
+    }
+
+    &__other_sprites-img {
+        width: 80px;
     }
 
 }

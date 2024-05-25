@@ -21,7 +21,6 @@ interface CartItem {
 
 const Cart: React.FC = () => {
     const [data, setData] = useState<CartItem[]>([]);
-    // const [quantity, setQuantity] = useState<number>();
 
     useEffect(() => {
         fetchCart();
@@ -34,7 +33,6 @@ const Cart: React.FC = () => {
             }
         })
             .then(response => {
-                console.log(response.data);
                 setData(response.data)
             })
             .catch(error => {
@@ -43,9 +41,7 @@ const Cart: React.FC = () => {
     }
 
     const updateQuantity = (itemId: number, newQuantity: number) => {
-        axios.put(`http://localhost:8080/api/v1/shoppingCart/${itemId}?quantity=${newQuantity}`, {
-            // quantity: newQuantity
-        }, {
+        axios.put(`http://localhost:8080/api/v1/shoppingCart/${itemId}?quantity=${newQuantity}`, {}, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
@@ -110,7 +106,7 @@ const Cart: React.FC = () => {
                 setData(prevData => prevData.filter(item => item.id !== itemId));
             })
             .catch(error => {
-                console.error('Error fetching products:', error);
+                console.error('Error deleting product:', error);
             });
     };
 
