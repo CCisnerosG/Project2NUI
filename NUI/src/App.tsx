@@ -19,6 +19,7 @@ import AdminOrders from './views/admin-orders';
 import AdminProducts from './views/admin-products';
 import SignUp from './views/signup';
 import Wishlist from './views/wishlist';
+import UserOrders from './views/user-orders';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path='/ShoppingCart' Component={ShoppingCart} />
             <Route path='/Checkout' Component={Checkout} />
             <Route path='/Wishlist' Component={Wishlist} />
+            <Route path='/Orders' Component={UserOrders} />
           </Route>
           <Route path='/AdminHome' Component={AdminHome} />
           <Route path='/AdminOrders' Component={AdminOrders} />

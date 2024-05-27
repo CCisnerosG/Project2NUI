@@ -1,8 +1,64 @@
-.mywishlist__cell {
-    display: flex;
-    align-items: center;
+.mywishlist {
+    &__container {
+        background-color: rgb(241, 241, 241);
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        overflow-x: scroll;
+        height: 100%;
+        padding-top: 30px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @include for-tablet-landscape {
+            height: 590px;
+        }
+    }
+
+    &__card-container {
+        display: flex;
+        width: 90%;
+        height: 100%;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__card {
+        width: 200px;
+        height: 200px;
+
+        @include for-tablet-portrait {
+            width: 300px;
+            height: 300px;
+        }
+    }
+
 }
 
 .pkm-img-wish {
     width: 20%;
+}
+
+.mycardheader {
+    display: flex;
+    align-items: self-start !important;
+    justify-content: space-between !important;
+}
+
+
+.card__header {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-btn {
+    margin-top: 5px;
+}
+
+.mycardimg {
+    object-fit: contain;
 }

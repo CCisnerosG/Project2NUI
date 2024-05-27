@@ -5,7 +5,7 @@
 }
 
 .admin__button {
-    width: 40px !important;
+    width: 80px !important;
 }
 
 .my__table {
@@ -28,4 +28,8 @@
         max-height: 80px;
         max-width: 80px;
     }
+}
+
+.admin__container {
+    background-color: $background;
 }

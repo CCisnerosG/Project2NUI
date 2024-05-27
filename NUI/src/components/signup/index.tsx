@@ -1,7 +1,7 @@
 import './signup.scss';
 import { Button, Input, useDisclosure } from "@nextui-org/react";
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SignUpModal from '../signup-modal';
 
@@ -10,8 +10,19 @@ const Sign = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+
+    useEffect(() => {
+        const validateForm = () => {
+            const isEmailValid = email.includes('@');
+            const isFullNameValid = fullName.trim() !== "";
+            const isPasswordValid = password.trim() !== "";
+            setIsButtonDisabled(!(isEmailValid && isFullNameValid && isPasswordValid));
+        };
+        validateForm();
+    }, [fullName, email, password]);
 
     const handleSignup = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -69,7 +80,7 @@ const Sign = () => {
                         }
                     />
                     <p className='signup__text'>Have an account? <Link to='/Login' className='signup__link'>Log In</Link></p>
-                    <Button color="primary" className='w-[80%]' onClick={handleSignup} onPress={onOpen}>
+                    <Button color="primary" className='w-[80%]' onClick={handleSignup} onPress={onOpen} isDisabled={isButtonDisabled}>
                         Sign Up
                     </Button>
                     <SignUpModal isOpen={isOpen} onClose={onClose} />

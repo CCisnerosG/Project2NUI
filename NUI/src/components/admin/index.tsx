@@ -41,7 +41,7 @@ const AdminSelect = () => {
                     <Link to="/AdminProducts" className="admi__link">
                         <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
                             <h4 className="font-bold text-large">Product Management</h4>
-                            <small className="text-default-500">{items} current products</small>
+                            <small className="text-default-500">{items} current pokémons in stock</small>
                         </CardHeader>
                         <CardBody className="overflow-visible py-2 admi__card-img">
                             <Image

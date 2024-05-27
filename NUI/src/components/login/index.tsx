@@ -27,7 +27,7 @@ const Log = () => {
             console.log(token);
             console.log(userId);
             setIsLoggedIn(true);
-            if (isLoggedIn) {
+            if (isLoggedIn == true) {
                 toast.success("Welcome Back!")
             }
 

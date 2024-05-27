@@ -3,16 +3,7 @@ import './checkout.scss'
 import { Divider } from "@nextui-org/divider";
 import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import ModalNUI from "../modal";
-import { useCountriesContext } from "../../context/countries-context";
 import axios from "axios";
-
-// interface Pokemon {
-//     id: number;
-//     name: string;
-//     subtotal: number;
-//     taxes: number;
-//     save: number;
-// }
 
 interface Pokemon {
     id: number;
@@ -27,11 +18,17 @@ interface CartItem {
     quantity: number;
 }
 
-// interface Country {
-//     id: number;
-//     name: string;
-//     states: string[];
-// }
+interface Province {
+    id: number;
+    name: string;
+}
+
+interface Country {
+    id: number;
+    name: string;
+    provinces: Province[];
+}
+
 
 interface PokemonData {
     pokemon: {
@@ -46,13 +43,12 @@ const Check = () => {
     const [data, setData] = useState([]);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [creditCardNumber, setCreditCardNumber] = useState('');
-    const [isValidCreditCard, setIsValidCreditCard] = useState(false);
+    const [isValidCreditCard, setIsValidCreditCard] = useState<boolean>(false);
     const [cardType, setCardType] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
-    const [states, setStates] = useState([]);
+    const [states, setStates] = useState<Province[]>([]);
     const [city, setCity] = useState('');
-    const country = useCountriesContext();
     const [zipCode, setZipCode] = useState('');
     const [isValidZipCode, setIsValidZipCode] = useState(false);
     const [cvv, setCVV] = useState('');
@@ -63,6 +59,7 @@ const Check = () => {
     const [address, setAddress] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
     const [combinedAddress, setCombinedAddress] = useState('');
+    const [countries, setCountries] = useState<Country[]>([]);
 
 
 
@@ -79,31 +76,43 @@ const Check = () => {
         );
     }, [selectedCountry, selectedState, isValidZipCode, creditCardNumber, isValidCreditCard, cvv, isValidCVV, isExpirationValid]);
 
-    useEffect(() => {
-        if (selectedCountry) {
-            const selectedCountryData = country.find(c => c.id === parseInt(selectedCountry));
-            if (selectedCountryData) {
-                setStates(selectedCountryData.states);
-            }
-        }
-    }, [selectedCountry, country]);
 
-    // Setteando pais
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/countries', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(response => {
+                setCountries(response.data);
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.error(error.message);
+            });
+    }, [])
+
+
     const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
-        setSelectedCountry(value);
-        console.log(value);
+        const selectedCountry = countries.find(country => country.id === parseInt(value));
+        if (selectedCountry) {
+            setSelectedCountry(selectedCountry.name);
+            setStates(selectedCountry.provinces);
+        }
     };
 
     // Seteando State de cada pais
     const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
-        setSelectedState(value);
-        console.log(value);
+        const selectedState = states.find(states => states.id === parseInt(value));
+        if (selectedState) {
+            setSelectedState(selectedState.name);
+        }
     };
 
     // City
-    const handleCityChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleCityChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setCity(value);
         console.log(value);
@@ -186,9 +195,9 @@ const Check = () => {
     //Seteando Tarjeta de credito
     function validateCreditCard(cardNumber: string) {
         const cleanedNumber = cardNumber.replace(/\D/g, "");
-        const isVisa = cleanedNumber.match(/^4\d{12}(?:\d{3})?$/);
-        const isMastercard = cleanedNumber.match(/^5[1-5]\d{14}$/);
-        const isAmex = cleanedNumber.match(/^3[47]\d{13}$/);
+        const isVisa = !!cleanedNumber.match(/^4\d{12}(?:\d{3})?$/);
+        const isMastercard = !!cleanedNumber.match(/^5[1-5]\d{14}$/);
+        const isAmex = !!cleanedNumber.match(/^3[47]\d{13}$/);
         const isValidLuhn = (num: string) => {
             let sum = 0;
             for (let i = 0; i < num.length; i++) {
@@ -350,7 +359,7 @@ const Check = () => {
                             value={selectedCountry}
                             onChange={handleCountryChange}
                         >
-                            {country.map((country) => (
+                            {countries.map((country) => (
                                 <SelectItem key={country.id} value={country.id}>
                                     {country.name}
                                 </SelectItem>
@@ -369,9 +378,9 @@ const Check = () => {
                             value={selectedState}
                             onChange={handleStateChange}
                         >
-                            {states.map((state, index) => (
-                                <SelectItem key={index} value={state}>
-                                    {state}
+                            {states.map((state) => (
+                                <SelectItem key={state.id} value={state.name}>
+                                    {state.name}
                                 </SelectItem>
                             ))}
                         </Select>

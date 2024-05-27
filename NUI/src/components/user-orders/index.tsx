@@ -3,7 +3,7 @@ import { Accordion, AccordionItem, Avatar, Button, Divider, Slider } from "@next
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { format, parseISO } from 'date-fns';
-import './adminorder.scss'
+import './userorder.scss'
 import { Link } from "react-router-dom";
 
 interface State {
@@ -17,6 +17,13 @@ interface User {
     email: string;
 }
 
+interface Product {
+    icon_sprite: string;
+    name: string;
+    id: number;
+    quantity: number;
+}
+
 interface Order {
     id: string;
     orderDate: string;
@@ -27,22 +34,22 @@ interface Order {
     fullName: string;
     address: string;
     email: string;
-    state: State
+    state: State;
+    products: Product[];
 }
 
 
-const AdminOrderPanel: React.FC = () => {
-    const [data, setData] = useState([]);
-    // const [formattedDate, setFormattedDate] = useState('');
-    const [selectedValue, setSelectedValue] = useState<number | number[]>(1);
+const UserOrderPanel: React.FC = () => {
+    const [data, setData] = useState<Order[]>([]);
 
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/order', {
+        axios.get('http://localhost:8080/api/v1/order/user/with-products', {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
             .then(response => {
                 setData(response.data)
+                console.log(response.data);
                 setData(response.data.map((order: Order) => ({
                     ...order,
                     formattedDate: format(parseISO(order.orderDate), 'MMM / dd / yyyy')
@@ -51,35 +58,14 @@ const AdminOrderPanel: React.FC = () => {
             .catch(error => {
                 console.error('Error fetching the data:', error);
             });
-    }, [data]);
+    }, []);
 
-    const handleChange = (value: number | number[], orderId: string) => {
-        setSelectedValue(value);
-        if (selectedValue) {
-            axios.put(`http://localhost:8080/api/v1/order/new-state?orderId=${orderId}&stateId=${value}`, {}, {
-                headers:
-                    { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-            })
-                .then(response => {
-                    const orders = response.data.map((order: Order) => {
-                        const isoDate = order.orderDate;
-                        const date = parseISO(isoDate);
-                        const formattedDate = format(date, 'MMM / dd / yyyy');
-                        return { ...order, formattedDate };
-                    });
-                    setData(orders);
-                })
-                .catch(error => {
-                    console.error('Error fetching the data:', error);
-                });
-        }
-    };
 
     if (data.length === 0) {
         return (
             <div className="empty-cart">
                 <p className="empty-cart-text">There are no orders to see...yet!</p>
-                <Link to={'/AdminHome'}><Button color="primary">Back to Admin Panel!</Button>
+                <Link to={'/PokemonList'}><Button color="primary">Back to Shopping!</Button>
                 </Link>
             </div>
         );
@@ -113,10 +99,9 @@ const AdminOrderPanel: React.FC = () => {
                                         </div>
                                     }
                                 >
-
                                     <div className="order__panel">
                                         <div className="order__panel-left">
-                                            <p className="order__panel-left-title">Bought Pokemons</p>
+                                            <p className="order__panel-left-title">Your Selected Pokemons</p>
                                             <div className="order__panel-left-icons">
                                                 {item.products && item.products.map((pokemon) => (
                                                     <div className="order__panel-left-icons-cntr" key={pokemon.id}>
@@ -235,15 +220,14 @@ const AdminOrderPanel: React.FC = () => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </AccordionItem>
                             </Accordion>
                             <Divider />
                         </div>
                     ))}
                 </section>
-            </div>
+            </div >
         </div >
     )
 }
-export default AdminOrderPanel;
+export default UserOrderPanel;

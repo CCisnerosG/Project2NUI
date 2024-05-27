@@ -3,6 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input
 import './adminmodal.scss';
 import axios from "axios";
 import { Pokemon } from '../../context/pokemon-context';
+import toast, { Toaster } from "react-hot-toast";
 
 interface ModalAdminProps {
     isOpen: boolean;
@@ -81,7 +82,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                     onClose();
                 })
                 .catch(error => {
-                    console.error("Error creating pokemon:", error);
+                    notification(error.response.data.message);
                 });
         } else {
             if (pokemon) {
@@ -95,50 +96,57 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                         onClose();
                     })
                     .catch(error => {
-                        console.error("Error updating pokemon:", error);
+                        notification(error.response.data);
                     });
             }
         }
     };
 
+    const notification = (value: string) => {
+        toast.error(value);
+    }
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isKeyboardDismissDisabled={true} className="admin__modal max-w-full">
-            <ModalContent>
-                <ModalHeader className="flex flex-col gap-1 modal__header">{isCreating ? 'Create Pokemon' : 'Edit Pokemon'}</ModalHeader>
-                <ModalBody>
-                    <img src={sprite} alt={name} className="max-w-40" />
-                    {isCreating && (
-                        <Input className="input" type="number" isRequired value={id} label="Pokemon Number" onChange={(e) => setId(e.target.value)} />
-                    )}
-                    <Input className="input" isRequired value={name} label="Name" onChange={(e) => setName(e.target.value)} />
-                    <Input className="input" isRequired value={description} label="Description" onChange={(e) => setDescription(e.target.value)} />
-                    <Input className="input" isRequired value={sprite} label="Sprite" onChange={(e) => setSprite(e.target.value)} />
-                    <Input className="input" isRequired value={icon_sprite} label="Pokemon Icon" onChange={(e) => setIcon_Sprite(e.target.value)} />
-                    <div className="pokemon__type-weight-height">
-                        <Input className="input" isRequired value={type} label="Type" onChange={(e) => setType(e.target.value)} />
-                        <Input className="input" type="number" isRequired value={weight} label="Weight" onChange={(e) => setWeight(e.target.value)} />
-                        <Input className="input" type="number" isRequired value={height} label="Height" onChange={(e) => setHeight(e.target.value)} />
-                    </div>
-                    <div className="pokemon__money">
-                        <Input className="input" type="number" isRequired value={price} label="Price" onChange={(e) => setPrice(e.target.value)} />
-                        <Input className="input" type="number" isRequired value={subtotal} label="Subtotal" onChange={(e) => setSubtotal(e.target.value)} />
-                        <Input className="input" type="number" isRequired value={taxes} label="Taxes" onChange={(e) => setTaxes(e.target.value)} />
-                        <Input className="input" type="number" isRequired value={save} label="Save" onChange={(e) => setSave(e.target.value)} />
-                    </div>
-                    <Input className="input" type="number" isRequired value={generation} label="Generation" onChange={(e) => setGeneration(e.target.value)} />
-                    <Input className="input" isRequired value={cries} label="Cries" onChange={(e) => setCries(e.target.value)} />
-                    <Input className="input" isRequired value={legendary} label="Legendary" onChange={(e) => setLegendary(e.target.value)} />
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onPress={onClose}>
-                        Close
-                    </Button>
-                    <Button color="secondary" onPress={handleSubmit}>
-                        {isCreating ? 'Create' : 'Save'}
-                    </Button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
+        <>
+            <div><Toaster /></div>
+            <Modal isOpen={isOpen} onClose={onClose} isKeyboardDismissDisabled={true} className="admin__modal max-w-full">
+                <ModalContent>
+                    <ModalHeader className="flex flex-col gap-1 modal__header">{isCreating ? 'Create Pokemon' : 'Edit Pokemon'}</ModalHeader>
+                    <ModalBody>
+                        <img src={sprite} alt={name} className="max-w-40" />
+                        {isCreating && (
+                            <Input className="input" type="number" isRequired value={id} label="Pokemon Number" onChange={(e) => setId(e.target.value)} />
+                        )}
+                        <Input className="input" isRequired value={name} label="Name" onChange={(e) => setName(e.target.value)} />
+                        <Input className="input" isRequired value={description} label="Description" onChange={(e) => setDescription(e.target.value)} />
+                        <Input className="input" isRequired value={sprite} label="Sprite" onChange={(e) => setSprite(e.target.value)} />
+                        <Input className="input" isRequired value={icon_sprite} label="Pokemon Icon" onChange={(e) => setIcon_Sprite(e.target.value)} />
+                        <div className="pokemon__type-weight-height">
+                            <Input className="input" isRequired value={type} label="Type" onChange={(e) => setType(e.target.value)} />
+                            <Input className="input" type="number" isRequired value={weight} label="Weight" onChange={(e) => setWeight(e.target.value)} />
+                            <Input className="input" type="number" isRequired value={height} label="Height" onChange={(e) => setHeight(e.target.value)} />
+                        </div>
+                        <div className="pokemon__money">
+                            <Input className="input" type="number" isRequired value={price} label="Price" onChange={(e) => setPrice(e.target.value)} />
+                            <Input className="input" type="number" isRequired value={subtotal} label="Subtotal" onChange={(e) => setSubtotal(e.target.value)} />
+                            <Input className="input" type="number" isRequired value={taxes} label="Taxes" onChange={(e) => setTaxes(e.target.value)} />
+                            <Input className="input" type="number" isRequired value={save} label="Save" onChange={(e) => setSave(e.target.value)} />
+                        </div>
+                        <Input className="input" min={1} max={4} type="number" isRequired value={generation} label="Generation" onChange={(e) => setGeneration(e.target.value)} />
+                        <Input className="input" isRequired value={cries} label="Cries" onChange={(e) => setCries(e.target.value)} />
+                        <Input className="input" isRequired value={legendary} label="Legendary" onChange={(e) => setLegendary(e.target.value)} />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onPress={onClose}>
+                            Close
+                        </Button>
+                        <Button color="secondary" onPress={handleSubmit}>
+                            {isCreating ? 'Create' : 'Save'}
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </>
     );
 }
 

@@ -38,6 +38,11 @@ const NavNUI = () => {
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
+                        <DropdownItem color="primary" >
+                            <Link to='/Orders'>
+                                Order History
+                            </Link>
+                        </DropdownItem>
                         <DropdownItem key="logout" color="danger" onClick={logOut}>
                             Log Out
                         </DropdownItem>
@@ -57,12 +62,19 @@ const NavNUI = () => {
         if (isLoggedIn == true) {
 
             return (
-                <Link to='/' key="logout" color="danger" onClick={() => {
-                    logOut();
-                    closeMenu();
-                }}>
-                    LOGOUT
-                </Link>
+                <>
+                    <Link to='/Orders' key="logout" color="primary" onClick={() => {
+                        closeMenu();
+                    }}>
+                        ORDER HISTORY
+                    </Link>
+                    <Link to='/' key="logout" color="danger" onClick={() => {
+                        logOut();
+                        closeMenu();
+                    }}>
+                        LOGOUT
+                    </Link>
+                </>
             )
         } else {
             return (
@@ -126,7 +138,7 @@ const NavNUI = () => {
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu>
-                <NavbarMenuItem className="navItem-container" >
+                <NavbarMenuItem className="navItem-container">
                     <Link color="foreground" to='/' onClick={closeMenu}>
                         HOME
                     </Link>

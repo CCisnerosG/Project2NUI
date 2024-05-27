@@ -56,9 +56,17 @@
     &__topkmlist-text {
         color: rgb(0, 128, 255);
         font-size: 1.1rem;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
 
         @include for-phone-only {
             font-size: 1.2rem;
+        }
+
+        @include for-pc {
+            &:hover{
+                color: rgb(30, 195, 52) ;
+            }
         }
     }
 }

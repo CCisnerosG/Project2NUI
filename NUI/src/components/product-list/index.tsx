@@ -19,7 +19,7 @@ interface FilterParams {
 }
 
 const PokeProducts = () => {
-    const [filters, setFilters] = useState({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
+    const [filters, setFilters] = useState<FilterParams>({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
     const [currentPage, setCurrentPage] = React.useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [data, setData] = useState<Pokemon[]>([]);
@@ -191,7 +191,7 @@ const PokeProducts = () => {
                             {generations.map((generation, index) => (
 
                                 <Radio
-                                    value={index}
+                                    value={index.toString()}
                                     key={index}
                                     variant={filters.generation === `${index + 1}` ? "contained" : "flat"}
                                     onClick={() => handleGenFilterChange(`${index + 1}`)}

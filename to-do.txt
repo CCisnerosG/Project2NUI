@@ -7,9 +7,7 @@ Login despues de loggearse
 ---Integracion Pp
 
 TypeScript
-checkout
 nav
 product-list
 signup
 wishlist
-

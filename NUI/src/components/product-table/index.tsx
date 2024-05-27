@@ -53,7 +53,7 @@ export default function ProductTable() {
     return (
         <>
             <div className="admin__container">
-                <Button color="success" className="admin__button" onClick={() => handleCreatePokemon()}>New Pokemon</Button>
+                <Button className="m-4" color="success"  onClick={() => handleCreatePokemon()}>New Pokemon</Button>
                 <div className="admin__table">
                     <Table aria-label="Example static collection table" className="my__table">
                         <TableHeader >
@@ -69,7 +69,7 @@ export default function ProductTable() {
                                     <TableCell>{pokemon.id}</TableCell>
                                     <TableCell><img src={pokemon.sprite} alt={pokemon.name} className="pkm-img-admin" /></TableCell>
                                     <TableCell>{pokemon.name}</TableCell>
-                                    <TableCell>{pokemon.price}</TableCell>
+                                    <TableCell>${pokemon.price}</TableCell>
                                     <TableCell>
                                         <Button color="warning" className="p-0" onClick={() => handleEditClick(pokemon)}>EDIT</Button>
                                         <Button color="danger" className="p-0 bg-red-700" onClick={() => deletePokemon(pokemon.id)}>DELETE</Button>
