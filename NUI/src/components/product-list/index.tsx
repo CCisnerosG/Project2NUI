@@ -15,19 +15,19 @@ interface FilterParams {
     generation?: string;
     minPrice?: string;
     maxPrice?: string;
-    page: number;
+    page?: number;
 }
+
 
 const PokeProducts = () => {
     const [filters, setFilters] = useState<FilterParams>({ name: '', type: '', generation: '', minPrice: '', maxPrice: '' });
     const [currentPage, setCurrentPage] = React.useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [data, setData] = useState<Pokemon[]>([]);
-    const [totalItems, setTotalItems] = useState();
 
     useEffect(() => {
         filter()
-    }, [currentPage, filters]);
+    }, [currentPage, filters,]);
 
 
     const addToCart = (item: Pokemon) => {
@@ -74,7 +74,6 @@ const PokeProducts = () => {
         })
             .then(response => {
                 setData(response.data.content);
-                setTotalItems(response.data.size);
                 setTotalPages(response.data.totalPages);
             })
             .catch(error => {
@@ -182,7 +181,7 @@ const PokeProducts = () => {
                             orientation="horizontal"
                         >
                             <Radio
-                                variant={filters.generation === '' ? "bordered" : "solid"}
+                                value={'All'}
                                 onClick={() => handleGenFilterChange('')}
                             >
                                 All
@@ -193,7 +192,6 @@ const PokeProducts = () => {
                                 <Radio
                                     value={index.toString()}
                                     key={index}
-                                    variant={filters.generation === `${index + 1}` ? "contained" : "flat"}
                                     onClick={() => handleGenFilterChange(`${index + 1}`)}
                                 >
                                     {generation}

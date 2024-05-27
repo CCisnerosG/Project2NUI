@@ -23,11 +23,13 @@ const NavNUI = () => {
         setIsLoggedIn(false);
     }
 
+
+
     const renderLoginButton = () => {
         if (isLoggedIn == true) {
 
             return (
-                <Dropdown placement="bottom-end">
+                <Dropdown placement="bottom-end" aria-label="Icon">
                     <DropdownTrigger>
                         <Avatar
                             isBordered
@@ -38,12 +40,14 @@ const NavNUI = () => {
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
-                        <DropdownItem color="primary" >
+                        <DropdownItem color="primary" aria-label="dropdown item" >
                             <Link to='/Orders'>
-                                Order History
+                                <button className="w-full text-left">
+                                    Order History
+                                </button>
                             </Link>
                         </DropdownItem>
-                        <DropdownItem key="logout" color="danger" onClick={logOut}>
+                        <DropdownItem key="logout" color="danger" onClick={logOut} aria-label="dropdown item">
                             Log Out
                         </DropdownItem>
                     </DropdownMenu>

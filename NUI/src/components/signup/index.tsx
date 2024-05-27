@@ -1,30 +1,57 @@
 import './signup.scss';
 import { Button, Input, useDisclosure } from "@nextui-org/react";
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SignUpModal from '../signup-modal';
-
+import axios from 'axios';
 
 const Sign = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isValidPass, setIsValidPass] = useState(true);
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
+    const [passwordError, setPasswordError] = useState("");
+
 
 
     useEffect(() => {
         const validateForm = () => {
             const isEmailValid = email.includes('@');
             const isFullNameValid = fullName.trim() !== "";
-            const isPasswordValid = password.trim() !== "";
-            setIsButtonDisabled(!(isEmailValid && isFullNameValid && isPasswordValid));
+            const isPasswordValid = validatePassword(password);
+            const passwordsMatch = password === confirmPassword;
+            setPasswordsMatch(passwordsMatch);
+            setIsButtonDisabled(!(isEmailValid && isFullNameValid && isPasswordValid && passwordsMatch));
         };
         validateForm();
-    }, [fullName, email, password]);
+    }, [fullName, email, password, confirmPassword]);
 
-    const handleSignup = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setPassword(value);
+        const isValid = validatePassword(value);
+        setIsValidPass(isValid);
+        setPasswordsMatch(value === confirmPassword);
+        setPasswordError(isValid ? "" : "Password must have 8 characters, a capital letter, and a special character");
+    };
+
+    const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setConfirmPassword(value);
+        setPasswordsMatch(password === value);
+    };
+
+    function validatePassword(value: string) {
+        const regexValidation = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return regexValidation.test(value);
+    }
+
+    const Signup = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         axios.post('http://localhost:8080/auth/signup', { fullName, email, password })
             .then((response) => {
@@ -66,21 +93,44 @@ const Sign = () => {
                             <img src='user.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='User icon' />
                         }
                     />
-                    <Input
-                        isRequired
-                        className='signup__myinput'
-                        type="password"
-                        label="Password"
-                        id='password'
-                        labelPlacement="outside"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        startContent={
-                            <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='Password Icon' />
-                        }
-                    />
+                    <div className="signup__myinput-passwords">
+                        <Input
+                            isRequired
+                            className='signup__myinput-pass'
+                            type="password"
+                            label="Password"
+                            id='password'
+                            labelPlacement="outside"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            startContent={
+                                <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='Password Icon' />
+                            }
+                        />
+
+                        <Input
+                            isRequired
+                            className='signup__myinput-pass'
+                            type="password"
+                            label="Confirm Password"
+                            id='password_2'
+                            labelPlacement="outside"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            startContent={
+                                <img src='key.svg' className="text-2xl text-default-400 pointer-events-none flex-shrink-0" alt='Password Icon' />
+                            }
+                        />
+
+                    </div>
+                    {!isValidPass && (
+                        <p className="signup__error-text">{passwordError}</p>
+                    )}
+                    {!passwordsMatch && (
+                        <p className="signup__error-text">Passwords must be the same</p>
+                    )}
                     <p className='signup__text'>Have an account? <Link to='/Login' className='signup__link'>Log In</Link></p>
-                    <Button color="primary" className='w-[80%]' onClick={handleSignup} onPress={onOpen} isDisabled={isButtonDisabled}>
+                    <Button color="primary" className='w-[80%]' onPress={onOpen} isDisabled={isButtonDisabled} onClick={Signup}>
                         Sign Up
                     </Button>
                     <SignUpModal isOpen={isOpen} onClose={onClose} />
@@ -93,7 +143,6 @@ const Sign = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 

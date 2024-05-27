@@ -11,7 +11,8 @@ export default function ProductTable() {
     const [isCreating, setIsCreating] = useState(false);
     const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
-    useEffect(() => {
+
+    const fetchPokemon = () => {
         axios.get('http://localhost:8080/api/v1/pokemon')
             .then(response => {
                 setData(response.data);
@@ -19,10 +20,14 @@ export default function ProductTable() {
             .catch(error => {
                 console.error('Error fetching the data:', error);
             });
-    }, [data]);
+    }
+
+    useEffect(() => {
+        fetchPokemon();
+    }, []);
 
     if (!data) {
-        return <div><CircularProgress label="Loading..." /></div>;
+        return <div className="empty-cart"><CircularProgress label="Loading..." /></div>;
     }
 
     const deletePokemon = async (id: number) => {
@@ -31,6 +36,7 @@ export default function ProductTable() {
                 'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
         });
+        fetchPokemon();
     };
 
     const handleEditClick = (pokemon: Pokemon) => {
@@ -48,12 +54,13 @@ export default function ProductTable() {
         setSelectedPokemon(null);
         setIsCreating(false);
         onClose();
+        fetchPokemon();
     };
 
     return (
         <>
             <div className="admin__container">
-                <Button className="m-4" color="success"  onClick={() => handleCreatePokemon()}>New Pokemon</Button>
+                <Button className="m-4" color="success" onClick={() => handleCreatePokemon()}>New Pokemon</Button>
                 <div className="admin__table">
                     <Table aria-label="Example static collection table" className="my__table">
                         <TableHeader >

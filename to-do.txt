@@ -7,7 +7,9 @@ Login despues de loggearse
 ---Integracion Pp
 
 TypeScript
-nav
-product-list
-signup
-wishlist
+checkout
+
+
+ASqqvN6-ka5dJIy_bsWVhLK2PuzsV3XKM6PSPB2Pvh03kc61KlSOc-4CsLGd9iHTwCF8LI9foWHG_FPy
+
+EMKXFAltt5MGUOD8KZ8fCMkXocc0QecA3hwmo6STkI0U2z3sfugeJEONQe9--f6ODqcdPTMqECZjlci1

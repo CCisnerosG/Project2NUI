@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, CardHeader, Image, CardFooter, Divider } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import './wishlist.scss';
+import toast, { Toaster } from "react-hot-toast";
 
 interface WishlistItem {
     id: number;
@@ -37,12 +38,40 @@ const Wish = () => {
 
     if (data.length === 0) {
         return (
-            <div className="empty-cart">
-                <p className="empty-cart-text">Your wishlist is empty</p>
-                <Link to={'/PokemonList'}><Button color="primary">Back to Shopping!</Button>
-                </Link>
-            </div>
+            <>
+                <Toaster />
+                <div className="empty-cart">
+                    <p className="empty-cart-text">Your wishlist is empty</p>
+                    <Link to={'/PokemonList'}><Button color="primary">Back to Shopping!</Button>
+                    </Link>
+                </div>
+            </>
         );
+    }
+
+    const toCartNotification = (item: WishlistItem) => {
+        toast(
+            <div className="toast">
+                <img className='toast-icon' src={item.pokemon.icon_sprite} alt={item.pokemon.name} />
+                <p>{item.pokemon.name} added to cart</p>
+            </div>
+            , { duration: 1000 }
+        )
+    }
+
+    const allToCartNotification = () => {
+        toast.success('All pokemons have been added to your cart!')
+            , { duration: 1000 }
+    }
+
+    const deleteNotification = (item: WishlistItem) => {
+        toast(
+            <div className="toast">
+                <img className='toast-icon' src={item.pokemon.icon_sprite} alt={item.pokemon.name} />
+                <p>{item.pokemon.name} deleted from to cart</p>
+            </div>
+            , { duration: 1000 }
+        )
     }
 
     const handleToCart = () => {
@@ -97,6 +126,7 @@ const Wish = () => {
 
     return (
         <>
+            <Toaster />
             <Divider />
             <div className="shopping__header">
                 <div className="shopping__title">
@@ -109,7 +139,7 @@ const Wish = () => {
                     </div>
                 </div>
                 <div className="shopping__topkmlist">
-                    <p className="shopping__topkmlist-text" onClick={handleToCart}>Add All To Cart</p>
+                    <p className="shopping__topkmlist-text" onClick={() => { handleToCart(); allToCartNotification() }}>Add All To Cart</p>
                 </div>
             </div>
             <Divider />
@@ -122,7 +152,7 @@ const Wish = () => {
                                     <h4 className="text-black/90 font-medium text-xl">{item.pokemon.name}</h4>
                                     <p className="text-tiny text-primary uppercase font-bold">{`$ ${item.pokemon.price}`}</p>
                                 </div>
-                                <button onClick={() => deleteItem(item.pokemon.id)} className="card-btn"><img className='item__trash-icon' src="/trash.svg" alt="Delete icon" /></button>
+                                <button onClick={() => { deleteItem(item.pokemon.id); deleteNotification(item) }} className="card-btn"><img className='item__trash-icon' src="/trash.svg" alt="Delete icon" /></button>
 
                             </CardHeader>
                             <Image
@@ -144,7 +174,7 @@ const Wish = () => {
                                         <p className="text-tiny text-white/60">Ready to be yours!</p>
                                     </div>
                                 </div>
-                                <Button color="success" radius="full" size="sm" onClick={() => oneProductToCart(item.pokemon.id)}> <img src="shopping-cart.svg" alt="Shopping Cart" /></Button>
+                                <Button color="success" radius="full" size="sm" onClick={() => { oneProductToCart(item.pokemon.id); toCartNotification(item) }}> <img src="shopping-cart.svg" alt="Shopping Cart" /></Button>
                             </CardFooter>
                         </Card>
                     ))}

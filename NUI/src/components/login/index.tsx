@@ -3,15 +3,16 @@ import { Button, Input } from "@nextui-org/react";
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import loginState from '../../states/login-recoil';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
 
 
 const Log = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+    const navigate = useNavigate();
 
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -19,28 +20,18 @@ const Log = () => {
         const response: AxiosResponse = await axios.post('http://localhost:8080/auth/login', { email, password });
         if (response.status === 200) {
             const { token } = response.data;
-            const { userId } = response.data
-            localStorage.setItem("user", JSON.stringify(response.data));
             localStorage.setItem("token", token);
-            localStorage.setItem("userId", userId);
-            console.log(response.data);
-            console.log(token);
-            console.log(userId);
             setIsLoggedIn(true);
-            if (isLoggedIn == true) {
-                toast.success("Welcome Back!")
-            }
+            navigate('/');
 
         } else {
             console.error("Login failed with status:", response.status);
         }
 
-
     }
 
     return (
         <>
-            <div><Toaster /></div>
             <div className="body">
                 <div className="login-container">
                     <div className="left-container">

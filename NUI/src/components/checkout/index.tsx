@@ -4,6 +4,7 @@ import { Divider } from "@nextui-org/divider";
 import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import ModalNUI from "../modal";
 import axios from "axios";
+import Paypal from "../ppal";
 
 interface Pokemon {
     id: number;
@@ -60,6 +61,7 @@ const Check = () => {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [combinedAddress, setCombinedAddress] = useState('');
     const [countries, setCountries] = useState<Country[]>([]);
+    const [total, setTotal] = useState(0);
 
 
 
@@ -213,7 +215,7 @@ const Check = () => {
         return (isVisa || isMastercard || isAmex) && isValidLuhn(cleanedNumber);
     }
 
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setCreditCardNumber(value);
         setIsValidCreditCard(validateCreditCard(value));
@@ -268,6 +270,13 @@ const Check = () => {
     };
 
 
+    useEffect(() => {
+        const subtotalAmount = data.reduce((subtotal, item: PokemonData) => subtotal + (item.pokemon.subtotal * item.quantity), 0);
+        const taxesAmount = data.reduce((taxes, item: PokemonData) => taxes + (item.pokemon.taxes * item.quantity), 0);
+        const saveAmount = data.reduce((save, item: PokemonData) => save + (item.pokemon.save * item.quantity), 0);
+        const totalAmount = ((subtotalAmount + taxesAmount) - saveAmount);
+        setTotal(totalAmount);
+    }, [data]);
 
 
 
@@ -453,12 +462,13 @@ const Check = () => {
                     </div>
                 </div>
                 <div className="forms__buttons">
-                    <Button type="submit" className=" bg-[black] text-[white]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
+                    {/* <Button type="submit" className=" bg-[black] text-[white]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
                         Pay with <img className="applepay" src="apple-pay.svg" alt="Apple Pay" />
-                    </Button>
+                    </Button> */}
                     <Button type="submit" color="success" className="text-[black]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
                         Pay
                     </Button>
+                    {total > 0 && <Paypal totalValue={total} />}
                     <ModalNUI isOpen={isOpen} onClose={onClose} />
                 </div>
             </div>

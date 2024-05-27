@@ -3,8 +3,8 @@ import { Accordion, AccordionItem, Avatar, Button, Divider, Slider } from "@next
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { format, parseISO } from 'date-fns';
-import './adminorder.scss'
 import { Link } from "react-router-dom";
+import './adminorder.scss';
 
 interface State {
     id: number;
@@ -17,6 +17,17 @@ interface User {
     email: string;
 }
 
+interface Product {
+    id: number;
+    quantity: number;
+    pokemon: Pokemon;
+}
+
+interface Pokemon {
+    name: string;
+    icon_sprite: string;
+}
+
 interface Order {
     id: string;
     orderDate: string;
@@ -27,7 +38,8 @@ interface Order {
     fullName: string;
     address: string;
     email: string;
-    state: State
+    state: State;
+    products: Product[];
 }
 
 
@@ -115,7 +127,7 @@ const AdminOrderPanel: React.FC = () => {
                                 >
 
                                     <div className="order__panel">
-                                        <div className="order__panel-left">
+                                        <div className="order__panel-left" tabIndex={0}>
                                             <p className="order__panel-left-title">Bought Pokemons</p>
                                             <div className="order__panel-left-icons">
                                                 {item.products && item.products.map((pokemon) => (

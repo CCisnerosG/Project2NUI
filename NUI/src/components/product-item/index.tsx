@@ -2,69 +2,34 @@ import { Link } from "react-router-dom";
 import './item.scss';
 import { Button } from "@nextui-org/react";
 import toast, { Toaster } from 'react-hot-toast';
+import { Pokemon } from "../../context/pokemon-context";
 
 interface PokeItemProps {
-    item: {
-        id: number;
-        name: string;
-        type: string;
-        generation: number;
-        price: number;
-        sprite: string;
-        height: number;
-        weight: number;
-        subtotal: number;
-        taxes: number;
-        save: number;
-        icon_sprite: string;
-    };
-    addToCart: (item: {
-        id: number;
-        name: string;
-        type: string;
-        generation: number;
-        price: number;
-        sprite: string;
-        height: number;
-        weight: number;
-        subtotal: number;
-        taxes: number;
-        save: number;
-    }) => void;
-    addToWishlist: (item: {
-        id: number;
-        name: string;
-        type: string;
-        generation: number;
-        price: number;
-        sprite: string;
-        height: number;
-        weight: number;
-        subtotal: number;
-        taxes: number;
-        save: number;
-    }) => void;
+    item: Pokemon;
+    addToCart: (item: Pokemon) => void;
+    addToWishlist: (item: Pokemon) => void;
 }
 
 const PokeItem: React.FC<PokeItemProps> = ({ item, addToCart, addToWishlist }) => {
 
     const notification = () => {
-        // toast.success(`${item.name} added to cart`)
         toast(
             <div className="toast">
                 <img className='toast-icon' src={item.icon_sprite} alt={item.name} />
                 <p>{item.name} added to cart</p>
             </div>
+            , { duration: 1000 }
         )
     }
 
     const wishlistNotification = () => {
-        // toast.success(`${item.name} added to wishlist`)
         toast(
+
             <div className="toast">
                 <img className='toast-icon' src={item.icon_sprite} alt={item.name} />
                 <p>{item.name} added to cart</p>
             </div>
+            , { duration: 1000 }
         )
     }
 
@@ -78,7 +43,6 @@ const PokeItem: React.FC<PokeItemProps> = ({ item, addToCart, addToWishlist }) =
                     className="text-default-900/60 data-[hover]:bg-foreground/10 my-heart"
                     radius="full"
                     variant="light"
-                    // onPress={() => setLiked((v) => !v)}
                     onClick={() => { addToWishlist(item); wishlistNotification(); }}
                 >
                     <img className="btn-image-img" src="/heart.svg" alt="Add to wishlist icon" />
