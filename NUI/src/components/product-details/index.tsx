@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { usePokemonContext, Pokemon } from "../../context/pokemon-context";
+import { usePokemonContext } from "../../context/pokemon-context";
 import NotFound from "../product-not-found";
 import './product-details.scss'
 import { Divider } from "@nextui-org/divider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
+import { PokemonChain, Pokemon, EVOPokemon } from "../../interfaces/interfaces";
 
 const typeColors: { [key: string]: string } = {
     Normal: "#A8A878",
@@ -28,9 +30,9 @@ const typeColors: { [key: string]: string } = {
 const PokemonDetails = () => {
     const { id } = useParams();
     const pokemonData = usePokemonContext();
-    console.log(pokemonData);
     const [bgColor, setBgColor] = useState("");
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+    const [evolutions, setEvolutions] = useState<Pokemon[]>([]);
 
     useEffect(() => {
         if (pokemonData && id) {
@@ -41,9 +43,67 @@ const PokemonDetails = () => {
                     setBgColor(typeColors[type]);
                 }
                 setPokemon(foundPokemon);
+                searchPkmSpecies(foundPokemon);
             }
         }
     }, [id, pokemonData]);
+
+    const renderEvolution = (evolution: EVOPokemon) => {
+        return (
+            <div key={evolution.id} className="pokemon__evolution">
+                <p className="pokemon__evolution-name">{evolution.name}</p>
+                <div className="pokemon__evolution-img-container">
+                    <img className="pokemon__evolution-img" src={evolution.sprites.other['official-artwork'].front_default} alt={`Image of ${evolution.name}`} />
+                </div>
+            </div>
+        );
+    };
+
+    const searchPkmSpecies = async (pokemon: Pokemon) => {
+        const pokemonName = pokemon.name.toLowerCase();
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`);
+        if (response.status === 200) {
+            const url = response.data.evolution_chain.url;
+            searchPkmEvoChain(url);
+
+        }
+    }
+
+    const searchPkmEvoChain = async (url: string) => {
+        try {
+            const response = await axios.get(url);
+            const evoChain = response.data;
+
+            const getEvoNames = (chain: PokemonChain) => {
+                let names: string[] = [];
+                if (chain.species && chain.species.name) {
+                    names.push(chain.species.name);
+                }
+                if (chain.evolves_to && chain.evolves_to.length > 0) {
+                    chain.evolves_to.forEach(evo => {
+                        names = names.concat(getEvoNames(evo));
+                    });
+                }
+                return names;
+            };
+
+            const allNames = getEvoNames(evoChain.chain);
+            const pokemonInfo = await fetchPokemonData(allNames);
+            setEvolutions(pokemonInfo);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchPokemonData = async (names: string[]) => {
+        const pokemonData = [];
+        for (const name of names) {
+            const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+            pokemonData.push(pokemonResponse.data);
+        }
+        return pokemonData;
+    };
+
 
     if (!pokemonData) {
         return <p>Loading...</p>;
@@ -53,28 +113,14 @@ const PokemonDetails = () => {
         return <NotFound />;
     }
 
-    // const renderEvolution = (evolution) => {
-    //     return (
-    //         <>
-    //             <div className="pokemon__evolution">
-    //                 <p className="pokemon__evolution-name">{evolution.name}</p>
-    //                 <div className="pokemon__evolution-img-container">
-    //                     <img className="pokemon__evolution-img" src={evolution.sprite} alt={`Image of ${evolution.name}`} />
-    //                 </div>
-    //             </div>
-
-    //             {evolution.evolution && evolution.evolution.map(renderEvolution)}
-    //         </>
-    //     );
-    // };
 
     return (
-        < div className="pokemon__product" >
+        <div className="pokemon__product">
             <div className="pokemon__header">
                 <div className="pokemon__other_sprites">
+                    <p className="pokemon__header-title">{pokemon.name}</p>
                     <img className="pokemon__other_sprites-img" src={pokemon.icon_sprite} alt={`${pokemon.name} icon`} />
                 </div>
-                <p className="pokemon__header-title">{pokemon.name}</p>
                 <p className="pokemon__header-price">${pokemon.price}</p>
             </div>
             <div className="pokemon__img-container" style={{ backgroundColor: bgColor }}>
@@ -118,20 +164,20 @@ const PokemonDetails = () => {
                         <source src={pokemon.cries} type="audio/ogg" />
                     </audio>
                 </div>
-                {/* <div className="pokemon__evolutions">
+                <div className="pokemon__evolutions">
                     <div className="pokemon__evolution-text">
                         <p className="pokemon__evolution-title">Possible evolutions</p>
                     </div>
                     <div className="pokemon__evolution-evos">
-                        {pokemon.evolution.length > 0 ? (
-                            pokemon.evolution.map(renderEvolution)
+                        {evolutions.length > 1 ? (
+                            evolutions.map(evo => renderEvolution(evo))
                         ) : (
                             <p className="noevo">This pokemon doesn't have any evolutions!</p>
                         )}
                     </div>
-                </div> */}
+                </div>
             </div>
-        </div >
+        </div>
     );
 };
 

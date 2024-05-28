@@ -1,10 +1,12 @@
 import './login.scss';
 import { Button, Input } from "@nextui-org/react";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import loginState from '../../states/login-recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import userRole from '../../states/user-recoil';
 
 
 const Log = () => {
@@ -12,26 +14,62 @@ const Log = () => {
     const [password, setPassword] = useState("");
     // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+    // eslint-disable-next-line
+    const [isAdmin, setIsAdmin] = useRecoilState(userRole);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/'), { replace: true };
+        }
+    })
 
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault();
 
-        const response: AxiosResponse = await axios.post('http://localhost:8080/auth/login', { email, password });
-        if (response.status === 200) {
-            const { token } = response.data;
-            localStorage.setItem("token", token);
-            setIsLoggedIn(true);
-            navigate('/');
+        await axios.post('http://localhost:8080/auth/login', { email, password })
+            .then(response => {
+                if (response.status === 200) {
+                    const { token } = response.data;
+                    localStorage.setItem("token", token);
+                    adminValidation()
+                    setIsLoggedIn(true);
+                    navigate('/');
+                }
+            })
+            .catch(error => {
+                notification(error.response.data.message);
+            })
+    }
 
-        } else {
-            console.error("Login failed with status:", response.status);
-        }
+    const adminValidation = () => {
+        axios.get('http://localhost:8080/users/me', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    const role = response.data.role.name;
+                    if (role === "ADMIN") {
+                        setIsAdmin(true);
+                    }
+                }
+            })
+            .catch(error => {
+                notification(error.response.data.message);
+            });
+    }
 
+
+    const notification = (value: string) => {
+        toast.error(value);
     }
 
     return (
         <>
+            <Toaster />
             <div className="body">
                 <div className="login-container">
                     <div className="left-container">

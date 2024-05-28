@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <PokemonProvider>
         <PayPalScriptProvider
           options={{
-            "client-id": "ASqqvN6-ka5dJIy_bsWVhLK2PuzsV3XKM6PSPB2Pvh03kc61KlSOc-4CsLGd9iHTwCF8LI9foWHG_FPy"
+            "client-id": "Af6MCEKWOYClBg4tTKgQg1kilC0-rBnoDh1O7qvFZUSZdpg9e1Ov4h8U3C8nvHyIip--cBjRKC-tCDFr"
           }}
         >
           {/* <NextUIProvider>

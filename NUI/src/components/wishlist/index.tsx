@@ -4,20 +4,7 @@ import { Button, Card, CardHeader, Image, CardFooter, Divider } from "@nextui-or
 import { Link } from "react-router-dom";
 import './wishlist.scss';
 import toast, { Toaster } from "react-hot-toast";
-
-interface WishlistItem {
-    id: number;
-    pokemon: {
-        id: number;
-        name: string;
-        sprite: string;
-        weight: number;
-        height: number;
-        price: number;
-        icon_sprite: string;
-        type: string;
-    };
-}
+import { WishlistItem } from "../../interfaces/interfaces";
 
 const Wish = () => {
     const [data, setData] = useState<WishlistItem[]>([]);

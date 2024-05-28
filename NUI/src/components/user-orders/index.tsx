@@ -6,42 +6,7 @@ import { format, parseISO } from 'date-fns';
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import loginState from "../../states/login-recoil";
-
-interface Pokemon {
-    icon_sprite: string;
-    name: string;
-}
-
-interface State {
-    id: number;
-    name: string;
-}
-
-interface User {
-    fullName: string;
-    address: string;
-    email: string;
-}
-
-interface Product {
-    id: number;
-    quantity: number;
-    pokemon: Pokemon;
-}
-
-interface Order {
-    id: string;
-    orderDate: string;
-    total: number;
-    paymentMethod: string;
-    user: User;
-    formattedDate?: string;
-    fullName: string;
-    address: string;
-    email: string;
-    state: State;
-    products: Product[];
-}
+import { Order } from "../../interfaces/interfaces";
 
 
 

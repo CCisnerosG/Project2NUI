@@ -5,42 +5,7 @@ import { useEffect, useState } from "react";
 import { format, parseISO } from 'date-fns';
 import { Link } from "react-router-dom";
 import './adminorder.scss';
-
-interface State {
-    id: number;
-    name: string;
-}
-
-interface User {
-    fullName: string;
-    address: string;
-    email: string;
-}
-
-interface Product {
-    id: number;
-    quantity: number;
-    pokemon: Pokemon;
-}
-
-interface Pokemon {
-    name: string;
-    icon_sprite: string;
-}
-
-interface Order {
-    id: string;
-    orderDate: string;
-    total: number;
-    paymentMethod: string;
-    user: User;
-    formattedDate?: string;
-    fullName: string;
-    address: string;
-    email: string;
-    state: State;
-    products: Product[];
-}
+import { Order } from "../../interfaces/interfaces";
 
 
 const AdminOrderPanel: React.FC = () => {

@@ -1,15 +1,14 @@
-ORDERS ADMIN
-EVOLUCIONES
-VALIDACION DE ROLES ----> /ME
-Login despues de loggearse
 
 ---Animacion login-signup ***
----Integracion Pp
+
 
 TypeScript
 checkout
+pp
 
 
-ASqqvN6-ka5dJIy_bsWVhLK2PuzsV3XKM6PSPB2Pvh03kc61KlSOc-4CsLGd9iHTwCF8LI9foWHG_FPy
 
-EMKXFAltt5MGUOD8KZ8fCMkXocc0QecA3hwmo6STkI0U2z3sfugeJEONQe9--f6ODqcdPTMqECZjlci1
+
+AXYJiK7_ssTm4FFHhTSTWhcZJPLVt-WJfNGxPgsLZRlDD99h6YoqF1_J9XdnF4PXN9oNpisKVQOM-d-Y
+
+EEEQe0Zz2SLZ4n9uYpxujJw5XBZ7DN1M9ty1eGsdNbc-RC00rnYTvaH41a74_3T1tV6N2subGTDMa1J3

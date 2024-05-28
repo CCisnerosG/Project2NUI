@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Select, SelectItem } from "@nextui-org/react";
 import './adminmodal.scss';
 import axios from "axios";
-import { Pokemon } from '../../context/pokemon-context';
+import { Pokemon, usePokemonContext } from '../../context/pokemon-context';
 import toast, { Toaster } from "react-hot-toast";
-
-interface ModalAdminProps {
-    isOpen: boolean;
-    onClose: () => void;
-    pokemon: Pokemon | null;
-    isCreating: boolean;
-}
+import { ModalAdminProps } from "../../interfaces/interfaces";
 
 const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCreating }) => {
     const [id, setId] = useState('');
@@ -28,6 +22,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
     const [cries, setCries] = useState('');
     const [legendary, setLegendary] = useState('');
     const [icon_sprite, setIcon_Sprite] = useState('');
+    const [types, setTypes] = useState<string>([]);
 
     useEffect(() => {
         if (!isCreating && pokemon) {
@@ -48,6 +43,39 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
             setIcon_Sprite(pokemon.icon_sprite.toString());
         }
     }, [isCreating, pokemon]);
+
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/pokemon')
+            .then(response => {
+                if (response.status === 200) {
+                    const typesSet = new Set<string>();
+                    const generationSet = new Set<number>();
+
+                    const getTypes = (data) => {
+                        if (data.type) {
+                            typesSet.add(data.type);
+                        }
+                        if (data.types && data.types.length > 0) {
+                            data.types.forEach(typeObj => {
+                                getTypes(typeObj);
+                            });
+                        }
+                    };
+
+                    response.data.forEach(pokemon => {
+                        getTypes(pokemon);
+                    });
+
+                    setTypes(Array.from(typesSet));
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching the data:', error);
+            });
+    }, []);
+
+
 
     const stringToBoolean = (value: string): boolean => {
         return value.toLowerCase() === 'true';
@@ -78,7 +106,6 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                 }
             })
                 .then(response => {
-                    console.log("Pokemon created successfully", response.data);
                     onClose();
                 })
                 .catch(error => {
@@ -92,7 +119,6 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                     }
                 })
                     .then(response => {
-                        console.log("Pokemon updated successfully", response.data);
                         onClose();
                     })
                     .catch(error => {
@@ -105,6 +131,10 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
     const notification = (value: string) => {
         toast.error(value);
     }
+
+    const handleSelect = (value: string) => {
+        setType(value);
+    };
 
     return (
         <>
@@ -122,7 +152,19 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                         <Input className="input" isRequired value={sprite} label="Sprite" onChange={(e) => setSprite(e.target.value)} />
                         <Input className="input" isRequired value={icon_sprite} label="Pokemon Icon" onChange={(e) => setIcon_Sprite(e.target.value)} />
                         <div className="pokemon__type-weight-height">
-                            <Input className="input" isRequired value={type} label="Type" onChange={(e) => setType(e.target.value)} />
+                            <Select
+                                className="input"
+                                isRequired
+                                value={type}
+                                label="Type"
+                                onChange={(e) => handleSelect(e.target.value)}
+                            >
+                                {types.map((type) => (
+                                    <SelectItem key={type} value={type}>
+                                        {type}
+                                    </SelectItem>
+                                ))}
+                            </Select>
                             <Input className="input" type="number" isRequired value={weight} label="Weight" onChange={(e) => setWeight(e.target.value)} />
                             <Input className="input" type="number" isRequired value={height} label="Height" onChange={(e) => setHeight(e.target.value)} />
                         </div>
@@ -132,9 +174,12 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                             <Input className="input" type="number" isRequired value={taxes} label="Taxes" onChange={(e) => setTaxes(e.target.value)} />
                             <Input className="input" type="number" isRequired value={save} label="Save" onChange={(e) => setSave(e.target.value)} />
                         </div>
-                        <Input className="input" min={1} max={4} type="number" isRequired value={generation} label="Generation" onChange={(e) => setGeneration(e.target.value)} />
+
                         <Input className="input" isRequired value={cries} label="Cries" onChange={(e) => setCries(e.target.value)} />
-                        <Input className="input" isRequired value={legendary} label="Legendary" onChange={(e) => setLegendary(e.target.value)} />
+                        <div className="pokemon__money">
+                            <Input className="input" min={1} max={4} type="number" isRequired value={generation} label="Generation" onChange={(e) => setGeneration(e.target.value)} />
+                            <Input className="input" isRequired value={legendary} label="Legendary" onChange={(e) => setLegendary(e.target.value)} />
+                        </div>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onPress={onClose}>

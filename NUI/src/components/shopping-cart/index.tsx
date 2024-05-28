@@ -4,20 +4,7 @@ import { Divider } from "@nextui-org/divider";
 import { Link } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
-
-interface Pokemon {
-    id: number;
-    name: string;
-    sprite: string;
-    price: number;
-}
-
-interface CartItem {
-    id: number;
-    pokemon: Pokemon;
-    quantity: number;
-    price: number;
-}
+import { CartItem } from "../../interfaces/interfaces";
 
 const Cart: React.FC = () => {
     const [data, setData] = useState<CartItem[]>([]);

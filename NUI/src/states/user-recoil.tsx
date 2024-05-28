@@ -4,7 +4,7 @@ import { recoilPersist } from "recoil-persist";
 const {persistAtom} = recoilPersist()
 
 const isUserAdmin = atom({
-    key: 'isUserAdmin',
+    key: 'userRole',
     default: false,
     effects_UNSTABLE: [persistAtom],
 });

@@ -4,23 +4,41 @@ import { Link } from 'react-router-dom';
 import './nav.scss'
 import { useRecoilState } from "recoil";
 import loginState from "../../states/login-recoil";
+import userRole from "../../states/user-recoil";
+import axios from "axios";
 
 const NavNUI = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+    const [isAdmin, setIsAdmin] = useRecoilState(userRole);
 
     const closeMenu = () => {
         useState(false);
     };
 
     useEffect(() => {
-
-    }, []);
+        if (isLoggedIn) {
+            axios.get('http://localhost:8080/users/me', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(response => {
+                    if (response.status == 200) {
+                        const role = response.data.role.name;
+                        if (role === "ADMIN") {
+                            setIsAdmin(true);
+                        }
+                    }
+                })
+        }
+    }, [setIsAdmin]);
 
     const logOut = () => {
         localStorage.clear();
         setIsLoggedIn(false);
+        setIsAdmin(false);
     }
 
 
@@ -89,6 +107,18 @@ const NavNUI = () => {
         }
     }
 
+    const renderAdminPanel = () => {
+        if (isAdmin == true) {
+            return (
+                <NavbarItem>
+                    <Link to="/AdminHome" aria-current="page">
+                        ADMIN HOME
+                    </Link>
+                </NavbarItem>
+            )
+        }
+    }
+
     return (
         <Navbar onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent>
@@ -123,11 +153,7 @@ const NavNUI = () => {
                         WISHLIST
                     </Link>
                 </NavbarItem>
-                <NavbarItem>
-                    <Link to="/AdminHome" aria-current="page">
-                        ADMIN HOME
-                    </Link>
-                </NavbarItem>
+                {renderAdminPanel()}
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem className="lg:flex mynavitem">

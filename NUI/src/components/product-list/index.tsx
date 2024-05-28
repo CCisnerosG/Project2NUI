@@ -6,17 +6,7 @@ import { Accordion, AccordionItem, Button, Radio, RadioGroup } from "@nextui-org
 import { Pagination } from "@nextui-org/react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Pokemon } from "../../context/pokemon-context";
-
-
-interface FilterParams {
-    name?: string;
-    type?: string;
-    generation?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    page?: number;
-}
+import { FilterParams, Pokemon } from "../../interfaces/interfaces";
 
 
 const PokeProducts = () => {
@@ -27,7 +17,7 @@ const PokeProducts = () => {
 
     useEffect(() => {
         filter()
-    }, [currentPage, filters,]);
+    }, [currentPage, filters]);
 
 
     const addToCart = (item: Pokemon) => {

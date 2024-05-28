@@ -5,40 +5,7 @@ import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/re
 import ModalNUI from "../modal";
 import axios from "axios";
 import Paypal from "../ppal";
-
-interface Pokemon {
-    id: number;
-    name: string;
-    subtotal: number;
-    taxes: number;
-    save: number;
-}
-
-interface CartItem {
-    pokemon: Pokemon;
-    quantity: number;
-}
-
-interface Province {
-    id: number;
-    name: string;
-}
-
-interface Country {
-    id: number;
-    name: string;
-    provinces: Province[];
-}
-
-
-interface PokemonData {
-    pokemon: {
-        subtotal: number;
-        taxes: number;
-        save: number;
-    },
-    quantity: number;
-}
+import { CartItem, Province, Country, PokemonData } from "../../interfaces/interfaces";
 
 const Check = () => {
     const [data, setData] = useState([]);
@@ -62,6 +29,7 @@ const Check = () => {
     const [combinedAddress, setCombinedAddress] = useState('');
     const [countries, setCountries] = useState<Country[]>([]);
     const [total, setTotal] = useState(0);
+    const [isPaypalSelected, setIsPaypalSelected] = useState(false);
 
 
 
@@ -163,8 +131,10 @@ const Check = () => {
     }, [selectedCountry, selectedState, city, zipCode, address]);
 
     useEffect(() => {
-        const combinedPaymentMethod = `${creditCardNumber} (${cardType})`;
-        setPaymentMethod(combinedPaymentMethod);
+        {
+            const combinedPaymentMethod = `${creditCardNumber} ${cardType}`;
+            setPaymentMethod(combinedPaymentMethod);
+        }
     }, [creditCardNumber, cardType]);
 
 
@@ -177,6 +147,32 @@ const Check = () => {
             }
 
             axios.post(`http://localhost:8080/api/v1/order/from-cart?address=${params.address}&paymentMethod=${params.paymentMethod}`,
+                {}
+                , {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
+                .then(response => {
+                    response.data;
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+        else {
+            console.log('Algo no esta funcionando', combinedAddress)
+        }
+    }
+
+    const completePaypalPurchase = () => {
+        if (combinedAddress) {
+            const params = {
+                address: combinedAddress,
+            }
+
+            axios.post(`http://localhost:8080/api/v1/order/from-cart?address=${params.address}&paymentMethod=Paypal`,
                 {}
                 , {
                     headers: {
@@ -278,6 +274,16 @@ const Check = () => {
         setTotal(totalAmount);
     }, [data]);
 
+    const handlePaypalPayment = () => {
+        setIsPaypalSelected(true);
+    };
+
+    useEffect(() => {
+        if (isPaypalSelected) {
+            completePaypalPurchase();
+            onOpen();
+        }
+    }, [isPaypalSelected]);
 
 
     const subtotalAmount = data.reduce((subtotal, item: PokemonData) => subtotal + (item.pokemon.subtotal * item.quantity), 0);
@@ -462,13 +468,13 @@ const Check = () => {
                     </div>
                 </div>
                 <div className="forms__buttons">
-                    {/* <Button type="submit" className=" bg-[black] text-[white]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
-                        Pay with <img className="applepay" src="apple-pay.svg" alt="Apple Pay" />
-                    </Button> */}
                     <Button type="submit" color="success" className="text-[black]" isDisabled={!isFormValid} onClick={completePurchase} onPress={onOpen}>
                         Pay
                     </Button>
-                    {total > 0 && <Paypal totalValue={total} />}
+                    <div className="z-0">
+                        {combinedAddress && total > 0 && <Paypal paymentMade={handlePaypalPayment} totalValue={total} />}
+                    </div>
+
                     <ModalNUI isOpen={isOpen} onClose={onClose} />
                 </div>
             </div>

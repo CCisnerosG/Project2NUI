@@ -1,11 +1,7 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import './modal.scss'
-
-interface SignUpModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
+import { SignUpModalProps } from "../../interfaces/interfaces";
 
 const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose }) => {
     return (
