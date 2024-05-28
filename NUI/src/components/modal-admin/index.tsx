@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Select, SelectItem } from "@nextui-org/react";
 import './adminmodal.scss';
 import axios from "axios";
-import { Pokemon, usePokemonContext } from '../../context/pokemon-context';
+import { Pokemon } from '../../context/pokemon-context';
 import toast, { Toaster } from "react-hot-toast";
 import { ModalAdminProps } from "../../interfaces/interfaces";
 
@@ -105,7 +105,7 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             })
-                .then(response => {
+                .then(() => {
                     onClose();
                 })
                 .catch(error => {
@@ -118,8 +118,9 @@ const ModalAdmin: React.FC<ModalAdminProps> = ({ isOpen, onClose, pokemon, isCre
                         'Authorization': `Bearer ${localStorage.getItem("token")}`
                     }
                 })
-                    .then(response => {
+                    .then(() => {
                         onClose();
+                        
                     })
                     .catch(error => {
                         notification(error.response.data);

@@ -16,12 +16,15 @@ const UserOrderPanel: React.FC = () => {
 
 
     useEffect(() => {
+        fetchOrders()
+    }, [setIsLoggedIn, data]);
+
+    const fetchOrders = () => {
         axios.get('http://localhost:8080/api/v1/order/user/with-products', {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
             .then(response => {
                 setData(response.data)
-                console.log(response.data);
                 setData(response.data.map((order: Order) => ({
                     ...order,
                     formattedDate: format(parseISO(order.orderDate), 'MMM / dd / yyyy')
@@ -33,7 +36,7 @@ const UserOrderPanel: React.FC = () => {
                     setIsLoggedIn(false);
                 }
             });
-    }, [setIsLoggedIn]);
+    }
 
     if (isLoggedIn) {
         if (data.length === 0) {

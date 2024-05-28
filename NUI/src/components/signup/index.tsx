@@ -64,7 +64,7 @@ const Sign = () => {
     const Signup = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         axios.post('http://localhost:8080/auth/signup', { fullName, email, password })
-            .then((response) => {
+            .then(() => {
                 onOpen();
             })
             .catch(error => {

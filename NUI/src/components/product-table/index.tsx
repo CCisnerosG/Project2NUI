@@ -12,10 +12,12 @@ export default function ProductTable() {
     const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
 
+
     const fetchPokemon = () => {
         axios.get('http://localhost:8080/api/v1/pokemon')
             .then(response => {
                 setData(response.data);
+
             })
             .catch(error => {
                 console.error('Error fetching the data:', error);

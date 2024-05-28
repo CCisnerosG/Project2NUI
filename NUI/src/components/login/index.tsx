@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import loginState from '../../states/login-recoil';
 import { Link, useNavigate } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import userRole from '../../states/user-recoil';
 

@@ -48,6 +48,8 @@ const PokemonDetails = () => {
         }
     }, [id, pokemonData]);
 
+    
+
     const renderEvolution = (evolution: EVOPokemon) => {
         return (
             <div key={evolution.id} className="pokemon__evolution">

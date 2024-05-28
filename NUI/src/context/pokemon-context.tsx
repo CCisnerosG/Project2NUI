@@ -34,7 +34,6 @@ export const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) =>
   const [data, setData] = useState<PokemonContextType>(null);
 
 
-
   useEffect(() => {
     axios.get<Pokemon[]>('http://localhost:8080/api/v1/pokemon')
       .then(response => {
@@ -44,6 +43,8 @@ export const PokemonProvider: React.FC<PokemonProviderProps> = ({ children }) =>
         console.error('Error fetching the data:', error);
       });
   }, []);
+
+
 
   return (
     <PokemonContext.Provider value={data}>

@@ -15,6 +15,10 @@ const AdminOrderPanel: React.FC = () => {
 
 
     useEffect(() => {
+        fetchOrders();
+    }, [data]);
+
+    const fetchOrders = () => {
         axios.get('http://localhost:8080/api/v1/order', {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
@@ -28,7 +32,7 @@ const AdminOrderPanel: React.FC = () => {
             .catch(error => {
                 console.error('Error fetching the data:', error);
             });
-    }, [data]);
+    }
 
     const handleChange = (value: number | number[], orderId: string) => {
         setSelectedValue(value);
